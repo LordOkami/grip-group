@@ -1,0 +1,20 @@
+{
+  "es": {
+    "menuItems": [
+      { "label": "Historia", "url": "/" },
+      { "label": "Motos", "url": "/motos" },
+      { "label": "Inscripciones", "url": "/inscripciones" }
+    ],
+    "ctaText": "Inscríbete",
+    "ctaUrl": "/inscripciones#registro"
+  },
+  "en": {
+    "menuItems": [
+      { "label": "Story", "url": "/en" },
+      { "label": "Bikes", "url": "/en/motos" },
+      { "label": "Registration", "url": "/en/inscripciones" }
+    ],
+    "ctaText": "Register",
+    "ctaUrl": "/en/inscripciones#registro"
+  }
+}

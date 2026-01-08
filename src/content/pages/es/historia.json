@@ -1,0 +1,38 @@
+{
+  "heroTagline": "Grip Club presenta",
+  "heroTitle": "8 HORAS",
+  "heroTitleAccent": "ENDURANCE",
+  "heroSubtitle": "La carrera de resistencia más emocionante de España.",
+  "heroSubtitleBold": "Motos 125cc de serie. 8 horas de pura adrenalina.",
+  "heroCta": "Quiero participar",
+  "heroCtaSecondary": "Descubre más",
+  "stats": [
+    { "value": "8H", "label": "Duración" },
+    { "value": "125cc", "label": "Cilindrada" },
+    { "value": "100%", "label": "Pasión" }
+  ],
+  "historiaTagline": "Nuestra Historia",
+  "historiaTitle": "El origen de la",
+  "historiaTitleAccent": "resistencia",
+  "historiaContent": [
+    "Inspirados por el legendario formato <strong>FreeTech Endurance</strong> del Reino Unido, traemos a España una experiencia única: <strong>8 horas de competición pura</strong> sobre motos 125cc de serie.",
+    "La filosofía es simple pero poderosa: <strong>nivelar el campo de juego</strong>. Con motos 125cc de serie idénticas, la victoria no depende del presupuesto más grande, sino de la estrategia, la consistencia y la pasión del equipo.",
+    "Es el formato perfecto para equipos amateur, pilotos que dan sus primeros pasos en competición, y veteranos que buscan <strong>la esencia pura del motorsport</strong>."
+  ],
+  "conceptoTagline": "El Concepto",
+  "conceptoTitle": "¿Por qué",
+  "conceptoTitleAccent": "125cc de serie",
+  "conceptCards": [
+    { "title": "Accesible económicamente", "description": "Sin necesidad de grandes presupuestos. Motos asequibles, costes de mantenimiento reducidos y competición al alcance de todos.", "icon": "money" },
+    { "title": "Competición pura", "description": "Con máquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y el trabajo en equipo marcan la diferencia.", "icon": "lightning" },
+    { "title": "Espíritu de equipo", "description": "8 horas no las corre nadie solo. La coordinación, los relevos y el trabajo conjunto son la clave del éxito.", "icon": "team" },
+    { "title": "Seguridad primero", "description": "Velocidades controladas que permiten competir con márgenes de seguridad mayores sin perder ni un gramo de emoción.", "icon": "shield" },
+    { "title": "Escuela de pilotos", "description": "El formato ideal para aprender las bases del pilotaje de competición y dar el salto a categorías superiores.", "icon": "book" },
+    { "title": "Diversión garantizada", "description": "Porque al final, de eso se trata: disfrutar de la competición, la camaradería y la pasión por las dos ruedas.", "icon": "smile" }
+  ],
+  "ctaTitle": "¿Listo para el",
+  "ctaTitleAccent": "desafío",
+  "ctaSubtitle": "Únete a la comunidad de pilotos que están escribiendo la historia del endurance 125cc en España. Las inscripciones están abiertas.",
+  "ctaButton": "Inscríbete ahora",
+  "ctaButtonSecondary": "Ver reglamento técnico"
+}

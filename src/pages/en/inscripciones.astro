@@ -1,0 +1,512 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Registration" currentPage="inscripciones">
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-racing"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Join us</span>
+        <h1 class="section-title mb-6"><span class="text-gradient">Registration</span></h1>
+        <p class="section-subtitle">
+          All the information you need to be part of the 8 Hours Endurance.
+          Register and live the experience.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Cards Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <!-- Card Fecha -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Event date</h3>
+          <p class="text-vanilla text-2xl font-bold mb-2" style="font-family: 'Bebas Neue', sans-serif;">TO BE CONFIRMED</p>
+          <p class="text-racing-silver text-sm">Pending track confirmation</p>
+        </div>
+
+        <!-- Card Lugar -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Location</h3>
+          <p class="text-vanilla text-2xl font-bold mb-2" style="font-family: 'Bebas Neue', sans-serif;">SPAIN</p>
+          <p class="text-racing-silver text-sm">Track to be determined</p>
+        </div>
+
+        <!-- Card Equipos -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Teams</h3>
+          <p class="text-vanilla text-2xl font-bold mb-2" style="font-family: 'Bebas Neue', sans-serif;">2-4 RIDERS</p>
+          <p class="text-racing-silver text-sm">Per team</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendario Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Plan ahead</span>
+        <h2 class="section-title"><span class="text-gradient">2025</span> Calendar</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="relative">
+          <!-- Timeline line -->
+          <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-racing-silver/20 md:-translate-x-px"></div>
+
+          <!-- Timeline items -->
+          <div class="space-y-8">
+            <!-- Item 1 -->
+            <div class="relative flex items-center gap-6 md:gap-0">
+              <div class="w-8 h-8 bg-racing-green rounded-full flex items-center justify-center shrink-0 z-10 md:absolute md:left-1/2 md:-translate-x-1/2">
+                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="card flex-1 md:w-5/12 md:mr-auto md:pr-8">
+                <span class="text-vanilla text-sm font-semibold">Now</span>
+                <h3 class="text-lg font-bold text-white">Pre-registration open</h3>
+                <p class="text-racing-silver text-sm">Register to receive all information and be the first to sign up when official spots open.</p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative flex items-center gap-6 md:gap-0">
+              <div class="w-8 h-8 bg-racing-gray border-2 border-racing-silver/30 rounded-full flex items-center justify-center shrink-0 z-10 md:absolute md:left-1/2 md:-translate-x-1/2">
+                <span class="text-racing-silver text-xs font-bold">2</span>
+              </div>
+              <div class="card flex-1 md:w-5/12 md:ml-auto md:pl-8">
+                <span class="text-racing-silver text-sm font-semibold">Coming soon</span>
+                <h3 class="text-lg font-bold text-white">Track confirmation</h3>
+                <p class="text-racing-silver text-sm">We'll announce the official track where the event will take place.</p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="relative flex items-center gap-6 md:gap-0">
+              <div class="w-8 h-8 bg-racing-gray border-2 border-racing-silver/30 rounded-full flex items-center justify-center shrink-0 z-10 md:absolute md:left-1/2 md:-translate-x-1/2">
+                <span class="text-racing-silver text-xs font-bold">3</span>
+              </div>
+              <div class="card flex-1 md:w-5/12 md:mr-auto md:pr-8">
+                <span class="text-racing-silver text-sm font-semibold">To be defined</span>
+                <h3 class="text-lg font-bold text-white">Official registration opens</h3>
+                <p class="text-racing-silver text-sm">Limited spots. Pre-registered teams will have priority.</p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="relative flex items-center gap-6 md:gap-0">
+              <div class="w-8 h-8 bg-racing-gray border-2 border-racing-silver/30 rounded-full flex items-center justify-center shrink-0 z-10 md:absolute md:left-1/2 md:-translate-x-1/2">
+                <span class="text-racing-silver text-xs font-bold">4</span>
+              </div>
+              <div class="card flex-1 md:w-5/12 md:ml-auto md:pl-8">
+                <span class="text-racing-silver text-sm font-semibold">Event day</span>
+                <h3 class="text-lg font-bold text-white">8 Hours Endurance</h3>
+                <p class="text-racing-silver text-sm">The big day! Technical inspections in the morning and 8-hour race.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Pricing</span>
+        <h2 class="section-title">Registration <span class="text-gradient">fee</span></h2>
+      </div>
+
+      <div class="max-w-lg mx-auto">
+        <div class="card relative overflow-hidden">
+          <!-- Badge -->
+          <div class="absolute top-0 right-0 bg-racing-green text-white text-xs font-bold px-4 py-2 rounded-bl-xl">
+            PRE-REGISTRATION
+          </div>
+
+          <div class="text-center pt-8">
+            <h3 class="text-2xl font-bold text-white mb-4">Team registration</h3>
+            <div class="mb-6">
+              <span class="text-racing-silver text-lg line-through">Price to be confirmed</span>
+              <div class="text-5xl font-bold text-gradient mt-2" style="font-family: 'Bebas Neue', sans-serif;">
+                COMING SOON
+              </div>
+            </div>
+
+            <ul class="space-y-3 text-left mb-8">
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Registration for 2-4 riders
+              </li>
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Pit/paddock access
+              </li>
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Transponder included
+              </li>
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Official timing
+              </li>
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Briefing and inspections
+              </li>
+              <li class="flex items-center gap-3 text-racing-silver">
+                <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Trophies for the podium
+              </li>
+            </ul>
+
+            <a href="#registro" class="btn-primary w-full block text-center">
+              Pre-register for free
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form Section -->
+  <section id="registro" class="py-20 bg-racing-gray scroll-mt-24">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Form</span>
+          <h2 class="section-title">Pre-<span class="text-gradient">registration</span></h2>
+          <p class="section-subtitle mx-auto mt-4">
+            Complete the form to register your interest. We'll contact you with all the information
+            when official registration opens.
+          </p>
+        </div>
+
+        <!-- Netlify Form -->
+        <form
+          name="preinscripcion-en"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          action="/en/gracias"
+          class="card"
+        >
+          <!-- Honeypot field for spam protection -->
+          <p class="hidden">
+            <label>Don't fill if you're human: <input name="bot-field" /></label>
+          </p>
+          <input type="hidden" name="form-name" value="preinscripcion-en" />
+
+          <div class="space-y-6">
+            <!-- Nombre y Apellidos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="nombre" class="label-field">First name *</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  required
+                  class="input-field"
+                  placeholder="Your first name"
+                />
+              </div>
+              <div>
+                <label for="apellidos" class="label-field">Last name *</label>
+                <input
+                  type="text"
+                  id="apellidos"
+                  name="apellidos"
+                  required
+                  class="input-field"
+                  placeholder="Your last name"
+                />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+              <label for="email" class="label-field">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="input-field"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <!-- Teléfono -->
+            <div>
+              <label for="telefono" class="label-field">Phone *</label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                required
+                class="input-field"
+                placeholder="+34 600 000 000"
+              />
+            </div>
+
+            <!-- Localización y Código Postal -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="localidad" class="label-field">City *</label>
+                <input
+                  type="text"
+                  id="localidad"
+                  name="localidad"
+                  required
+                  class="input-field"
+                  placeholder="Your city"
+                />
+              </div>
+              <div>
+                <label for="codigo_postal" class="label-field">Postal code *</label>
+                <input
+                  type="text"
+                  id="codigo_postal"
+                  name="codigo_postal"
+                  required
+                  class="input-field"
+                  placeholder="28001"
+                />
+              </div>
+            </div>
+
+            <!-- Country -->
+            <div>
+              <label for="pais" class="label-field">Country *</label>
+              <input
+                type="text"
+                id="pais"
+                name="pais"
+                required
+                class="input-field"
+                placeholder="Your country"
+              />
+            </div>
+
+            <!-- Moto -->
+            <div>
+              <label for="moto" class="label-field">What bike do you have? (Optional)</label>
+              <input
+                type="text"
+                id="moto"
+                name="moto"
+                class="input-field"
+                placeholder="E.g.: Honda CBR125R 2019"
+              />
+            </div>
+
+            <!-- Experiencia -->
+            <div>
+              <label for="experiencia" class="label-field">Racing experience (Optional)</label>
+              <select
+                id="experiencia"
+                name="experiencia"
+                class="input-field"
+              >
+                <option value="">Select your experience</option>
+                <option value="ninguna">No racing experience</option>
+                <option value="tandas">Track days only</option>
+                <option value="amateur">Amateur racing</option>
+                <option value="semipro">Semi-professional racing</option>
+                <option value="profesional">Professional racing</option>
+              </select>
+            </div>
+
+            <!-- Mensaje -->
+            <div>
+              <label for="mensaje" class="label-field">Comments (Optional)</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                rows="4"
+                class="input-field resize-none"
+                placeholder="Do you have a team? Any questions?"
+              ></textarea>
+            </div>
+
+            <!-- Checkbox RGPD -->
+            <div class="flex items-start gap-3">
+              <input
+                type="checkbox"
+                id="rgpd"
+                name="rgpd"
+                required
+                class="mt-1 w-5 h-5 rounded border-racing-silver/30 bg-racing-black text-vanilla focus:ring-racing-green focus:ring-2"
+              />
+              <label for="rgpd" class="text-racing-silver text-sm">
+                I have read and accept the privacy policy. I consent to the processing of my data
+                to manage my pre-registration and receive information about the event. *
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-primary w-full">
+              Submit pre-registration
+            </button>
+          </div>
+        </form>
+
+        <!-- Info adicional -->
+        <div class="mt-8 p-6 bg-racing-black rounded-2xl border border-racing-silver/10">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold mb-2">What happens next?</h4>
+              <p class="text-racing-silver text-sm">
+                After submitting your pre-registration, you'll receive a confirmation email. When we confirm
+                the track and dates, we'll send you all the information to complete your
+                official registration. Pre-registered teams will have priority for spots.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">FAQ</span>
+        <h2 class="section-title">Frequently asked <span class="text-gradient">questions</span></h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto space-y-4">
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="text-white font-bold">How many riders can a team have?</span>
+            <svg class="w-5 h-5 text-vanilla transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <p class="mt-4 text-racing-silver">
+            Each team can have a minimum of 2 and a maximum of 4 riders.
+            All riders must be registered before the registration deadline.
+          </p>
+        </details>
+
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="text-white font-bold">Do I need a racing license?</span>
+            <svg class="w-5 h-5 text-vanilla transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <p class="mt-4 text-racing-silver">
+            No racing license is required. The organization will provide liability
+            insurance for all participants during the event.
+          </p>
+        </details>
+
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="text-white font-bold">Can I participate without a team?</span>
+            <svg class="w-5 h-5 text-vanilla transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <p class="mt-4 text-racing-silver">
+            If you don't have a team, mention it in the comments section of the form. We'll try
+            to connect you with other riders looking for teammates.
+          </p>
+        </details>
+
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="text-white font-bold">What's included in the registration?</span>
+            <svg class="w-5 h-5 text-vanilla transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <p class="mt-4 text-racing-silver">
+            Registration includes track access for the entire team, transponder,
+            official timing, pit/paddock access, briefing and technical inspections,
+            and trophies for the podium.
+          </p>
+        </details>
+
+        <details class="card group">
+          <summary class="flex items-center justify-between cursor-pointer list-none">
+            <span class="text-white font-bold">Is there a lap limit per rider?</span>
+            <svg class="w-5 h-5 text-vanilla transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </summary>
+          <p class="mt-4 text-racing-silver">
+            Yes, there will be a maximum number of continuous stints per rider to ensure safety
+            and team spirit. Specific details will be communicated in the sporting
+            regulations.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title mb-6">Have more <span class="text-gradient">questions</span>?</h2>
+        <p class="section-subtitle mx-auto mb-8">
+          We're here to help. Contact us and we'll answer all your questions.
+        </p>
+        <a href="mailto:info@gripclub.es" class="btn-primary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Contact us
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

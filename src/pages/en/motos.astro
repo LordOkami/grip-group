@@ -1,0 +1,451 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Bikes" currentPage="motos">
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-racing"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Technical Regulations</span>
+        <h1 class="section-title mb-6">The <span class="text-gradient">machines</span></h1>
+        <p class="section-subtitle">
+          Everything you need to know about permitted bikes, modifications, and technical regulations
+          to participate in the 8 Hours Endurance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motos Permitidas Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Single category</span>
+        <h2 class="section-title"><span class="text-gradient">Approved</span> bikes</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Moto Card 1 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">
+            125cc
+          </div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10">
+            <svg class="w-16 h-16 text-racing-silver/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Honda CBR125R</h3>
+          <p class="text-racing-silver text-sm mb-4">
+            The reference in its category. Single-cylinder 4-stroke engine, reliable and balanced.
+          </p>
+          <ul class="space-y-2 text-sm text-racing-silver">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              125cc / 13 HP
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Years: 2011-2024
+            </li>
+          </ul>
+        </div>
+
+        <!-- Moto Card 2 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">
+            125cc
+          </div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10">
+            <svg class="w-16 h-16 text-racing-silver/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Yamaha YZF-R125</h3>
+          <p class="text-racing-silver text-sm mb-4">
+            Pure sportiness. Racing aesthetics and balanced performance.
+          </p>
+          <ul class="space-y-2 text-sm text-racing-silver">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              125cc / 15 HP
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Years: 2008-2024
+            </li>
+          </ul>
+        </div>
+
+        <!-- Moto Card 3 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">
+            125cc
+          </div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10">
+            <svg class="w-16 h-16 text-racing-silver/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">KTM RC 125</h3>
+          <p class="text-racing-silver text-sm mb-4">
+            Austrian racing DNA. Aggressive and ready for the track.
+          </p>
+          <ul class="space-y-2 text-sm text-racing-silver">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              125cc / 15 HP
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Years: 2014-2024
+            </li>
+          </ul>
+        </div>
+
+        <!-- Moto Card 4 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">
+            125cc
+          </div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10">
+            <svg class="w-16 h-16 text-racing-silver/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Aprilia RS 125</h3>
+          <p class="text-racing-silver text-sm mb-4">
+            Italian racing tradition. Design and performance from the home of motorcycles.
+          </p>
+          <ul class="space-y-2 text-sm text-racing-silver">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              125cc / 15 HP
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Years: 2017-2024
+            </li>
+          </ul>
+        </div>
+
+        <!-- Moto Card 5 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">
+            125cc
+          </div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10">
+            <svg class="w-16 h-16 text-racing-silver/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Kawasaki Ninja 125</h3>
+          <p class="text-racing-silver text-sm mb-4">
+            The smallest ninja in the family. Compact, agile, and with the green spirit.
+          </p>
+          <ul class="space-y-2 text-sm text-racing-silver">
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              125cc / 15 HP
+            </li>
+            <li class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-vanilla" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Years: 2019-2024
+            </li>
+          </ul>
+        </div>
+
+        <!-- Más motos Card -->
+        <div class="card group border-dashed border-racing-silver/30 flex flex-col items-center justify-center text-center">
+          <div class="w-16 h-16 bg-racing-silver/10 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-8 h-8 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Your bike not listed?</h3>
+          <p class="text-racing-silver text-sm">
+            Contact us to verify if your stock 125cc is approved for competition.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reglamento Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Regulations</span>
+        <h2 class="section-title"><span class="text-gradient">Technical</span> rules</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Permitido -->
+        <div class="card">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Allowed modifications</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Safety elements</strong>
+                <p class="text-racing-silver text-sm">Track fairings, engine protectors, crash bungs</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Suspension</strong>
+                <p class="text-racing-silver text-sm">Preload, rebound, and compression adjustment of stock components</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Tyres</strong>
+                <p class="text-racing-silver text-sm">Free choice, street or track (slicks allowed)</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Levers and grips</strong>
+                <p class="text-racing-silver text-sm">Free choice, including folding levers</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Exhaust</strong>
+                <p class="text-racing-silver text-sm">Free with decibel limit (max. 107 dB)</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Rearsets</strong>
+                <p class="text-racing-silver text-sm">Free choice, adjustable position allowed</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Prohibido -->
+        <div class="card">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Prohibited modifications</h3>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Engine</strong>
+                <p class="text-racing-silver text-sm">Any internal engine modification is prohibited</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">ECU</strong>
+                <p class="text-racing-silver text-sm">Must be original stock, no reprogramming</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Air filter</strong>
+                <p class="text-racing-silver text-sm">Original stock (cleaning and oiling allowed)</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Frame</strong>
+                <p class="text-racing-silver text-sm">Original frame cannot be modified</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Aftermarket suspension</strong>
+                <p class="text-racing-silver text-sm">Competition suspension not allowed</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-vanilla mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <strong class="text-white">Power Commander / Quickshifter</strong>
+                <p class="text-racing-silver text-sm">Additional electronics not permitted</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requisitos de Seguridad -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Mandatory</span>
+        <h2 class="section-title"><span class="text-gradient">Safety</span> requirements</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Approved helmet</h3>
+          <p class="text-racing-silver text-sm">Full-face helmet with ECE 22.05 or higher approval</p>
+        </div>
+
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Leather suit</h3>
+          <p class="text-racing-silver text-sm">One-piece suit with CE protection on elbows, knees, and back</p>
+        </div>
+
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Racing gloves</h3>
+          <p class="text-racing-silver text-sm">Leather gloves with knuckle and palm protection</p>
+        </div>
+
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Racing boots</h3>
+          <p class="text-racing-silver text-sm">High boots with ankle protection and sliders</p>
+        </div>
+      </div>
+
+      <div class="mt-12 p-6 bg-racing-gray rounded-2xl border border-racing-silver/20">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-vanilla/20 rounded-lg flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-white font-bold mb-2">Mandatory technical inspection</h4>
+            <p class="text-racing-silver">
+              All bikes will undergo a technical inspection before the race. General condition,
+              safety elements, noise level, and regulation compliance will be checked. Bikes that
+              don't pass inspection won't be allowed to participate.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Documentation</span>
+        <h2 class="section-title mb-6">Download the <span class="text-gradient">full regulations</span></h2>
+        <p class="section-subtitle mx-auto mb-8">
+          Check all technical, sporting, and safety regulations in the official document.
+        </p>
+        <a href="#" class="btn-primary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          Download PDF (Coming soon)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title mb-6">Is your <span class="text-gradient">125cc</span> ready?</h2>
+        <p class="section-subtitle mx-auto mb-8">
+          If your bike meets the regulations, you're one step away from experiencing the most intense 8 hours of amateur motorsport.
+        </p>
+        <a href="/en/inscripciones#registro" class="btn-primary">
+          Register now
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

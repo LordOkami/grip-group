@@ -1,0 +1,38 @@
+{
+  "heroTagline": "Grip Club presents",
+  "heroTitle": "8 HOURS",
+  "heroTitleAccent": "ENDURANCE",
+  "heroSubtitle": "The most exciting endurance race in Spain.",
+  "heroSubtitleBold": "125cc stock motorcycles. 8 hours of pure adrenaline.",
+  "heroCta": "I want to participate",
+  "heroCtaSecondary": "Learn more",
+  "stats": [
+    { "value": "8H", "label": "Duration" },
+    { "value": "125cc", "label": "Displacement" },
+    { "value": "100%", "label": "Passion" }
+  ],
+  "historiaTagline": "Our Story",
+  "historiaTitle": "The origin of",
+  "historiaTitleAccent": "endurance",
+  "historiaContent": [
+    "Inspired by the legendary <strong>FreeTech Endurance</strong> format from the UK, we bring to Spain a unique experience: <strong>8 hours of pure competition</strong> on stock 125cc motorcycles.",
+    "The philosophy is simple but powerful: <strong>level the playing field</strong>. With identical stock 125cc motorcycles, victory doesn't depend on the biggest budget, but on strategy, consistency, and team passion.",
+    "It's the perfect format for amateur teams, riders taking their first steps in competition, and veterans looking for <strong>the pure essence of motorsport</strong>."
+  ],
+  "conceptoTagline": "The Concept",
+  "conceptoTitle": "Why",
+  "conceptoTitleAccent": "stock 125cc",
+  "conceptCards": [
+    { "title": "Economically accessible", "description": "No need for big budgets. Affordable bikes, reduced maintenance costs, and competition within everyone's reach.", "icon": "money" },
+    { "title": "Pure competition", "description": "With equal machines, the one with the best strategy wins. Rider skill and teamwork make the difference.", "icon": "lightning" },
+    { "title": "Team spirit", "description": "8 hours can't be raced alone. Coordination, relays, and teamwork are the keys to success.", "icon": "team" },
+    { "title": "Safety first", "description": "Controlled speeds that allow competing with greater safety margins without losing any excitement.", "icon": "shield" },
+    { "title": "Rider school", "description": "The ideal format to learn the basics of competitive riding and take the leap to higher categories.", "icon": "book" },
+    { "title": "Guaranteed fun", "description": "Because in the end, that's what it's about: enjoying the competition, camaraderie, and passion for two wheels.", "icon": "smile" }
+  ],
+  "ctaTitle": "Ready for the",
+  "ctaTitleAccent": "challenge",
+  "ctaSubtitle": "Join the community of riders who are writing the history of 125cc endurance in Spain. Registration is open.",
+  "ctaButton": "Register now",
+  "ctaButtonSecondary": "View technical regulations"
+}
