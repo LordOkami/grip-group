@@ -8,6 +8,7 @@ export default defineConfig({
   adapter: netlify({
     edgeMiddleware: false
   }),
+  output: 'server',
   vite: {
     plugins: [tailwindcss()]
   }

@@ -18,6 +18,15 @@ export interface IdentityUser {
 class IdentityService {
   private widget: any = null;
   private initialized = false;
+  private initPromise: Promise<void> | null = null;
+  private initResolve: (() => void) | null = null;
+
+  constructor() {
+    // Create a promise that resolves when init completes
+    this.initPromise = new Promise((resolve) => {
+      this.initResolve = resolve;
+    });
+  }
 
   async init(locale: string = 'es') {
     if (typeof window === 'undefined') return;
@@ -28,15 +37,30 @@ class IdentityService {
     this.widget = netlifyIdentity;
 
     // When running locally, point to production Netlify site for Identity
-    const isLocalhost = typeof window !== 'undefined' && 
+    const isLocalhost = typeof window !== 'undefined' &&
       (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-    
+
     netlifyIdentity.init({
       locale: locale === 'en' ? 'en' : 'es',
       ...(isLocalhost && { APIUrl: 'https://grip-club.netlify.app/.netlify/identity' })
     });
 
     this.initialized = true;
+
+    // Resolve the init promise
+    if (this.initResolve) {
+      this.initResolve();
+    }
+  }
+
+  // Wait for initialization to complete
+  async waitForInit(): Promise<void> {
+    if (this.initialized) return;
+    return this.initPromise || Promise.resolve();
+  }
+
+  isInitialized(): boolean {
+    return this.initialized;
   }
 
   getWidget() {
@@ -139,6 +163,9 @@ export const identity = new IdentityService();
 
 // Helper function for API calls
 export async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Response> {
+  // Wait for identity to be initialized
+  await identity.waitForInit();
+
   const token = identity.getToken();
 
   if (!token) {
