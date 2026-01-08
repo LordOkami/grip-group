@@ -14,11 +14,8 @@
 [forms]
   formName = "preinscripcion"
 
-# API function redirects
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# NOTE: Astro SSR handles /api/* routes directly via the server bundle
+# No redirect needed - removing the old functions redirect that was causing 404s
 
 # Headers for security and performance
 [[headers]]

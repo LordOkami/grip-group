@@ -30,7 +30,10 @@ export const GET: APIRoute = async ({ request, locals }) => {
     }
 
     if (!user || !user.sub) {
-        return new Response(JSON.stringify({ error: 'Not authenticated' }), { status: 401 });
+        return new Response(JSON.stringify({ error: 'Not authenticated' }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
 
     try {
@@ -40,7 +43,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
             .eq('representative_user_id', user.sub)
             .single();
 
-        if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned" -> null result, which is fine (no team)
+        // PGRST116 is "no rows returned" -> null result, which is fine (no team yet)
+        if (error && error.code !== 'PGRST116') {
+            console.error('Supabase GET error:', error);
             throw error;
         }
 
@@ -49,7 +54,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), {
+        console.error('GET /api/teams error:', error);
+        return new Response(JSON.stringify({ error: error.message || 'Error fetching team' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -73,25 +79,36 @@ export const POST: APIRoute = async ({ request, locals }) => {
             if (!body[field]) throw new Error(`Missing field: ${field}`);
         }
 
+        // Prepare team data with defaults for required database fields
+        const teamData = {
+            ...body,
+            representative_user_id: user.sub,
+            representative_email: body.representative_email || user.email,
+            // Set defaults for fields that might be required by the database
+            status: body.status || 'draft',
+            gdpr_consent_date: body.gdpr_consent ? new Date().toISOString() : null,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+        };
+
         const { data, error } = await supabase
             .from('teams')
-            .insert({
-                ...body,
-                representative_user_id: user.sub,
-                representative_email: user.email, // Ensure email matches auth user or allow body override? Better enforcing auth email or body?
-                // Let's trust body but ensure representative_user_id is set
-            })
+            .insert(teamData)
             .select()
             .single();
 
-        if (error) throw error;
+        if (error) {
+            console.error('Supabase insert error:', error);
+            throw new Error(error.message || 'Database error');
+        }
 
         return new Response(JSON.stringify({ team: data }), {
             status: 201,
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), {
+        console.error('POST /api/teams error:', error);
+        return new Response(JSON.stringify({ error: error.message || 'Error creating team' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -109,24 +126,36 @@ export const PUT: APIRoute = async ({ request, locals }) => {
     try {
         const body = await request.json();
 
+        // Update gdpr_consent_date if consent is being set
+        const updateData = {
+            ...body,
+            updated_at: new Date().toISOString(),
+        };
+
+        // If gdpr_consent is being set to true, update the date
+        if (body.gdpr_consent === true) {
+            updateData.gdpr_consent_date = new Date().toISOString();
+        }
+
         const { data, error } = await supabase
             .from('teams')
-            .update({
-                ...body,
-                updated_at: new Date().toISOString()
-            })
+            .update(updateData)
             .eq('representative_user_id', user.sub) // Ensure user owns the team
             .select()
             .single();
 
-        if (error) throw error;
+        if (error) {
+            console.error('Supabase update error:', error);
+            throw new Error(error.message || 'Database error');
+        }
 
         return new Response(JSON.stringify({ team: data }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), {
+        console.error('PUT /api/teams error:', error);
+        return new Response(JSON.stringify({ error: error.message || 'Error updating team' }), {
             status: 400,
             headers: { 'Content-Type': 'application/json' }
         });

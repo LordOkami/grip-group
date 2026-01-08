@@ -149,18 +149,12 @@ const translatePath = useTranslatedPath(lang);
 
     const lang = document.documentElement.lang || 'es';
 
-    // Update user email display
-    const user = identity.getUser();
-    const userEmailEl = document.getElementById('user-email');
-    if (userEmailEl && user) {
-      userEmailEl.textContent = user.email;
-    }
-
     // Elements
     const loadingState = document.getElementById('loading-state');
     const noTeamState = document.getElementById('no-team-state');
     const teamDashboard = document.getElementById('team-dashboard');
     const errorState = document.getElementById('error-state');
+    const userEmailEl = document.getElementById('user-email');
 
     // Dashboard elements
     const teamNameEl = document.getElementById('team-name');
@@ -232,6 +226,23 @@ const translatePath = useTranslatedPath(lang);
       }
     }
 
-    loadTeamData();
+    // Initialize and load data
+    async function initAndLoad() {
+      // Wait for identity to be initialized (done by DashboardLayout)
+      await identity.waitForInit();
+
+      // Update user email display
+      const user = identity.getUser();
+      if (userEmailEl && user) {
+        userEmailEl.textContent = user.email;
+      }
+
+      // Load team data
+      if (user) {
+        loadTeamData();
+      }
+    }
+
+    initAndLoad();
   </script>
 </DashboardLayout>
