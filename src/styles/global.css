@@ -1,13 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-racing-red: #DC2626;
-  --color-racing-red-dark: #991B1B;
-  --color-racing-orange: #EA580C;
+  /* Colores corporativos Grip Club */
+  --color-racing-green: #004225;
+  --color-racing-green-dark: #002d19;
+  --color-racing-green-light: #005c34;
+  --color-vanilla: #f3e5ab;
+  --color-vanilla-dark: #e6d48a;
+  --color-vanilla-light: #f8f0c8;
+
+  /* Fondos y neutros */
   --color-racing-black: #0A0A0A;
-  --color-racing-gray: #1F1F1F;
+  --color-racing-gray: #1a1a1a;
+  --color-racing-gray-light: #2a2a2a;
   --color-racing-silver: #A1A1AA;
-  --color-racing-gold: #F59E0B;
 
   --font-heading: 'Bebas Neue', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -31,24 +37,24 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-racing-red hover:bg-racing-red-dark text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider;
+    @apply bg-racing-green hover:bg-racing-green-dark text-vanilla font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider;
   }
 
   .btn-secondary {
-    @apply border-2 border-racing-red text-racing-red hover:bg-racing-red hover:text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 uppercase tracking-wider;
+    @apply border-2 border-vanilla text-vanilla hover:bg-vanilla hover:text-racing-green font-bold py-3 px-8 rounded-lg transition-all duration-300 uppercase tracking-wider;
   }
 
   .card {
-    @apply bg-racing-gray rounded-2xl p-6 border border-racing-silver/20 hover:border-racing-red/50 transition-all duration-300;
+    @apply bg-racing-gray rounded-2xl p-6 border border-racing-silver/20 hover:border-racing-green/50 transition-all duration-300;
   }
 
   .nav-link {
-    @apply relative text-white hover:text-racing-red transition-colors duration-300 uppercase tracking-wider font-semibold;
+    @apply relative text-white hover:text-vanilla transition-colors duration-300 uppercase tracking-wider font-semibold;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-racing-red transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-vanilla transition-all duration-300;
   }
 
   .nav-link:hover::after {
@@ -56,7 +62,7 @@
   }
 
   .nav-link.active {
-    @apply text-racing-red;
+    @apply text-vanilla;
   }
 
   .nav-link.active::after {
@@ -73,7 +79,7 @@
   }
 
   .input-field {
-    @apply w-full bg-racing-gray border border-racing-silver/30 rounded-lg px-4 py-3 text-white placeholder-racing-silver/50 focus:border-racing-red focus:outline-none focus:ring-2 focus:ring-racing-red/20 transition-all duration-300;
+    @apply w-full bg-racing-gray border border-racing-silver/30 rounded-lg px-4 py-3 text-white placeholder-racing-silver/50 focus:border-racing-green focus:outline-none focus:ring-2 focus:ring-racing-green/20 transition-all duration-300;
   }
 
   .label-field {
@@ -83,7 +89,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-racing-red to-racing-orange bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-racing-green to-vanilla bg-clip-text text-transparent;
   }
 
   .bg-gradient-racing {
