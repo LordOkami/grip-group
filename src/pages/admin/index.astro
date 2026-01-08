@@ -1,0 +1,185 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Dashboard Admin" currentSection="dashboard">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+        Panel de Administracion
+      </h1>
+      <p class="text-racing-silver mt-2">Gestion de inscripciones Grip Club</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="text-3xl font-bold text-white" id="stat-total">-</div>
+        <div class="text-racing-silver text-sm">Total Equipos</div>
+      </div>
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="text-3xl font-bold text-yellow-500" id="stat-pending">-</div>
+        <div class="text-racing-silver text-sm">Pendientes</div>
+      </div>
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="text-3xl font-bold text-green-500" id="stat-confirmed">-</div>
+        <div class="text-racing-silver text-sm">Confirmados</div>
+      </div>
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="text-3xl font-bold text-blue-500" id="stat-pilots">-</div>
+        <div class="text-racing-silver text-sm">Total Pilotos</div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <a href="/panel/equipos" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-white font-semibold">Ver Equipos</div>
+            <div class="text-racing-silver text-sm">Gestionar inscripciones</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/panel/configuracion" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-white font-semibold">Configuracion</div>
+            <div class="text-racing-silver text-sm">Ajustes de inscripciones</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/panel/exportar" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-white font-semibold">Exportar Datos</div>
+            <div class="text-racing-silver text-sm">Descargar CSV/Excel</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Recent Teams -->
+    <div class="bg-racing-gray rounded-xl border border-racing-silver/10">
+      <div class="p-6 border-b border-racing-silver/10">
+        <h2 class="text-xl font-semibold text-white">Ultimos Equipos Registrados</h2>
+      </div>
+      <div id="recent-teams" class="divide-y divide-racing-silver/10">
+        <div class="p-6 text-center text-racing-silver">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
+          Cargando...
+        </div>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script>
+  import { identity } from '../../lib/identity';
+
+  async function loadDashboard() {
+    try {
+      const token = identity.getToken();
+      const response = await fetch('/api/admin-teams', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Error loading data');
+      }
+
+      const { teams, stats } = await response.json();
+
+      // Update stats
+      document.getElementById('stat-total')!.textContent = stats.total.toString();
+      document.getElementById('stat-pending')!.textContent = stats.pending.toString();
+      document.getElementById('stat-confirmed')!.textContent = stats.confirmed.toString();
+      document.getElementById('stat-pilots')!.textContent = stats.total_pilots.toString();
+
+      // Update recent teams
+      const recentTeamsEl = document.getElementById('recent-teams')!;
+      const recentTeams = teams.slice(0, 5);
+
+      if (recentTeams.length === 0) {
+        recentTeamsEl.innerHTML = `
+          <div class="p-6 text-center text-racing-silver">
+            No hay equipos registrados todavia
+          </div>
+        `;
+        return;
+      }
+
+      recentTeamsEl.innerHTML = recentTeams.map((team: any) => {
+        const statusColors: Record<string, string> = {
+          draft: 'bg-gray-500',
+          pending: 'bg-yellow-500',
+          confirmed: 'bg-green-500',
+          cancelled: 'bg-red-500'
+        };
+        const statusLabels: Record<string, string> = {
+          draft: 'Borrador',
+          pending: 'Pendiente',
+          confirmed: 'Confirmado',
+          cancelled: 'Cancelado'
+        };
+
+        return `
+          <a href="/panel/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center">
+                <span class="text-red-500 font-bold">${team.name?.charAt(0) || '?'}</span>
+              </div>
+              <div>
+                <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
+                <div class="text-racing-silver text-sm">
+                  ${team.representative_name || ''} ${team.representative_surname || ''}
+                  - ${team.pilots_count} pilotos
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="px-2 py-1 rounded text-xs text-white ${statusColors[team.status] || 'bg-gray-500'}">
+                ${statusLabels[team.status] || team.status}
+              </span>
+              <svg class="w-5 h-5 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+    } catch (error) {
+      console.error('Error loading dashboard:', error);
+      document.getElementById('recent-teams')!.innerHTML = `
+        <div class="p-6 text-center text-red-500">
+          Error al cargar los datos
+        </div>
+      `;
+    }
+  }
+
+  // Load on page ready
+  loadDashboard();
+</script>

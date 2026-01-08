@@ -60,6 +60,24 @@ export function getUserEmail(event: HandlerEvent): string | null {
   return payload?.email || null;
 }
 
+// Check if user is admin
+export function isAdmin(event: HandlerEvent): boolean {
+  const email = getUserEmail(event);
+  if (!email) return false;
+
+  const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());
+  return adminEmails.includes(email.toLowerCase());
+}
+
+// Forbidden response (for non-admin access)
+export function forbiddenResponse() {
+  return {
+    statusCode: 403,
+    headers: corsHeaders,
+    body: JSON.stringify({ error: 'No tienes permisos de administrador' })
+  };
+}
+
 // Standard CORS headers
 export const corsHeaders = {
   'Access-Control-Allow-Origin': '*',

@@ -1,0 +1,339 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+
+const { id } = Astro.params;
+---
+
+<AdminLayout title="Detalle Equipo" currentSection="equipos">
+  <div class="max-w-5xl mx-auto">
+    <!-- Back button -->
+    <a href="/panel/equipos" class="inline-flex items-center gap-2 text-racing-silver hover:text-white mb-6 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      Volver a equipos
+    </a>
+
+    <!-- Loading state -->
+    <div id="loading" class="text-center py-12">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+      <p class="text-racing-silver">Cargando datos del equipo...</p>
+    </div>
+
+    <!-- Team content (hidden until loaded) -->
+    <div id="team-content" class="hidden space-y-6">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div>
+          <h1 id="team-name" class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">-</h1>
+          <p id="team-email" class="text-racing-silver mt-1">-</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span id="team-status" class="px-3 py-1 rounded text-sm text-white bg-gray-500">-</span>
+          <select id="change-status" class="bg-racing-black border border-racing-silver/20 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-red-600">
+            <option value="draft">Borrador</option>
+            <option value="pending">Pendiente</option>
+            <option value="confirmed">Confirmado</option>
+            <option value="cancelled">Cancelado</option>
+          </select>
+          <button id="save-status" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm">
+            Guardar
+          </button>
+        </div>
+      </div>
+
+      <!-- Team Info -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Representative -->
+        <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+          <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            Representante
+          </h2>
+          <dl class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Nombre:</dt>
+              <dd id="rep-name" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">DNI:</dt>
+              <dd id="rep-dni" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Email:</dt>
+              <dd id="rep-email" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Telefono:</dt>
+              <dd id="rep-phone" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Direccion:</dt>
+              <dd id="rep-address" class="text-white text-right">-</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Motorcycle -->
+        <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+          <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Motocicleta
+          </h2>
+          <dl class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Marca:</dt>
+              <dd id="moto-brand" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Modelo:</dt>
+              <dd id="moto-model" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Cilindrada:</dt>
+              <dd id="moto-capacity" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-racing-silver">Matriculacion:</dt>
+              <dd id="moto-date" class="text-white">-</dd>
+            </div>
+            <div>
+              <dt class="text-racing-silver mb-1">Modificaciones:</dt>
+              <dd id="moto-mods" class="text-white text-sm bg-racing-black/50 rounded p-2">-</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <!-- Pilots -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10">
+        <div class="p-6 border-b border-racing-silver/10">
+          <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+            Pilotos
+            <span id="pilots-count" class="text-racing-silver font-normal">(0)</span>
+          </h2>
+        </div>
+        <div id="pilots-list" class="divide-y divide-racing-silver/10">
+          <div class="p-6 text-center text-racing-silver">Cargando pilotos...</div>
+        </div>
+      </div>
+
+      <!-- Staff -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10">
+        <div class="p-6 border-b border-racing-silver/10">
+          <h2 class="text-lg font-semibold text-white flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Staff
+            <span id="staff-count" class="text-racing-silver font-normal">(0)</span>
+          </h2>
+        </div>
+        <div id="staff-list" class="divide-y divide-racing-silver/10">
+          <div class="p-6 text-center text-racing-silver">Cargando staff...</div>
+        </div>
+      </div>
+
+      <!-- Meta info -->
+      <div class="text-sm text-racing-silver">
+        <span>Registrado: </span>
+        <span id="created-at">-</span>
+        <span class="mx-2">|</span>
+        <span>GDPR: </span>
+        <span id="gdpr-consent">-</span>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div id="error" class="hidden text-center py-12">
+      <div class="text-red-500 text-6xl mb-4">!</div>
+      <p class="text-white text-xl mb-2">Error al cargar el equipo</p>
+      <p class="text-racing-silver">El equipo no existe o no tienes permisos para verlo</p>
+    </div>
+  </div>
+</AdminLayout>
+
+<script define:vars={{ teamId: id }}>
+  window.TEAM_ID = teamId;
+</script>
+
+<script>
+  import { identity } from '../../../lib/identity';
+
+  const teamId = (window as any).TEAM_ID;
+
+  const statusColors: Record<string, string> = {
+    draft: 'bg-gray-500',
+    pending: 'bg-yellow-500',
+    confirmed: 'bg-green-500',
+    cancelled: 'bg-red-500'
+  };
+
+  const statusLabels: Record<string, string> = {
+    draft: 'Borrador',
+    pending: 'Pendiente',
+    confirmed: 'Confirmado',
+    cancelled: 'Cancelado'
+  };
+
+  const levelLabels: Record<string, string> = {
+    amateur: 'Amateur',
+    intermediate: 'Intermedio',
+    advanced: 'Avanzado',
+    expert: 'Experto'
+  };
+
+  const roleLabels: Record<string, string> = {
+    mechanic: 'Mecanico',
+    coordinator: 'Coordinador',
+    support: 'Apoyo'
+  };
+
+  async function loadTeam() {
+    try {
+      const token = identity.getToken();
+      const response = await fetch('/api/admin-teams', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!response.ok) throw new Error('Error loading teams');
+
+      const { teams } = await response.json();
+      const team = teams.find((t: any) => t.id === teamId);
+
+      if (!team) {
+        document.getElementById('loading')!.classList.add('hidden');
+        document.getElementById('error')!.classList.remove('hidden');
+        return;
+      }
+
+      // Populate data
+      document.getElementById('team-name')!.textContent = team.name || 'Sin nombre';
+      document.getElementById('team-email')!.textContent = team.representative_email || '-';
+
+      const statusEl = document.getElementById('team-status')!;
+      statusEl.textContent = statusLabels[team.status] || team.status;
+      statusEl.className = `px-3 py-1 rounded text-sm text-white ${statusColors[team.status] || 'bg-gray-500'}`;
+
+      (document.getElementById('change-status') as HTMLSelectElement).value = team.status;
+
+      // Representative
+      document.getElementById('rep-name')!.textContent = `${team.representative_name || ''} ${team.representative_surname || ''}`.trim() || '-';
+      document.getElementById('rep-dni')!.textContent = team.representative_dni || '-';
+      document.getElementById('rep-email')!.textContent = team.representative_email || '-';
+      document.getElementById('rep-phone')!.textContent = team.representative_phone || '-';
+      document.getElementById('rep-address')!.textContent = [
+        team.address,
+        team.municipality,
+        team.postal_code,
+        team.province
+      ].filter(Boolean).join(', ') || '-';
+
+      // Motorcycle
+      document.getElementById('moto-brand')!.textContent = team.motorcycle_brand || '-';
+      document.getElementById('moto-model')!.textContent = team.motorcycle_model || '-';
+      document.getElementById('moto-capacity')!.textContent = team.engine_capacity === '125cc_4t' ? '125cc 4T' : team.engine_capacity === '50cc_2t' ? '50cc 2T' : team.engine_capacity || '-';
+      document.getElementById('moto-date')!.textContent = team.registration_date ? new Date(team.registration_date).toLocaleDateString('es-ES') : '-';
+      document.getElementById('moto-mods')!.textContent = team.modifications || 'Ninguna';
+
+      // Pilots
+      const pilots = team.pilots || [];
+      document.getElementById('pilots-count')!.textContent = `(${pilots.length})`;
+
+      if (pilots.length === 0) {
+        document.getElementById('pilots-list')!.innerHTML = `
+          <div class="p-6 text-center text-racing-silver">No hay pilotos registrados</div>
+        `;
+      } else {
+        document.getElementById('pilots-list')!.innerHTML = pilots.map((p: any, i: number) => `
+          <div class="p-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 bg-red-600/20 rounded-full flex items-center justify-center">
+                <span class="text-red-500 font-bold">${i + 1}</span>
+              </div>
+              <div>
+                <div class="text-white font-medium">
+                  ${p.name || ''} ${p.surname || ''}
+                  ${p.is_representative ? '<span class="text-xs bg-red-600 px-2 py-0.5 rounded ml-2">REP</span>' : ''}
+                </div>
+                <div class="text-racing-silver text-sm">${p.email || '-'} | ${p.phone || '-'}</div>
+              </div>
+            </div>
+            <div class="text-right">
+              <div class="text-white text-sm">${levelLabels[p.driving_level] || p.driving_level || '-'}</div>
+              <div class="text-racing-silver text-xs">DNI: ${p.dni || '-'}</div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Staff
+      const staff = team.team_staff || [];
+      document.getElementById('staff-count')!.textContent = `(${staff.length})`;
+
+      if (staff.length === 0) {
+        document.getElementById('staff-list')!.innerHTML = `
+          <div class="p-6 text-center text-racing-silver">No hay staff registrado</div>
+        `;
+      } else {
+        document.getElementById('staff-list')!.innerHTML = staff.map((s: any) => `
+          <div class="p-4 flex items-center justify-between">
+            <div class="text-white">${s.name || '-'}</div>
+            <div class="text-racing-silver text-sm">${roleLabels[s.role] || s.role || '-'}</div>
+          </div>
+        `).join('');
+      }
+
+      // Meta
+      document.getElementById('created-at')!.textContent = team.created_at ? new Date(team.created_at).toLocaleString('es-ES') : '-';
+      document.getElementById('gdpr-consent')!.textContent = team.gdpr_consent ? 'Si' : 'No';
+
+      // Show content
+      document.getElementById('loading')!.classList.add('hidden');
+      document.getElementById('team-content')!.classList.remove('hidden');
+
+    } catch (error) {
+      console.error('Error:', error);
+      document.getElementById('loading')!.classList.add('hidden');
+      document.getElementById('error')!.classList.remove('hidden');
+    }
+  }
+
+  // Save status
+  document.getElementById('save-status')?.addEventListener('click', async () => {
+    const newStatus = (document.getElementById('change-status') as HTMLSelectElement).value;
+
+    try {
+      const token = identity.getToken();
+      const response = await fetch(`/api/admin-teams?id=${teamId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+
+      if (!response.ok) throw new Error('Error updating status');
+
+      // Reload to show updated status
+      loadTeam();
+      alert('Estado actualizado correctamente');
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al actualizar el estado');
+    }
+  });
+
+  // Load team
+  loadTeam();
+</script>

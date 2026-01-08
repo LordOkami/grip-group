@@ -1,0 +1,251 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  currentSection?: string;
+}
+
+const { title, currentSection = 'dashboard' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>{title} | Admin - Grip Club</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-racing-black">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-racing-black/90 backdrop-blur-md border-b border-racing-silver/10">
+      <nav class="container mx-auto px-4 md:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <a href="/panel" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center group-hover:bg-red-700 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+            </div>
+            <div class="hidden sm:block">
+              <span class="text-xl font-bold tracking-wider" style="font-family: 'Bebas Neue', sans-serif;">GRIP CLUB</span>
+              <span class="ml-2 px-2 py-0.5 bg-red-600 text-white text-xs rounded">ADMIN</span>
+            </div>
+          </a>
+
+          <!-- User Menu -->
+          <div class="flex items-center gap-4">
+            <!-- Back to site -->
+            <a href="/" class="nav-link flex items-center gap-1 text-sm text-racing-silver hover:text-white">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+              </svg>
+              Volver al sitio
+            </a>
+
+            <!-- User dropdown -->
+            <div class="relative" id="user-menu-container">
+              <button id="user-menu-btn" class="flex items-center gap-2 text-white hover:text-vanilla transition-colors">
+                <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                  </svg>
+                </div>
+                <span id="user-name" class="hidden sm:block text-sm"></span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+
+              <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-racing-gray rounded-lg shadow-lg border border-racing-silver/10 py-2">
+                <button id="logout-btn" class="w-full text-left px-4 py-2 text-sm text-racing-silver hover:text-white hover:bg-racing-silver/10">
+                  Cerrar sesion
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex-grow pt-16 flex">
+      <!-- Sidebar -->
+      <aside class="hidden md:block w-64 bg-racing-gray border-r border-racing-silver/10 fixed left-0 top-16 bottom-0 overflow-y-auto">
+        <nav class="p-4 space-y-2">
+          <a href="/panel"
+             class={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${currentSection === 'dashboard' ? 'bg-red-600 text-white' : 'text-racing-silver hover:bg-racing-silver/10 hover:text-white'}`}>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            Dashboard
+          </a>
+
+          <a href="/panel/equipos"
+             class={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${currentSection === 'equipos' ? 'bg-red-600 text-white' : 'text-racing-silver hover:bg-racing-silver/10 hover:text-white'}`}>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            Equipos
+          </a>
+
+          <a href="/panel/configuracion"
+             class={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${currentSection === 'configuracion' ? 'bg-red-600 text-white' : 'text-racing-silver hover:bg-racing-silver/10 hover:text-white'}`}>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Configuracion
+          </a>
+
+          <a href="/panel/exportar"
+             class={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${currentSection === 'exportar' ? 'bg-red-600 text-white' : 'text-racing-silver hover:bg-racing-silver/10 hover:text-white'}`}>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Exportar
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Mobile bottom nav -->
+      <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-racing-gray border-t border-racing-silver/10 z-40">
+        <div class="flex justify-around py-2">
+          <a href="/panel"
+             class={`flex flex-col items-center px-3 py-2 ${currentSection === 'dashboard' ? 'text-red-600' : 'text-racing-silver'}`}>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <span class="text-xs mt-1">Home</span>
+          </a>
+          <a href="/panel/equipos"
+             class={`flex flex-col items-center px-3 py-2 ${currentSection === 'equipos' ? 'text-red-600' : 'text-racing-silver'}`}>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+            <span class="text-xs mt-1">Equipos</span>
+          </a>
+          <a href="/panel/configuracion"
+             class={`flex flex-col items-center px-3 py-2 ${currentSection === 'configuracion' ? 'text-red-600' : 'text-racing-silver'}`}>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span class="text-xs mt-1">Config</span>
+          </a>
+          <a href="/panel/exportar"
+             class={`flex flex-col items-center px-3 py-2 ${currentSection === 'exportar' ? 'text-red-600' : 'text-racing-silver'}`}>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span class="text-xs mt-1">Exportar</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <main class="flex-grow md:ml-64 p-4 md:p-8 pb-24 md:pb-8">
+        <slot />
+      </main>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-racing-black/80 z-50 flex items-center justify-center">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+        <p class="mt-4 text-racing-silver">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      import { identity } from '../lib/identity';
+
+      const showLoading = () => document.getElementById('loading-overlay')?.classList.remove('hidden');
+      const hideLoading = () => document.getElementById('loading-overlay')?.classList.add('hidden');
+
+      // Helper for authenticated fetch
+      async function fetchWithAuth(url: string, options: RequestInit = {}) {
+        const token = identity.getToken();
+        return fetch(url, {
+          ...options,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            ...options.headers,
+          },
+        });
+      }
+
+      // Make it available globally
+      (window as any).fetchWithAuth = fetchWithAuth;
+      (window as any).showLoading = showLoading;
+      (window as any).hideLoading = hideLoading;
+
+      // Initialize identity
+      await identity.init('es');
+
+      // Check if logged in and is admin
+      const user = identity.getUser();
+      if (!user) {
+        window.location.href = '/auth/login';
+      } else {
+        // Check admin status via API
+        try {
+          const response = await fetchWithAuth('/api/panel-teams');
+          if (response.status === 403) {
+            // Not an admin
+            alert('No tienes permisos de administrador');
+            window.location.href = '/';
+          } else if (response.status === 401) {
+            window.location.href = '/auth/login';
+          }
+        } catch (error) {
+          console.error('Error checking admin status:', error);
+        }
+
+        // Update user name display
+        const userName = document.getElementById('user-name');
+        if (userName) {
+          userName.textContent = user.user_metadata?.full_name || user.email.split('@')[0];
+        }
+      }
+
+      // User dropdown toggle
+      const userMenuBtn = document.getElementById('user-menu-btn');
+      const userDropdown = document.getElementById('user-dropdown');
+
+      userMenuBtn?.addEventListener('click', () => {
+        userDropdown?.classList.toggle('hidden');
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener('click', (e) => {
+        const container = document.getElementById('user-menu-container');
+        if (container && !container.contains(e.target as Node)) {
+          userDropdown?.classList.add('hidden');
+        }
+      });
+
+      // Logout handler
+      const logoutBtn = document.getElementById('logout-btn');
+      logoutBtn?.addEventListener('click', () => {
+        identity.logout();
+        window.location.href = '/';
+      });
+
+      // Listen for auth changes
+      identity.onAuthChange((user) => {
+        if (!user) {
+          window.location.href = '/auth/login';
+        }
+      });
+    </script>
+  </body>
+</html>
