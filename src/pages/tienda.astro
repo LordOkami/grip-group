@@ -1,0 +1,445 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Productos mockeados
+const products = [
+  {
+    id: 1,
+    name: 'Camiseta Grip Club Classic',
+    nameEn: 'Grip Club Classic T-Shirt',
+    description: 'Camiseta oficial 100% algodón con logo bordado',
+    descriptionEn: 'Official 100% cotton t-shirt with embroidered logo',
+    price: 29.99,
+    image: '/images/merch/camiseta-classic.jpg',
+    category: 'camisetas',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Negro', 'Blanco', 'Verde Racing'],
+    colorsEn: ['Black', 'White', 'Racing Green'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: 2,
+    name: 'Camiseta 8H Endurance',
+    nameEn: '8H Endurance T-Shirt',
+    description: 'Edición especial con diseño exclusivo de la carrera',
+    descriptionEn: 'Special edition with exclusive race design',
+    price: 34.99,
+    image: '/images/merch/camiseta-endurance.jpg',
+    category: 'camisetas',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Negro', 'Gris Oscuro'],
+    colorsEn: ['Black', 'Dark Gray'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: 3,
+    name: 'Gorra Grip Club',
+    nameEn: 'Grip Club Cap',
+    description: 'Gorra ajustable con logo bordado frontal',
+    descriptionEn: 'Adjustable cap with front embroidered logo',
+    price: 24.99,
+    image: '/images/merch/gorra-classic.jpg',
+    category: 'gorras',
+    sizes: ['Única'],
+    colors: ['Negro', 'Verde Racing'],
+    colorsEn: ['Black', 'Racing Green'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: 4,
+    name: 'Gorra Trucker Racing',
+    nameEn: 'Racing Trucker Cap',
+    description: 'Estilo trucker con malla transpirable',
+    descriptionEn: 'Trucker style with breathable mesh',
+    price: 22.99,
+    image: '/images/merch/gorra-trucker.jpg',
+    category: 'gorras',
+    sizes: ['Única'],
+    colors: ['Negro/Blanco', 'Verde/Negro'],
+    colorsEn: ['Black/White', 'Green/Black'],
+    inStock: true,
+    featured: false,
+  },
+  {
+    id: 5,
+    name: 'Sudadera Grip Club Pro',
+    nameEn: 'Grip Club Pro Hoodie',
+    description: 'Sudadera con capucha, felpa interior y bolsillo canguro',
+    descriptionEn: 'Hoodie with fleece lining and kangaroo pocket',
+    price: 54.99,
+    image: '/images/merch/sudadera-pro.jpg',
+    category: 'camisetas',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['Negro', 'Verde Racing'],
+    colorsEn: ['Black', 'Racing Green'],
+    inStock: true,
+    featured: true,
+  },
+  {
+    id: 6,
+    name: 'Llavero Grip Club',
+    nameEn: 'Grip Club Keychain',
+    description: 'Llavero metálico con acabado premium',
+    descriptionEn: 'Metal keychain with premium finish',
+    price: 9.99,
+    image: '/images/merch/llavero.jpg',
+    category: 'accesorios',
+    sizes: ['Única'],
+    colors: ['Plateado', 'Negro Mate'],
+    colorsEn: ['Silver', 'Matte Black'],
+    inStock: true,
+    featured: false,
+  },
+  {
+    id: 7,
+    name: 'Pegatinas Pack Racing',
+    nameEn: 'Racing Stickers Pack',
+    description: 'Pack de 5 pegatinas vinilo resistentes al agua',
+    descriptionEn: 'Pack of 5 water-resistant vinyl stickers',
+    price: 7.99,
+    image: '/images/merch/pegatinas.jpg',
+    category: 'accesorios',
+    sizes: ['Única'],
+    colors: ['Multicolor'],
+    colorsEn: ['Multicolor'],
+    inStock: true,
+    featured: false,
+  },
+  {
+    id: 8,
+    name: 'Botella Térmica 750ml',
+    nameEn: 'Thermal Bottle 750ml',
+    description: 'Botella de acero inoxidable, mantiene temperatura 24h',
+    descriptionEn: 'Stainless steel bottle, keeps temperature 24h',
+    price: 19.99,
+    image: '/images/merch/botella.jpg',
+    category: 'accesorios',
+    sizes: ['750ml'],
+    colors: ['Negro', 'Verde Racing'],
+    colorsEn: ['Black', 'Racing Green'],
+    inStock: false,
+    featured: false,
+  },
+  {
+    id: 9,
+    name: 'Polo Grip Club Team',
+    nameEn: 'Grip Club Team Polo',
+    description: 'Polo técnico transpirable ideal para paddock',
+    descriptionEn: 'Technical breathable polo ideal for paddock',
+    price: 44.99,
+    image: '/images/merch/polo-team.jpg',
+    category: 'camisetas',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Negro', 'Blanco'],
+    colorsEn: ['Black', 'White'],
+    inStock: true,
+    featured: false,
+  },
+  {
+    id: 10,
+    name: 'Bolsa Gym Grip Club',
+    nameEn: 'Grip Club Gym Bag',
+    description: 'Bolsa deportiva con compartimento para calzado',
+    descriptionEn: 'Sports bag with shoe compartment',
+    price: 34.99,
+    image: '/images/merch/bolsa-gym.jpg',
+    category: 'accesorios',
+    sizes: ['Única'],
+    colors: ['Negro'],
+    colorsEn: ['Black'],
+    inStock: true,
+    featured: false,
+  },
+];
+
+const categories = ['all', 'camisetas', 'gorras', 'accesorios'];
+const featuredProducts = products.filter(p => p.featured);
+---
+
+<Layout title={t('tienda.title')} currentPage="tienda">
+  <!-- Hero Section -->
+  <section class="relative py-24 bg-racing-black overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute inset-0 bg-gradient-to-br from-racing-green/30 to-transparent"></div>
+    </div>
+
+    <div class="relative container mx-auto px-4 md:px-8 text-center">
+      <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Grip Club</span>
+      <h1 class="text-5xl md:text-7xl font-bold mb-4" style="font-family: 'Bebas Neue', sans-serif;">
+        {t('tienda.title')}
+      </h1>
+      <p class="text-xl text-racing-silver max-w-2xl mx-auto">
+        {t('tienda.subtitle')}
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="py-16 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-8" style="font-family: 'Bebas Neue', sans-serif;">
+        {lang === 'es' ? 'Productos Destacados' : 'Featured Products'}
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featuredProducts.map((product) => (
+          <div class="group bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20 hover:border-racing-green/50 transition-all duration-300">
+            <!-- Product Image -->
+            <div class="aspect-square bg-racing-gray-light relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center text-racing-silver/30">
+                <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              {!product.inStock && (
+                <div class="absolute top-3 right-3 bg-red-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  {t('tienda.outOfStock')}
+                </div>
+              )}
+              {product.featured && product.inStock && (
+                <div class="absolute top-3 left-3 bg-racing-green text-vanilla text-xs font-bold px-3 py-1 rounded-full">
+                  {lang === 'es' ? 'Destacado' : 'Featured'}
+                </div>
+              )}
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-white mb-2 group-hover:text-vanilla transition-colors">
+                {lang === 'es' ? product.name : product.nameEn}
+              </h3>
+              <p class="text-racing-silver text-sm mb-3 line-clamp-2">
+                {lang === 'es' ? product.description : product.descriptionEn}
+              </p>
+
+              <!-- Sizes -->
+              <div class="flex flex-wrap gap-1 mb-3">
+                {product.sizes.map((size) => (
+                  <span class="text-xs bg-racing-gray px-2 py-1 rounded text-racing-silver">
+                    {size}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Price & Button -->
+              <div class="flex items-center justify-between mt-4">
+                <span class="text-2xl font-bold text-vanilla">{product.price.toFixed(2)}€</span>
+                <button
+                  class={`px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${
+                    product.inStock
+                      ? 'bg-racing-green hover:bg-racing-green-dark text-vanilla'
+                      : 'bg-racing-gray text-racing-silver cursor-not-allowed'
+                  }`}
+                  disabled={!product.inStock}
+                >
+                  {product.inStock ? (lang === 'es' ? 'Añadir' : 'Add') : t('tienda.outOfStock')}
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All Products with Filter -->
+  <section class="py-16 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+          {lang === 'es' ? 'Todos los Productos' : 'All Products'}
+        </h2>
+
+        <!-- Category Filter -->
+        <div class="flex flex-wrap gap-2" id="category-filters">
+          {categories.map((cat) => (
+            <button
+              class="category-btn px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider transition-all border border-racing-silver/30 text-racing-silver hover:border-vanilla hover:text-vanilla data-[active=true]:bg-racing-green data-[active=true]:border-racing-green data-[active=true]:text-vanilla"
+              data-category={cat}
+              data-active={cat === 'all' ? 'true' : 'false'}
+            >
+              {t(`tienda.category.${cat}` as any)}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
+        {products.map((product) => (
+          <div
+            class="product-card group bg-racing-gray rounded-2xl overflow-hidden border border-racing-silver/20 hover:border-racing-green/50 transition-all duration-300"
+            data-category={product.category}
+          >
+            <!-- Product Image -->
+            <div class="aspect-square bg-racing-gray-light relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center text-racing-silver/30">
+                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              {!product.inStock && (
+                <div class="absolute top-3 right-3 bg-red-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  {t('tienda.outOfStock')}
+                </div>
+              )}
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-4">
+              <span class="text-xs text-racing-green uppercase tracking-wider font-semibold">
+                {t(`tienda.category.${product.category}` as any)}
+              </span>
+              <h3 class="text-lg font-bold text-white mt-1 mb-2 group-hover:text-vanilla transition-colors">
+                {lang === 'es' ? product.name : product.nameEn}
+              </h3>
+              <p class="text-racing-silver text-sm mb-3 line-clamp-2">
+                {lang === 'es' ? product.description : product.descriptionEn}
+              </p>
+
+              <!-- Colors -->
+              <div class="text-xs text-racing-silver mb-3">
+                <span class="font-semibold">{t('tienda.colors')}:</span> {lang === 'es' ? product.colors.join(', ') : product.colorsEn.join(', ')}
+              </div>
+
+              <!-- Price & Button -->
+              <div class="flex items-center justify-between">
+                <span class="text-xl font-bold text-vanilla">{product.price.toFixed(2)}€</span>
+                <button
+                  class={`px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all ${
+                    product.inStock
+                      ? 'bg-racing-green hover:bg-racing-green-dark text-vanilla'
+                      : 'bg-racing-black text-racing-silver cursor-not-allowed'
+                  }`}
+                  disabled={!product.inStock}
+                >
+                  {product.inStock ? (lang === 'es' ? 'Añadir' : 'Add') : t('tienda.outOfStock')}
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon Banner -->
+  <section class="py-16 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="bg-gradient-to-r from-racing-green/20 to-racing-black rounded-2xl p-8 md:p-12 border border-racing-green/30">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Bebas Neue', sans-serif;">
+              {lang === 'es' ? 'Nueva Colección 2025' : '2025 New Collection'}
+            </h3>
+            <p class="text-racing-silver">
+              {lang === 'es'
+                ? 'Próximamente nuevos diseños exclusivos para la temporada.'
+                : 'Coming soon: new exclusive designs for the season.'}
+            </p>
+          </div>
+          <div class="flex items-center gap-2 text-vanilla">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="font-bold uppercase tracking-wider">{t('tienda.comingSoon')}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="py-16 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Envío -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2">
+            {lang === 'es' ? 'Envío Gratis' : 'Free Shipping'}
+          </h4>
+          <p class="text-racing-silver text-sm">
+            {lang === 'es' ? 'En pedidos superiores a 50€' : 'On orders over 50€'}
+          </p>
+        </div>
+
+        <!-- Calidad -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2">
+            {lang === 'es' ? 'Calidad Premium' : 'Premium Quality'}
+          </h4>
+          <p class="text-racing-silver text-sm">
+            {lang === 'es' ? 'Materiales de primera calidad' : 'Top quality materials'}
+          </p>
+        </div>
+
+        <!-- Devoluciones -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </div>
+          <h4 class="text-lg font-bold text-white mb-2">
+            {lang === 'es' ? 'Devolución Fácil' : 'Easy Returns'}
+          </h4>
+          <p class="text-racing-silver text-sm">
+            {lang === 'es' ? '30 días para cambios y devoluciones' : '30 days for changes and returns'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Category filter functionality
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const productCards = document.querySelectorAll('.product-card');
+
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+
+      // Update active state
+      categoryBtns.forEach(b => b.setAttribute('data-active', 'false'));
+      btn.setAttribute('data-active', 'true');
+
+      // Filter products
+      productCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          (card as HTMLElement).style.display = 'block';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
