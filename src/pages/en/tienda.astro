@@ -5,7 +5,7 @@ import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Mock products
+// Mock products with Unsplash images
 const products = [
   {
     id: 1,
@@ -14,7 +14,7 @@ const products = [
     description: 'Camiseta oficial 100% algodón con logo bordado',
     descriptionEn: 'Official 100% cotton t-shirt with embroidered logo',
     price: 29.99,
-    image: '/images/merch/camiseta-classic.jpg',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&h=500&fit=crop',
     category: 'camisetas',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Negro', 'Blanco', 'Verde Racing'],
@@ -29,7 +29,7 @@ const products = [
     description: 'Edición especial con diseño exclusivo de la carrera',
     descriptionEn: 'Special edition with exclusive race design',
     price: 34.99,
-    image: '/images/merch/camiseta-endurance.jpg',
+    image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500&h=500&fit=crop',
     category: 'camisetas',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Negro', 'Gris Oscuro'],
@@ -44,7 +44,7 @@ const products = [
     description: 'Gorra ajustable con logo bordado frontal',
     descriptionEn: 'Adjustable cap with front embroidered logo',
     price: 24.99,
-    image: '/images/merch/gorra-classic.jpg',
+    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&h=500&fit=crop',
     category: 'gorras',
     sizes: ['Única'],
     colors: ['Negro', 'Verde Racing'],
@@ -59,7 +59,7 @@ const products = [
     description: 'Estilo trucker con malla transpirable',
     descriptionEn: 'Trucker style with breathable mesh',
     price: 22.99,
-    image: '/images/merch/gorra-trucker.jpg',
+    image: 'https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=500&h=500&fit=crop',
     category: 'gorras',
     sizes: ['Única'],
     colors: ['Negro/Blanco', 'Verde/Negro'],
@@ -74,7 +74,7 @@ const products = [
     description: 'Sudadera con capucha, felpa interior y bolsillo canguro',
     descriptionEn: 'Hoodie with fleece lining and kangaroo pocket',
     price: 54.99,
-    image: '/images/merch/sudadera-pro.jpg',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=500&fit=crop',
     category: 'camisetas',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: ['Negro', 'Verde Racing'],
@@ -89,7 +89,7 @@ const products = [
     description: 'Llavero metálico con acabado premium',
     descriptionEn: 'Metal keychain with premium finish',
     price: 9.99,
-    image: '/images/merch/llavero.jpg',
+    image: 'https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?w=500&h=500&fit=crop',
     category: 'accesorios',
     sizes: ['Única'],
     colors: ['Plateado', 'Negro Mate'],
@@ -104,7 +104,7 @@ const products = [
     description: 'Pack de 5 pegatinas vinilo resistentes al agua',
     descriptionEn: 'Pack of 5 water-resistant vinyl stickers',
     price: 7.99,
-    image: '/images/merch/pegatinas.jpg',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop',
     category: 'accesorios',
     sizes: ['Única'],
     colors: ['Multicolor'],
@@ -119,7 +119,7 @@ const products = [
     description: 'Botella de acero inoxidable, mantiene temperatura 24h',
     descriptionEn: 'Stainless steel bottle, keeps temperature 24h',
     price: 19.99,
-    image: '/images/merch/botella.jpg',
+    image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&h=500&fit=crop',
     category: 'accesorios',
     sizes: ['750ml'],
     colors: ['Negro', 'Verde Racing'],
@@ -134,7 +134,7 @@ const products = [
     description: 'Polo técnico transpirable ideal para paddock',
     descriptionEn: 'Technical breathable polo ideal for paddock',
     price: 44.99,
-    image: '/images/merch/polo-team.jpg',
+    image: 'https://images.unsplash.com/photo-1625910513413-5fc42a5ef7f5?w=500&h=500&fit=crop',
     category: 'camisetas',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Negro', 'Blanco'],
@@ -149,7 +149,7 @@ const products = [
     description: 'Bolsa deportiva con compartimento para calzado',
     descriptionEn: 'Sports bag with shoe compartment',
     price: 34.99,
-    image: '/images/merch/bolsa-gym.jpg',
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&h=500&fit=crop',
     category: 'accesorios',
     sizes: ['Única'],
     colors: ['Negro'],
@@ -193,11 +193,12 @@ const featuredProducts = products.filter(p => p.featured);
           <div class="group bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20 hover:border-racing-green/50 transition-all duration-300">
             <!-- Product Image -->
             <div class="aspect-square bg-racing-gray-light relative overflow-hidden">
-              <div class="absolute inset-0 flex items-center justify-center text-racing-silver/30">
-                <svg class="w-20 h-20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
+              <img
+                src={product.image}
+                alt={lang === 'es' ? product.name : product.nameEn}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
               {!product.inStock && (
                 <div class="absolute top-3 right-3 bg-red-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
                   {t('tienda.outOfStock')}
@@ -280,11 +281,12 @@ const featuredProducts = products.filter(p => p.featured);
           >
             <!-- Product Image -->
             <div class="aspect-square bg-racing-gray-light relative overflow-hidden">
-              <div class="absolute inset-0 flex items-center justify-center text-racing-silver/30">
-                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
+              <img
+                src={product.image}
+                alt={lang === 'es' ? product.name : product.nameEn}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
               {!product.inStock && (
                 <div class="absolute top-3 right-3 bg-red-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
                   {t('tienda.outOfStock')}
