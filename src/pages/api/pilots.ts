@@ -39,7 +39,7 @@ export const GET: APIRoute = async ({ request }) => {
       .from('pilots')
       .select('*')
       .eq('team_id', team.id)
-      .order('pilot_number', { ascending: true });
+      .order('created_at', { ascending: true });
 
     if (error) throw error;
 
@@ -99,8 +99,6 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Pilot with this DNI already exists' }), { status: 400 });
     }
 
-    const nextNumber = (count || 0) + 1;
-
     const { data, error } = await supabase
       .from('pilots')
       .insert({
@@ -114,16 +112,17 @@ export const POST: APIRoute = async ({ request }) => {
         emergency_contact_phone: body.emergency_contact_phone,
         driving_level: body.driving_level || 'amateur',
         track_experience: body.track_experience,
-        is_representative: body.is_representative || false,
-        pilot_number: nextNumber
+        is_representative: body.is_representative || false
       })
       .select()
       .single();
 
+    const currentCount = (count || 0) + 1;
+
     if (error) throw error;
 
     // Update team status if minimum pilots reached
-    if (nextNumber >= 4) {
+    if (currentCount >= 4) {
       await supabase
         .from('teams')
         .update({ status: 'pending' })
@@ -236,7 +235,7 @@ export const DELETE: APIRoute = async ({ request, url }) => {
     // Verify pilot
     const { data: pilot } = await supabase
       .from('pilots')
-      .select('id, is_representative, pilot_number')
+      .select('id, is_representative')
       .eq('id', pilotId)
       .eq('team_id', team.id)
       .single();
@@ -256,24 +255,6 @@ export const DELETE: APIRoute = async ({ request, url }) => {
       .eq('team_id', team.id);
 
     if (error) throw error;
-
-    // Reorder remaining pilots
-    const { data: remainingPilots } = await supabase
-      .from('pilots')
-      .select('id, pilot_number')
-      .eq('team_id', team.id)
-      .order('pilot_number', { ascending: true });
-
-    if (remainingPilots) {
-      for (let i = 0; i < remainingPilots.length; i++) {
-        if (remainingPilots[i].pilot_number !== i + 1) {
-          await supabase
-            .from('pilots')
-            .update({ pilot_number: i + 1 })
-            .eq('id', remainingPilots[i].id);
-        }
-      }
-    }
 
     // Update team status if below minimum
     const { count } = await supabase
