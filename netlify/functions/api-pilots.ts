@@ -42,7 +42,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           .from('pilots')
           .select('*')
           .eq('team_id', team.id)
-          .order('pilot_number', { ascending: true });
+          .order('created_at', { ascending: true });
 
         if (error) throw error;
 
@@ -85,9 +85,6 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           return errorResponse('Ya existe un piloto con ese DNI en el equipo / A pilot with that ID already exists in the team');
         }
 
-        // Get next pilot number
-        const nextNumber = (count || 0) + 1;
-
         // Create pilot
         const { data, error } = await supabase
           .from('pilots')
@@ -102,16 +99,17 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
             emergency_contact_phone: body.emergency_contact_phone,
             driving_level: body.driving_level || 'amateur',
             track_experience: body.track_experience,
-            is_representative: body.is_representative || false,
-            pilot_number: nextNumber
+            is_representative: body.is_representative || false
           })
           .select()
           .single();
 
         if (error) throw error;
 
+        const currentCount = (count || 0) + 1;
+
         // Update team status if minimum pilots reached
-        if (nextNumber >= 4) {
+        if (currentCount >= 4) {
           await supabase
             .from('teams')
             .update({ status: 'pending' })
@@ -185,7 +183,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         // Verify pilot belongs to user's team and is not representative
         const { data: pilotToDelete } = await supabase
           .from('pilots')
-          .select('id, is_representative, pilot_number')
+          .select('id, is_representative')
           .eq('id', pilotId)
           .eq('team_id', team.id)
           .single();
@@ -206,24 +204,6 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           .eq('team_id', team.id);
 
         if (error) throw error;
-
-        // Reorder remaining pilots
-        const { data: remainingPilots } = await supabase
-          .from('pilots')
-          .select('id, pilot_number')
-          .eq('team_id', team.id)
-          .order('pilot_number', { ascending: true });
-
-        if (remainingPilots) {
-          for (let i = 0; i < remainingPilots.length; i++) {
-            if (remainingPilots[i].pilot_number !== i + 1) {
-              await supabase
-                .from('pilots')
-                .update({ pilot_number: i + 1 })
-                .eq('id', remainingPilots[i].id);
-            }
-          }
-        }
 
         // Update team status if below minimum
         const { count } = await supabase
