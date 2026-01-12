@@ -102,6 +102,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   async function loadTeams() {
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -226,6 +227,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     const newStatus = (document.getElementById('modal-status') as HTMLSelectElement).value;
 
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch(`/api/admin-teams?id=${currentTeamId}`, {
         method: 'PUT',

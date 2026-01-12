@@ -199,6 +199,7 @@ const { id } = Astro.params;
 
   async function loadTeam() {
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -312,6 +313,7 @@ const { id } = Astro.params;
     const newStatus = (document.getElementById('change-status') as HTMLSelectElement).value;
 
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch(`/api/admin-teams?id=${teamId}`, {
         method: 'PUT',

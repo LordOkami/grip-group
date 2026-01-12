@@ -106,6 +106,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   async function loadSettings() {
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch('/api/admin-settings', {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -150,6 +151,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     loading.classList.remove('hidden');
 
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
 
       const registration_deadline = (document.getElementById('registration_deadline') as HTMLInputElement).value;

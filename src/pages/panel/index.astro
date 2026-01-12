@@ -265,6 +265,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   async function loadDashboard() {
     try {
+      // Wait for identity to be ready
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: {

@@ -208,6 +208,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   async function loadPilots() {
     try {
+      await identity.waitForInit();
       const token = identity.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: {
