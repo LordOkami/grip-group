@@ -5,6 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # PUBLIC_SITE_URL is not a secret - it's the public site URL
+  SECRETS_SCAN_OMIT_KEYS = "PUBLIC_SITE_URL"
 
 # Functions configuration
 [functions]
