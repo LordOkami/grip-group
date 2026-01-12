@@ -1,3 +1,197 @@
 ---
-return Astro.redirect('/admin/configuracion');
+import AdminLayout from '../../layouts/AdminLayout.astro';
 ---
+
+<AdminLayout title="Configuracion" currentSection="configuracion">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+        Configuracion de Inscripciones
+      </h1>
+      <p class="text-racing-silver mt-2">Gestiona las opciones de registro de equipos</p>
+    </div>
+
+    <!-- Settings Form -->
+    <form id="settings-form" class="space-y-6">
+      <!-- Registration Open -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-white font-semibold">Inscripciones Abiertas</h3>
+            <p class="text-racing-silver text-sm mt-1">Permite a los usuarios crear nuevos equipos</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="registration_open" class="sr-only peer">
+            <div class="w-14 h-7 bg-racing-black rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Max Teams -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="block">
+          <span class="text-white font-semibold">Numero Maximo de Equipos</span>
+          <p class="text-racing-silver text-sm mt-1 mb-3">Limite de equipos que pueden inscribirse</p>
+          <input type="number" id="max_teams" min="1" max="100"
+                 class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600">
+        </label>
+      </div>
+
+      <!-- Registration Deadline -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="block">
+          <span class="text-white font-semibold">Fecha Limite de Inscripcion</span>
+          <p class="text-racing-silver text-sm mt-1 mb-3">Despues de esta fecha no se podran crear nuevos equipos</p>
+          <input type="datetime-local" id="registration_deadline"
+                 class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600">
+        </label>
+      </div>
+
+      <!-- Pilot Modification Deadline -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="block">
+          <span class="text-white font-semibold">Fecha Limite de Modificacion de Pilotos</span>
+          <p class="text-racing-silver text-sm mt-1 mb-3">Despues de esta fecha no se podran modificar los pilotos</p>
+          <input type="datetime-local" id="pilot_modification_deadline"
+                 class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600">
+        </label>
+      </div>
+
+      <!-- Event Date -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="block">
+          <span class="text-white font-semibold">Fecha del Evento</span>
+          <p class="text-racing-silver text-sm mt-1 mb-3">Fecha en la que se celebra la carrera</p>
+          <input type="date" id="event_date"
+                 class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600">
+        </label>
+      </div>
+
+      <!-- Event Location -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="block">
+          <span class="text-white font-semibold">Ubicacion del Evento</span>
+          <p class="text-racing-silver text-sm mt-1 mb-3">Circuito o lugar donde se celebra</p>
+          <input type="text" id="event_location" placeholder="Ej: Circuito de Jerez"
+                 class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-red-600">
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <div class="flex justify-end gap-4">
+        <button type="button" id="reset-btn" class="px-6 py-3 bg-racing-silver/20 text-white rounded-lg hover:bg-racing-silver/30 transition-colors">
+          Restablecer
+        </button>
+        <button type="submit" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+          Guardar Cambios
+        </button>
+      </div>
+    </form>
+
+    <!-- Loading overlay -->
+    <div id="form-loading" class="hidden fixed inset-0 bg-racing-black/80 z-50 flex items-center justify-center">
+      <div class="text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+        <p class="mt-4 text-racing-silver">Guardando...</p>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script>
+  import { identity } from '../../lib/identity';
+
+  let originalSettings: any = {};
+
+  async function loadSettings() {
+    try {
+      const token = identity.getToken();
+      const response = await fetch('/api/admin-settings', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (!response.ok) throw new Error('Error loading settings');
+
+      const { settings } = await response.json();
+      originalSettings = settings;
+
+      // Populate form
+      (document.getElementById('registration_open') as HTMLInputElement).checked = settings.registration_open ?? true;
+      (document.getElementById('max_teams') as HTMLInputElement).value = settings.max_teams?.toString() || '35';
+
+      if (settings.registration_deadline) {
+        const date = new Date(settings.registration_deadline);
+        (document.getElementById('registration_deadline') as HTMLInputElement).value = date.toISOString().slice(0, 16);
+      }
+
+      if (settings.pilot_modification_deadline) {
+        const date = new Date(settings.pilot_modification_deadline);
+        (document.getElementById('pilot_modification_deadline') as HTMLInputElement).value = date.toISOString().slice(0, 16);
+      }
+
+      if (settings.event_date) {
+        (document.getElementById('event_date') as HTMLInputElement).value = settings.event_date.split('T')[0];
+      }
+
+      (document.getElementById('event_location') as HTMLInputElement).value = settings.event_location || '';
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al cargar la configuracion');
+    }
+  }
+
+  // Save settings
+  document.getElementById('settings-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const loading = document.getElementById('form-loading')!;
+    loading.classList.remove('hidden');
+
+    try {
+      const token = identity.getToken();
+
+      const registration_deadline = (document.getElementById('registration_deadline') as HTMLInputElement).value;
+      const pilot_modification_deadline = (document.getElementById('pilot_modification_deadline') as HTMLInputElement).value;
+      const event_date = (document.getElementById('event_date') as HTMLInputElement).value;
+
+      const response = await fetch('/api/admin-settings', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          registration_open: (document.getElementById('registration_open') as HTMLInputElement).checked,
+          max_teams: parseInt((document.getElementById('max_teams') as HTMLInputElement).value) || 35,
+          registration_deadline: registration_deadline ? new Date(registration_deadline).toISOString() : null,
+          pilot_modification_deadline: pilot_modification_deadline ? new Date(pilot_modification_deadline).toISOString() : null,
+          event_date: event_date || null,
+          event_location: (document.getElementById('event_location') as HTMLInputElement).value || null
+        })
+      });
+
+      if (!response.ok) throw new Error('Error saving settings');
+
+      alert('Configuracion guardada correctamente');
+      loadSettings(); // Reload to confirm
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al guardar la configuracion');
+    } finally {
+      loading.classList.add('hidden');
+    }
+  });
+
+  // Reset button
+  document.getElementById('reset-btn')?.addEventListener('click', () => {
+    if (confirm('Restablecer a los valores guardados?')) {
+      loadSettings();
+    }
+  });
+
+  // Load settings on page load
+  loadSettings();
+</script>
