@@ -18,13 +18,14 @@ export interface IdentityUser {
 class IdentityService {
   private widget: any = null;
   private initialized = false;
-  private initPromise: Promise<void> | null = null;
-  private initResolve: (() => void) | null = null;
+  private userReady = false;
+  private userReadyPromise: Promise<IdentityUser | null> | null = null;
+  private userReadyResolve: ((user: IdentityUser | null) => void) | null = null;
 
   constructor() {
-    // Create a promise that resolves when init completes
-    this.initPromise = new Promise((resolve) => {
-      this.initResolve = resolve;
+    // Create a promise that resolves when user state is ready
+    this.userReadyPromise = new Promise((resolve) => {
+      this.userReadyResolve = resolve;
     });
   }
 
@@ -41,23 +42,35 @@ class IdentityService {
       (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
     const siteUrl = import.meta.env.PUBLIC_SITE_URL || '';
+
+    // Listen for init event BEFORE calling init() to not miss it
+    netlifyIdentity.on('init', (user: IdentityUser | null) => {
+      this.userReady = true;
+      if (this.userReadyResolve) {
+        this.userReadyResolve(user);
+      }
+    });
+
     netlifyIdentity.init({
       locale: locale === 'en' ? 'en' : 'es',
       ...(isLocalhost && siteUrl && { APIUrl: `${siteUrl}/.netlify/identity` })
     });
 
     this.initialized = true;
-
-    // Resolve the init promise
-    if (this.initResolve) {
-      this.initResolve();
-    }
   }
 
-  // Wait for initialization to complete
+  // Wait for user state to be ready (after init event fires)
+  async waitForUser(): Promise<IdentityUser | null> {
+    if (this.userReady) {
+      return this.getUser();
+    }
+    return this.userReadyPromise || Promise.resolve(null);
+  }
+
+  // Wait for initialization to complete (including user state)
   async waitForInit(): Promise<void> {
-    if (this.initialized) return;
-    return this.initPromise || Promise.resolve();
+    if (this.userReady) return;
+    await this.userReadyPromise;
   }
 
   isInitialized(): boolean {

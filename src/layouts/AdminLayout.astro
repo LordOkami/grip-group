@@ -196,11 +196,10 @@ const { title, currentSection = 'dashboard' } = Astro.props;
       (window as any).showLoading = showLoading;
       (window as any).hideLoading = hideLoading;
 
-      // Initialize identity
+      // Initialize identity and wait for user state to be ready
       await identity.init('es');
+      const user = await identity.waitForUser();
 
-      // Check if logged in and is admin
-      const user = identity.getUser();
       if (!user) {
         window.location.href = '/auth/login';
       } else {
@@ -208,7 +207,6 @@ const { title, currentSection = 'dashboard' } = Astro.props;
         try {
           const response = await fetchWithAuth('/api/admin-teams');
           if (response.status === 403) {
-            // Not an admin
             alert('No tienes permisos de administrador');
             window.location.href = '/';
           } else if (response.status === 401) {
