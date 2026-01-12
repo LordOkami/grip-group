@@ -38,17 +38,32 @@
   status = 200
 
 [[redirects]]
-  from = "/api/api-teams"
+  from = "/api/teams"
   to = "/.netlify/functions/api-teams"
   status = 200
 
 [[redirects]]
-  from = "/api/api-pilots"
+  from = "/api/teams/*"
+  to = "/.netlify/functions/api-teams"
+  status = 200
+
+[[redirects]]
+  from = "/api/pilots"
   to = "/.netlify/functions/api-pilots"
   status = 200
 
 [[redirects]]
-  from = "/api/api-staff"
+  from = "/api/pilots/*"
+  to = "/.netlify/functions/api-pilots"
+  status = 200
+
+[[redirects]]
+  from = "/api/staff"
+  to = "/.netlify/functions/api-staff"
+  status = 200
+
+[[redirects]]
+  from = "/api/staff/*"
   to = "/.netlify/functions/api-staff"
   status = 200
 
