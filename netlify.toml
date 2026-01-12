@@ -16,8 +16,41 @@
 [forms]
   formName = "preinscripcion"
 
-# NOTE: Astro SSR handles /api/* routes directly via the server bundle
-# No redirect needed - removing the old functions redirect that was causing 404s
+# Redirect /api/* to Netlify Functions
+[[redirects]]
+  from = "/api/admin-teams"
+  to = "/.netlify/functions/admin-teams"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin-teams/*"
+  to = "/.netlify/functions/admin-teams"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin-settings"
+  to = "/.netlify/functions/admin-settings"
+  status = 200
+
+[[redirects]]
+  from = "/api/admin-export"
+  to = "/.netlify/functions/admin-export"
+  status = 200
+
+[[redirects]]
+  from = "/api/api-teams"
+  to = "/.netlify/functions/api-teams"
+  status = 200
+
+[[redirects]]
+  from = "/api/api-pilots"
+  to = "/.netlify/functions/api-pilots"
+  status = 200
+
+[[redirects]]
+  from = "/api/api-staff"
+  to = "/.netlify/functions/api-staff"
+  status = 200
 
 # Headers for security and performance
 [[headers]]
