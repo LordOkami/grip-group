@@ -55,7 +55,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         // Calculate stats by driving level
         const drivingLevelStats = {
-          beginner: allPilots.filter(p => p.driving_level === 'beginner').length,
+          amateur: allPilots.filter(p => p.driving_level === 'amateur').length,
           intermediate: allPilots.filter(p => p.driving_level === 'intermediate').length,
           advanced: allPilots.filter(p => p.driving_level === 'advanced').length,
           expert: allPilots.filter(p => p.driving_level === 'expert').length

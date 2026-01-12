@@ -44,7 +44,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-2 text-white focus:border-red-600 focus:outline-none"
           >
             <option value="">Todos los niveles</option>
-            <option value="beginner">Principiante</option>
+            <option value="amateur">Amateur</option>
             <option value="intermediate">Intermedio</option>
             <option value="advanced">Avanzado</option>
             <option value="expert">Experto</option>
@@ -70,8 +70,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     <!-- Stats Cards -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
       <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
-        <div class="text-2xl font-bold text-blue-400" id="stat-beginner">0</div>
-        <div class="text-racing-silver text-xs">Principiantes</div>
+        <div class="text-2xl font-bold text-blue-400" id="stat-amateur">0</div>
+        <div class="text-racing-silver text-xs">Amateur</div>
       </div>
       <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
         <div class="text-2xl font-bold text-green-400" id="stat-intermediate">0</div>
@@ -179,14 +179,14 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   let sortAsc = true;
 
   const levelLabels: Record<string, string> = {
-    beginner: 'Principiante',
+    amateur: 'Amateur',
     intermediate: 'Intermedio',
     advanced: 'Avanzado',
     expert: 'Experto'
   };
 
   const levelColors: Record<string, string> = {
-    beginner: 'bg-blue-500',
+    amateur: 'bg-blue-500',
     intermediate: 'bg-green-500',
     advanced: 'bg-orange-500',
     expert: 'bg-red-500'
@@ -247,13 +247,13 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   function updateStats() {
     const stats = {
-      beginner: allPilots.filter(p => p.driving_level === 'beginner').length,
+      amateur: allPilots.filter(p => p.driving_level === 'amateur').length,
       intermediate: allPilots.filter(p => p.driving_level === 'intermediate').length,
       advanced: allPilots.filter(p => p.driving_level === 'advanced').length,
       expert: allPilots.filter(p => p.driving_level === 'expert').length
     };
 
-    document.getElementById('stat-beginner')!.textContent = stats.beginner.toString();
+    document.getElementById('stat-amateur')!.textContent = stats.amateur.toString();
     document.getElementById('stat-intermediate')!.textContent = stats.intermediate.toString();
     document.getElementById('stat-advanced')!.textContent = stats.advanced.toString();
     document.getElementById('stat-expert')!.textContent = stats.expert.toString();

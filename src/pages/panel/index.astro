@@ -416,10 +416,10 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     levelChart = new (window as any).Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Principiante', 'Intermedio', 'Avanzado', 'Experto'],
+        labels: ['Amateur', 'Intermedio', 'Avanzado', 'Experto'],
         datasets: [{
           label: 'Pilotos',
-          data: [levels.beginner, levels.intermediate, levels.advanced, levels.expert],
+          data: [levels.amateur, levels.intermediate, levels.advanced, levels.expert],
           backgroundColor: ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444'],
           borderRadius: 8
         }]
