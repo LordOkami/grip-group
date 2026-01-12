@@ -178,12 +178,12 @@ const altPath = lang === 'es'
     <script>
       import { identity } from '../lib/identity';
 
-      // Initialize identity
+      // Initialize identity and wait for user state
       const lang = document.documentElement.lang || 'es';
       await identity.init(lang);
+      const user = await identity.waitForUser();
 
       // Check if logged in
-      const user = identity.getUser();
       if (!user) {
         const loginPath = lang === 'en' ? '/en/auth/login' : '/auth/login';
         window.location.href = loginPath;

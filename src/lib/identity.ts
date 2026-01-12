@@ -166,6 +166,11 @@ class IdentityService {
   onAuthChange(callback: (user: IdentityUser | null) => void) {
     if (!this.widget) return;
 
+    // If already initialized, call callback immediately with current user
+    if (this.userReady) {
+      callback(this.getUser());
+    }
+
     this.widget.on('login', callback);
     this.widget.on('logout', () => callback(null));
     this.widget.on('init', (user: IdentityUser | null) => callback(user));

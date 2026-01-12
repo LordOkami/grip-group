@@ -393,8 +393,9 @@ const altPath =
         }
       }
 
-      // Initial check
-      updateAuthUI(identity.getUser());
+      // Initial check - wait for user state to be ready
+      const user = await identity.waitForUser();
+      updateAuthUI(user);
 
       // Listen for auth changes
       identity.onAuthChange(updateAuthUI);

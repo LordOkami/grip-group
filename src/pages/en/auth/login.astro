@@ -62,8 +62,8 @@ const translatePath = useTranslatedPath(lang);
     const lang = document.documentElement.lang || 'es';
     await identity.init(lang);
 
-    // Check if already logged in
-    const currentUser = identity.getUser();
+    // Wait for user state to be ready before checking
+    const currentUser = await identity.waitForUser();
     if (currentUser) {
       const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
       window.location.href = dashboardPath;
