@@ -256,7 +256,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  import { identity } from '../../lib/identity';
+  import { firebaseAuth } from '../../lib/firebase-auth';
 
   // Chart instances
   let statusChart: any;
@@ -266,8 +266,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   async function loadDashboard() {
     try {
       // Wait for identity to be ready
-      await identity.waitForInit();
-      const token = identity.getToken();
+      await firebaseAuth.waitForInit();
+      const token = firebaseAuth.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: {
           'Authorization': `Bearer ${token}`

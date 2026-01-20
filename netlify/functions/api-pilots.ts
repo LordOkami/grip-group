@@ -1,5 +1,6 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { supabase } from './utils/supabase';
+import { getFirestoreDb } from './utils/firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 import {
   getUserId,
   corsHeaders,
@@ -15,21 +16,26 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
-  const userId = getUserId(event);
+  const userId = await getUserId(event);
   if (!userId) {
     return unauthorizedResponse();
   }
 
-  // Get user's team
-  const { data: team, error: teamError } = await supabase
-    .from('teams')
-    .select('id, number_of_pilots')
-    .eq('representative_user_id', userId)
-    .single();
+  const db = getFirestoreDb();
 
-  if (teamError || !team) {
+  // Get user's team
+  const teamQuery = await db.collection('teams')
+    .where('representativeUserId', '==', userId)
+    .limit(1)
+    .get();
+
+  if (teamQuery.empty) {
     return errorResponse('Primero debes crear un equipo / You must create a team first', 400);
   }
+
+  const teamDoc = teamQuery.docs[0];
+  const teamData = teamDoc.data();
+  const pilotsRef = teamDoc.ref.collection('pilots');
 
   // Get pilot ID from query string for PUT/DELETE
   const pilotId = event.queryStringParameters?.id;
@@ -38,15 +44,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     switch (event.httpMethod) {
       case 'GET': {
         // Get all pilots for the team
-        const { data, error } = await supabase
-          .from('pilots')
-          .select('*')
-          .eq('team_id', team.id)
-          .order('created_at', { ascending: true });
+        const pilotsSnapshot = await pilotsRef.orderBy('createdAt').get();
+        const pilots = pilotsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          teamId: teamDoc.id,
+          ...doc.data()
+        }));
 
-        if (error) throw error;
-
-        return successResponse({ pilots: data || [] });
+        return successResponse({ pilots });
       }
 
       case 'POST': {
@@ -54,19 +59,17 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         const body = JSON.parse(event.body || '{}');
 
         // Check pilot count
-        const { count } = await supabase
-          .from('pilots')
-          .select('*', { count: 'exact', head: true })
-          .eq('team_id', team.id);
+        const pilotsCount = await pilotsRef.count().get();
+        const count = pilotsCount.data().count;
 
-        if (count !== null && count >= team.number_of_pilots) {
+        if (count >= teamData.numberOfPilots) {
           return errorResponse(
-            `El equipo ya tiene el máximo de pilotos (${team.number_of_pilots}) / Team already has maximum pilots (${team.number_of_pilots})`
+            `El equipo ya tiene el máximo de pilotos (${teamData.numberOfPilots}) / Team already has maximum pilots (${teamData.numberOfPilots})`
           );
         }
 
         // Validate required fields
-        const requiredFields = ['name', 'surname', 'dni', 'email', 'phone', 'emergency_contact_name', 'emergency_contact_phone'];
+        const requiredFields = ['name', 'surname', 'dni', 'email', 'phone', 'emergencyContactName', 'emergencyContactPhone'];
         for (const field of requiredFields) {
           if (!body[field]) {
             return errorResponse(`Campo obligatorio: ${field} / Required field: ${field}`);
@@ -74,50 +77,44 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         }
 
         // Check DNI uniqueness within team
-        const { data: existingDni } = await supabase
-          .from('pilots')
-          .select('id')
-          .eq('team_id', team.id)
-          .eq('dni', body.dni)
-          .single();
-
-        if (existingDni) {
+        const existingDni = await pilotsRef.where('dni', '==', body.dni).limit(1).get();
+        if (!existingDni.empty) {
           return errorResponse('Ya existe un piloto con ese DNI en el equipo / A pilot with that ID already exists in the team');
         }
 
         // Create pilot
-        const { data, error } = await supabase
-          .from('pilots')
-          .insert({
-            team_id: team.id,
-            name: body.name,
-            surname: body.surname,
-            dni: body.dni,
-            email: body.email,
-            phone: body.phone,
-            emergency_contact_name: body.emergency_contact_name,
-            emergency_contact_phone: body.emergency_contact_phone,
-            driving_level: body.driving_level || 'amateur',
-            track_experience: body.track_experience,
-            is_representative: body.is_representative || false
-          })
-          .select()
-          .single();
+        const now = FieldValue.serverTimestamp();
+        const pilotRef = pilotsRef.doc();
 
-        if (error) throw error;
+        const pilotData = {
+          teamId: teamDoc.id,
+          name: body.name,
+          surname: body.surname,
+          dni: body.dni,
+          email: body.email,
+          phone: body.phone,
+          emergencyContactName: body.emergencyContactName,
+          emergencyContactPhone: body.emergencyContactPhone,
+          drivingLevel: body.drivingLevel || 'amateur',
+          trackExperience: body.trackExperience || '',
+          isRepresentative: body.isRepresentative || false,
+          createdAt: now,
+          updatedAt: now
+        };
 
-        const currentCount = (count || 0) + 1;
+        await pilotRef.set(pilotData);
+
+        const currentCount = count + 1;
 
         // Update team status if minimum pilots reached
-        if (currentCount >= 4) {
-          await supabase
-            .from('teams')
-            .update({ status: 'pending' })
-            .eq('id', team.id)
-            .eq('status', 'draft');
+        if (currentCount >= 4 && teamData.status === 'draft') {
+          await teamDoc.ref.update({
+            status: 'pending',
+            updatedAt: now
+          });
         }
 
-        return successResponse({ pilot: data }, 201);
+        return successResponse({ pilot: { id: pilotRef.id, ...pilotData } }, 201);
       }
 
       case 'PUT': {
@@ -128,50 +125,37 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         const body = JSON.parse(event.body || '{}');
 
-        // Verify pilot belongs to user's team
-        const { data: existingPilot } = await supabase
-          .from('pilots')
-          .select('id')
-          .eq('id', pilotId)
-          .eq('team_id', team.id)
-          .single();
-
-        if (!existingPilot) {
+        // Verify pilot exists in team
+        const pilotDoc = await pilotsRef.doc(pilotId).get();
+        if (!pilotDoc.exists) {
           return errorResponse('Piloto no encontrado / Pilot not found', 404);
         }
 
         // If changing DNI, check uniqueness
         if (body.dni) {
-          const { data: dniCheck } = await supabase
-            .from('pilots')
-            .select('id')
-            .eq('team_id', team.id)
-            .eq('dni', body.dni)
-            .neq('id', pilotId)
-            .single();
+          const dniCheck = await pilotsRef
+            .where('dni', '==', body.dni)
+            .limit(1)
+            .get();
 
-          if (dniCheck) {
+          if (!dniCheck.empty && dniCheck.docs[0].id !== pilotId) {
             return errorResponse('Ya existe un piloto con ese DNI en el equipo / A pilot with that ID already exists in the team');
           }
         }
 
         // Remove fields that shouldn't be updated
         delete body.id;
-        delete body.team_id;
-        delete body.created_at;
-        delete body.pilot_number;
+        delete body.teamId;
+        delete body.createdAt;
 
-        const { data, error } = await supabase
-          .from('pilots')
-          .update(body)
-          .eq('id', pilotId)
-          .eq('team_id', team.id)
-          .select()
-          .single();
+        // Add updated timestamp
+        body.updatedAt = FieldValue.serverTimestamp();
 
-        if (error) throw error;
+        await pilotDoc.ref.update(body);
 
-        return successResponse({ pilot: data });
+        const updatedDoc = await pilotDoc.ref.get();
+
+        return successResponse({ pilot: { id: updatedDoc.id, teamId: teamDoc.id, ...updatedDoc.data() } });
       }
 
       case 'DELETE': {
@@ -180,42 +164,29 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           return errorResponse('Pilot ID required');
         }
 
-        // Verify pilot belongs to user's team and is not representative
-        const { data: pilotToDelete } = await supabase
-          .from('pilots')
-          .select('id, is_representative')
-          .eq('id', pilotId)
-          .eq('team_id', team.id)
-          .single();
-
-        if (!pilotToDelete) {
+        // Verify pilot exists and is not representative
+        const pilotDoc = await pilotsRef.doc(pilotId).get();
+        if (!pilotDoc.exists) {
           return errorResponse('Piloto no encontrado / Pilot not found', 404);
         }
 
-        if (pilotToDelete.is_representative) {
+        const pilotData = pilotDoc.data();
+        if (pilotData?.isRepresentative) {
           return errorResponse('No puedes eliminar al representante del equipo / Cannot delete the team representative');
         }
 
         // Delete pilot
-        const { error } = await supabase
-          .from('pilots')
-          .delete()
-          .eq('id', pilotId)
-          .eq('team_id', team.id);
-
-        if (error) throw error;
+        await pilotDoc.ref.delete();
 
         // Update team status if below minimum
-        const { count } = await supabase
-          .from('pilots')
-          .select('*', { count: 'exact', head: true })
-          .eq('team_id', team.id);
+        const pilotsCount = await pilotsRef.count().get();
+        const count = pilotsCount.data().count;
 
-        if (count !== null && count < 4) {
-          await supabase
-            .from('teams')
-            .update({ status: 'draft' })
-            .eq('id', team.id);
+        if (count < 4) {
+          await teamDoc.ref.update({
+            status: 'draft',
+            updatedAt: FieldValue.serverTimestamp()
+          });
         }
 
         return successResponse({ success: true });

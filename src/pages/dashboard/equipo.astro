@@ -327,7 +327,7 @@ const translatePath = useTranslatedPath(lang);
   </div>
 
   <script>
-    import { identity, fetchWithAuth } from "../../lib/identity";
+    import { firebaseAuth, fetchWithAuth } from "../../lib/firebase-auth";
 
     const lang = document.documentElement.lang || "es";
     const dashboardPath = lang === "en" ? "/en/dashboard" : "/dashboard";
@@ -387,7 +387,7 @@ const translatePath = useTranslatedPath(lang);
           });
         } else {
           // Pre-fill email from logged user
-          const user = identity.getUser();
+          const user = firebaseAuth.getUser();
           if (user) {
             const emailInput = document.getElementById(
               "representative_email",
@@ -474,16 +474,16 @@ const translatePath = useTranslatedPath(lang);
     // Initialize and load data
     async function initAndLoad() {
       // Wait for identity to be initialized (done by DashboardLayout)
-      await identity.waitForInit();
+      await firebaseAuth.waitForInit();
 
       // Load data if authenticated
-      const user = identity.getUser();
+      const user = firebaseAuth.getUser();
       if (user) {
         loadTeamData();
       }
 
       // Listen for auth changes to load data when user logs in
-      identity.onAuthChange((u) => {
+      firebaseAuth.onAuthChange((u) => {
         if (u) {
           loadTeamData();
         }

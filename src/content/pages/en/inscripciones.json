@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "title": "Registration",
+    "description": "All the information you need to be part of the 8 Hours Endurance. Register and live the experience."
+  },
+  "hero": {
+    "tagline": "Join us",
+    "title": "Registration",
+    "subtitle": "All the information you need to be part of the 8 Hours Endurance. Register and live the experience."
+  },
+  "infoCards": [
+    {
+      "icon": "calendar",
+      "title": "Event date",
+      "value": "TO BE CONFIRMED",
+      "subtitle": "Pending track confirmation"
+    },
+    {
+      "icon": "location",
+      "title": "Location",
+      "value": "SPAIN",
+      "subtitle": "Track to be determined"
+    },
+    {
+      "icon": "team",
+      "title": "Teams",
+      "value": "4-8 RIDERS",
+      "subtitle": "+ up to 4 staff per team"
+    }
+  ],
+  "calendar": {
+    "tagline": "Plan ahead",
+    "title": "Calendar",
+    "titleAccent": "2025",
+    "items": [
+      {
+        "status": "active",
+        "label": "Now",
+        "title": "Pre-registration open",
+        "description": "Register to receive all information and be the first to sign up when official spots open."
+      },
+      {
+        "status": "pending",
+        "label": "Coming soon",
+        "title": "Track confirmation",
+        "description": "We'll announce the official track where the event will take place."
+      },
+      {
+        "status": "pending",
+        "label": "To be defined",
+        "title": "Official registration opens",
+        "description": "Limited spots. Pre-registered teams will have priority."
+      },
+      {
+        "status": "pending",
+        "label": "Event day",
+        "title": "8 Hours Endurance",
+        "description": "The big day! Technical inspections in the morning and 8-hour race."
+      }
+    ]
+  },
+  "pricing": {
+    "tagline": "Pricing",
+    "title": "Registration",
+    "titleAccent": "fee",
+    "badge": "PRE-REGISTRATION",
+    "cardTitle": "Team registration",
+    "priceNote": "Price to be confirmed",
+    "priceValue": "COMING SOON",
+    "features": [
+      "Registration for 4-8 riders + staff",
+      "Pit/paddock access",
+      "Transponder included",
+      "Official timing",
+      "Briefing and inspections",
+      "Trophies for the podium"
+    ],
+    "cta": "Pre-register for free"
+  },
+  "registration": {
+    "tagline": "Registration",
+    "title": "Register your",
+    "titleAccent": "team",
+    "subtitle": "Create an account to register your complete team with all pilots and required data.",
+    "teamRegistration": {
+      "title": "Complete team registration",
+      "description": "Sign up to register your team with all details: representative, pilots (4-8), staff, and motorcycle data. You can complete the registration in multiple sessions.",
+      "createAccount": "Create account",
+      "hasAccount": "I have an account",
+      "signupLink": "/en/auth/signup",
+      "loginLink": "/en/auth/login"
+    },
+    "separator": "or leave your details",
+    "quickForm": {
+      "title": "Quick pre-registration",
+      "subtitle": "If you're not ready for full registration yet, leave your details and we'll contact you.",
+      "formName": "preinscripcion-en",
+      "successPage": "/en/gracias",
+      "fields": {
+        "nombre": { "label": "First name *", "placeholder": "Your first name" },
+        "apellidos": { "label": "Last name *", "placeholder": "Your last name" },
+        "email": { "label": "Email *", "placeholder": "your@email.com" },
+        "telefono": { "label": "Phone *", "placeholder": "+34 600 000 000" },
+        "localidad": { "label": "City *", "placeholder": "Your city" },
+        "codigoPostal": { "label": "Postal code *", "placeholder": "28001" },
+        "pais": { "label": "Country *", "placeholder": "Your country" },
+        "moto": { "label": "What bike do you have? (Optional)", "placeholder": "E.g.: Honda CBR125R 2019" },
+        "experiencia": {
+          "label": "Racing experience (Optional)",
+          "placeholder": "Select your experience",
+          "options": [
+            { "value": "ninguna", "label": "No racing experience" },
+            { "value": "tandas", "label": "Track days only" },
+            { "value": "amateur", "label": "Amateur racing" },
+            { "value": "semipro", "label": "Semi-professional racing" },
+            { "value": "profesional", "label": "Professional racing" }
+          ]
+        },
+        "mensaje": { "label": "Comments (Optional)", "placeholder": "Do you have a team? Any questions?" },
+        "rgpd": "I have read and accept the privacy policy. I consent to the processing of my data to manage my pre-registration and receive information about the event. *"
+      },
+      "submit": "Submit pre-registration"
+    },
+    "nextSteps": {
+      "title": "What happens next?",
+      "description": "After submitting your pre-registration, you'll receive a confirmation email. When we confirm the track and dates, we'll send you all the information to complete your official registration. Pre-registered teams will have priority for spots."
+    }
+  },
+  "faq": {
+    "tagline": "FAQ",
+    "title": "Frequently asked",
+    "titleAccent": "questions",
+    "items": [
+      {
+        "question": "How many riders can a team have?",
+        "answer": "Each team can have a minimum of 4 and a maximum of 8 riders. Additionally, you can register up to 4 staff members (mechanics, coordinators, support). All riders must be registered before the registration deadline."
+      },
+      {
+        "question": "Do I need a racing license?",
+        "answer": "No racing license is required. The organization will provide liability insurance for all participants during the event."
+      },
+      {
+        "question": "Can I participate without a team?",
+        "answer": "If you don't have a team, mention it in the comments section of the form. We'll try to connect you with other riders looking for teammates."
+      },
+      {
+        "question": "What's included in the registration?",
+        "answer": "Registration includes track access for the entire team, transponder, official timing, pit/paddock access, briefing and technical inspections, and trophies for the podium."
+      },
+      {
+        "question": "Is there a lap limit per rider?",
+        "answer": "Yes, there will be a maximum number of continuous stints per rider to ensure safety and team spirit. Specific details will be communicated in the sporting regulations."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Have more",
+    "titleAccent": "questions",
+    "subtitle": "We're here to help. Contact us and we'll answer all your questions.",
+    "cta": "Contact us",
+    "email": "info@gripclub.es"
+  }
+}

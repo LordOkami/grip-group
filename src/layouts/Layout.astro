@@ -97,18 +97,28 @@ const altPath =
           <div class="hidden md:flex items-center gap-8">
             <a
               href={translatePath("/")}
+              class={`nav-link ${currentPage === "home" ? "active" : ""}`}
+              >{t("nav.home")}</a
+            >
+            <a
+              href={translatePath("/historia")}
               class={`nav-link ${currentPage === "historia" ? "active" : ""}`}
               >{t("nav.historia")}</a
             >
             <a
-              href={translatePath("/motos")}
-              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
-              >{t("nav.motos")}</a
+              href={translatePath("/eventos")}
+              class={`nav-link ${currentPage === "eventos" ? "active" : ""}`}
+              >{t("nav.eventos")}</a
             >
             <a
               href={translatePath("/inscripciones")}
               class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
               >{t("nav.inscripciones")}</a
+            >
+            <a
+              href={translatePath("/reglamento")}
+              class={`nav-link ${currentPage === "reglamento" ? "active" : ""}`}
+              >{t("nav.reglamento")}</a
             >
             <a
               href={translatePath("/tienda")}
@@ -175,18 +185,28 @@ const altPath =
           >
             <a
               href={translatePath("/")}
+              class={`nav-link ${currentPage === "home" ? "active" : ""}`}
+              >{t("nav.home")}</a
+            >
+            <a
+              href={translatePath("/historia")}
               class={`nav-link ${currentPage === "historia" ? "active" : ""}`}
               >{t("nav.historia")}</a
             >
             <a
-              href={translatePath("/motos")}
-              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
-              >{t("nav.motos")}</a
+              href={translatePath("/eventos")}
+              class={`nav-link ${currentPage === "eventos" ? "active" : ""}`}
+              >{t("nav.eventos")}</a
             >
             <a
               href={translatePath("/inscripciones")}
               class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
               >{t("nav.inscripciones")}</a
+            >
+            <a
+              href={translatePath("/reglamento")}
+              class={`nav-link ${currentPage === "reglamento" ? "active" : ""}`}
+              >{t("nav.reglamento")}</a
             >
             <a
               href={translatePath("/tienda")}
@@ -262,16 +282,16 @@ const altPath =
             <ul class="space-y-2">
               <li>
                 <a
-                  href={translatePath("/")}
+                  href={translatePath("/historia")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
                   >{t("nav.historia")}</a
                 >
               </li>
               <li>
                 <a
-                  href={translatePath("/motos")}
+                  href={translatePath("/eventos")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
-                  >{t("nav.motos")}</a
+                  >{t("nav.eventos")}</a
                 >
               </li>
               <li>
@@ -283,9 +303,9 @@ const altPath =
               </li>
               <li>
                 <a
-                  href={translatePath("/tienda")}
+                  href={translatePath("/reglamento")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
-                  >{t("nav.tienda")}</a
+                  >{t("nav.reglamento")}</a
                 >
               </li>
             </ul>
@@ -362,12 +382,11 @@ const altPath =
       });
     </script>
 
-    <!-- Netlify Identity Script -->
+    <!-- Firebase Auth Script -->
     <script>
-      import { identity } from "../lib/identity";
+      import { firebaseAuth } from "../lib/firebase-auth";
 
-      const lang = document.documentElement.lang || "es";
-      await identity.init(lang);
+      await firebaseAuth.init();
 
       // Toggle auth buttons based on login state
       function updateAuthUI(user: any) {
@@ -394,11 +413,11 @@ const altPath =
       }
 
       // Initial check - wait for user state to be ready
-      const user = await identity.waitForUser();
+      const user = await firebaseAuth.waitForUser();
       updateAuthUI(user);
 
       // Listen for auth changes
-      identity.onAuthChange(updateAuthUI);
+      firebaseAuth.onAuthChange(updateAuthUI);
     </script>
   </body>
 </html>

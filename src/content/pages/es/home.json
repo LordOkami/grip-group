@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "title": "8 Horas Endurance",
+    "description": "La prueba de resistencia mas emocionante de Espana. Motos 125cc de serie. 8 horas de pura adrenalina."
+  },
+  "hero": {
+    "tagline": "Grip Club presenta",
+    "title": "8 HORAS",
+    "subtitle": "La prueba de resistencia mas emocionante de Espana.",
+    "subtitleBold": "Motos 125cc de serie. 8 horas de pura adrenalina.",
+    "cta": "Quiero participar",
+    "ctaSecondary": "Descubre mas",
+    "ctaLink": "/inscripciones#registro",
+    "ctaSecondaryLink": "#concepto",
+    "backgroundImage": "/images/header-2024.jpg",
+    "stats": [
+      { "value": "8H", "label": "Duracion" },
+      { "value": "125cc", "label": "Cilindrada" },
+      { "value": "100%", "label": "Pasion" }
+    ]
+  },
+  "concepto": {
+    "tagline": "El Concepto",
+    "title": "Por que",
+    "titleAccent": "125cc de serie",
+    "cards": [
+      {
+        "title": "Accesible economicamente",
+        "description": "Sin necesidad de grandes presupuestos. Motos asequibles, costes de mantenimiento reducidos y competicion al alcance de todos.",
+        "icon": "money"
+      },
+      {
+        "title": "Competicion pura",
+        "description": "Con maquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y el trabajo en equipo marcan la diferencia.",
+        "icon": "lightning"
+      },
+      {
+        "title": "Espiritu de equipo",
+        "description": "8 horas no las corre nadie solo. La coordinacion, los relevos y el trabajo conjunto son la clave del exito.",
+        "icon": "team"
+      },
+      {
+        "title": "Seguridad primero",
+        "description": "Velocidades controladas que permiten competir con margenes de seguridad mayores sin perder ni un gramo de emocion.",
+        "icon": "shield"
+      },
+      {
+        "title": "Escuela de pilotos",
+        "description": "El formato ideal para aprender las bases del pilotaje de competicion y dar el salto a categorias superiores.",
+        "icon": "book"
+      },
+      {
+        "title": "Diversion garantizada",
+        "description": "Porque al final, de eso se trata: disfrutar de la competicion, la camaraderia y la pasion por las dos ruedas.",
+        "icon": "smile"
+      }
+    ]
+  },
+  "bikes": {
+    "tagline": "Las Maquinas",
+    "title": "Motos",
+    "titleAccent": "125cc de serie",
+    "ctaText": "Ver reglamento tecnico",
+    "ctaLink": "/motos",
+    "images": [
+      { "src": "/images/bikes-1.jpg", "alt": "Moto 125cc en pista" },
+      { "src": "/images/bikes-2.jpg", "alt": "Detalle de moto" },
+      { "src": "/images/bikes-3.jpg", "alt": "Motos en boxes" },
+      { "src": "/images/bikes-4.jpg", "alt": "Moto preparada" }
+    ]
+  },
+  "teams": {
+    "tagline": "Los Equipos",
+    "title": "Trabajo en",
+    "titleAccent": "equipo",
+    "subtitle": "De 4 a 8 pilotos por equipo, mas hasta 4 miembros de staff. La coordinacion es clave.",
+    "images": [
+      { "src": "/images/teams-1.jpg", "alt": "Equipo de pilotos" },
+      { "src": "/images/teams-2.jpg", "alt": "Celebracion en pista" },
+      { "src": "/images/teams-3.jpg", "alt": "Mecanicos trabajando" },
+      { "src": "/images/teams-4.jpg", "alt": "Ambiente de equipo" }
+    ]
+  },
+  "cta": {
+    "title": "Listo para el",
+    "titleAccent": "desafio",
+    "subtitle": "Unete a la comunidad de pilotos que estan escribiendo la historia del endurance 125cc en Espana. Las inscripciones estan abiertas.",
+    "button": "Inscribete ahora",
+    "buttonLink": "/inscripciones#registro",
+    "buttonSecondary": "Ver reglamento tecnico",
+    "buttonSecondaryLink": "/motos",
+    "backgroundImage": "/images/track-DR7-1.jpg"
+  }
+}

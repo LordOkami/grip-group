@@ -176,12 +176,12 @@ const altPath = lang === 'es'
 
     <!-- Scripts -->
     <script>
-      import { identity } from '../lib/identity';
+      import { firebaseAuth } from '../lib/firebase-auth';
 
-      // Initialize identity and wait for user state
+      // Initialize Firebase Auth and wait for user state
       const lang = document.documentElement.lang || 'es';
-      await identity.init(lang);
-      const user = await identity.waitForUser();
+      await firebaseAuth.init();
+      const user = await firebaseAuth.waitForUser();
 
       // Check if logged in
       if (!user) {
@@ -191,7 +191,7 @@ const altPath = lang === 'es'
         // Update user name display
         const userName = document.getElementById('user-name');
         if (userName) {
-          userName.textContent = user.user_metadata?.full_name || user.email.split('@')[0];
+          userName.textContent = user.displayName || user.email.split('@')[0];
         }
       }
 
@@ -213,14 +213,14 @@ const altPath = lang === 'es'
 
       // Logout handler
       const logoutBtn = document.getElementById('logout-btn');
-      logoutBtn?.addEventListener('click', () => {
-        identity.logout();
+      logoutBtn?.addEventListener('click', async () => {
+        await firebaseAuth.logout();
         const homePath = lang === 'en' ? '/en' : '/';
         window.location.href = homePath;
       });
 
       // Listen for auth changes
-      identity.onAuthChange((user) => {
+      firebaseAuth.onAuthChange((user) => {
         if (!user) {
           const loginPath = lang === 'en' ? '/en/auth/login' : '/auth/login';
           window.location.href = loginPath;

@@ -1,5 +1,6 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { supabase } from './utils/supabase';
+import { getFirestoreDb } from './utils/firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 import {
   getUserId,
   isAdmin,
@@ -17,37 +18,37 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
-  const userId = getUserId(event);
+  const userId = await getUserId(event);
   if (!userId) {
     return unauthorizedResponse();
   }
 
   // Check admin permission
-  if (!isAdmin(event)) {
+  if (!(await isAdmin(event))) {
     return forbiddenResponse();
   }
+
+  const db = getFirestoreDb();
+  const settingsRef = db.collection('settings').doc('registration');
 
   try {
     switch (event.httpMethod) {
       case 'GET': {
         // Get registration settings
-        const { data, error } = await supabase
-          .from('registration_settings')
-          .select('*')
-          .single();
-
-        if (error && error.code !== 'PGRST116') {
-          throw error;
-        }
+        const settingsDoc = await settingsRef.get();
 
         // If no settings exist, return defaults
-        const settings = data || {
-          registration_open: true,
-          max_teams: 35,
-          registration_deadline: null,
-          event_date: null,
-          event_location: null
-        };
+        const settings = settingsDoc.exists
+          ? { id: settingsDoc.id, ...settingsDoc.data() }
+          : {
+              id: 'registration',
+              registrationOpen: true,
+              maxTeams: 35,
+              registrationDeadline: null,
+              pilotModificationDeadline: null,
+              eventDate: null,
+              eventLocation: null
+            };
 
         return successResponse({ settings });
       }
@@ -57,12 +58,12 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         // Build update object with only allowed fields
         const allowedFields = [
-          'registration_open',
-          'max_teams',
-          'registration_deadline',
-          'pilot_modification_deadline',
-          'event_date',
-          'event_location'
+          'registrationOpen',
+          'maxTeams',
+          'registrationDeadline',
+          'pilotModificationDeadline',
+          'eventDate',
+          'eventLocation'
         ];
 
         const updates: Record<string, any> = {};
@@ -76,39 +77,30 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           return errorResponse('No valid fields to update');
         }
 
-        // Check if settings row exists
-        const { data: existing } = await supabase
-          .from('registration_settings')
-          .select('id')
-          .single();
+        updates.updatedAt = FieldValue.serverTimestamp();
 
-        let data;
-        let error;
+        // Check if settings document exists
+        const settingsDoc = await settingsRef.get();
 
-        if (existing) {
+        if (settingsDoc.exists) {
           // Update existing
-          const result = await supabase
-            .from('registration_settings')
-            .update(updates)
-            .eq('id', existing.id)
-            .select()
-            .single();
-          data = result.data;
-          error = result.error;
+          await settingsRef.update(updates);
         } else {
-          // Insert new
-          const result = await supabase
-            .from('registration_settings')
-            .insert(updates)
-            .select()
-            .single();
-          data = result.data;
-          error = result.error;
+          // Create new with defaults
+          await settingsRef.set({
+            registrationOpen: true,
+            maxTeams: 35,
+            registrationDeadline: null,
+            pilotModificationDeadline: null,
+            eventDate: null,
+            eventLocation: null,
+            ...updates
+          });
         }
 
-        if (error) throw error;
+        const updatedDoc = await settingsRef.get();
 
-        return successResponse({ settings: data });
+        return successResponse({ settings: { id: updatedDoc.id, ...updatedDoc.data() } });
       }
 
       default:

@@ -1,8 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getContent } from '../../i18n/utils';
+
+const content = await getContent('en', 'home');
 ---
 
-<Layout title="Story" currentPage="historia">
+<Layout title={content.meta.title} currentPage="home">
   <!-- Hero Section -->
   <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
     <!-- Background Pattern -->
@@ -16,42 +19,36 @@ import Layout from '../../layouts/Layout.astro';
 
     <div class="relative z-10 container mx-auto px-4 md:px-8 text-center">
       <div class="inline-block mb-6 px-4 py-2 bg-racing-green/20 border border-vanilla/30 rounded-full">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest">Grip Club presents</span>
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest">{content.hero.tagline}</span>
       </div>
 
       <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 leading-none" style="font-family: 'Bebas Neue', sans-serif;">
-        <span class="text-white">8 HOURS</span><br>
-        <span class="text-vanilla">ENDURANCE</span>
+        <span class="text-white">{content.hero.title}</span><br>
+        {content.hero.titleSecondary && <span class="text-vanilla">{content.hero.titleSecondary}</span>}
       </h1>
 
       <p class="text-xl md:text-2xl text-racing-silver max-w-3xl mx-auto mb-8">
-        The most exciting endurance race in Spain.<br>
-        <span class="text-white font-semibold">125cc stock motorcycles. 8 hours of pure adrenaline.</span>
+        {content.hero.subtitle}<br>
+        <span class="text-white font-semibold">{content.hero.subtitleBold}</span>
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="/en/inscripciones#registro" class="btn-primary">
-          I want to participate
+        <a href={content.hero.ctaLink} class="btn-primary">
+          {content.hero.cta}
         </a>
-        <a href="#historia" class="btn-secondary">
-          Learn more
+        <a href={content.hero.ctaSecondaryLink} class="btn-secondary">
+          {content.hero.ctaSecondary}
         </a>
       </div>
 
       <!-- Stats -->
       <div class="grid grid-cols-3 gap-4 md:gap-8 mt-16 max-w-2xl mx-auto">
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">8H</div>
-          <div class="text-racing-silver text-sm uppercase tracking-wider">Duration</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">125cc</div>
-          <div class="text-racing-silver text-sm uppercase tracking-wider">Displacement</div>
-        </div>
-        <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">100%</div>
-          <div class="text-racing-silver text-sm uppercase tracking-wider">Passion</div>
-        </div>
+        {content.hero.stats.map((stat: { value: string; label: string }) => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
+            <div class="text-racing-silver text-sm uppercase tracking-wider">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </div>
 
@@ -68,23 +65,12 @@ import Layout from '../../layouts/Layout.astro';
     <div class="container mx-auto px-4 md:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Our Story</span>
-          <h2 class="section-title mb-6">The origin of <span class="text-vanilla">endurance</span></h2>
+          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">{content.historia.tagline}</span>
+          <h2 class="section-title mb-6">{content.historia.title} <span class="text-vanilla">{content.historia.titleAccent}</span></h2>
           <div class="space-y-4 text-racing-silver">
-            <p>
-              Inspired by the legendary <strong class="text-white">FreeTech Endurance</strong> format from the UK,
-              we bring to Spain a unique experience: <strong class="text-white">8 hours of pure competition</strong> on
-              stock 125cc motorcycles.
-            </p>
-            <p>
-              The philosophy is simple but powerful: <strong class="text-white">level the playing field</strong>.
-              With identical stock 125cc motorcycles, victory doesn't depend on the biggest budget, but on
-              strategy, consistency, and team passion.
-            </p>
-            <p>
-              It's the perfect format for amateur teams, riders taking their first steps in competition,
-              and veterans looking for <strong class="text-white">the pure essence of motorsport</strong>.
-            </p>
+            {content.historia.content.map((paragraph: string) => (
+              <p set:html={paragraph}></p>
+            ))}
           </div>
         </div>
 
@@ -97,7 +83,7 @@ import Layout from '../../layouts/Layout.astro';
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
-                <p class="text-racing-silver">Coming soon: Promotional video</p>
+                <p class="text-racing-silver">{content.historia.videoPlaceholder}</p>
               </div>
             </div>
           </div>
@@ -113,94 +99,49 @@ import Layout from '../../layouts/Layout.astro';
   <section class="py-24 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">The Concept</span>
-        <h2 class="section-title">Why <span class="text-vanilla">stock 125cc</span>?</h2>
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">{content.concepto.tagline}</span>
+        <h2 class="section-title">{content.concepto.title} <span class="text-vanilla">{content.concepto.titleAccent}</span>?</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+        {content.concepto.cards.map((card: { title: string; description: string; icon: string }) => (
+          <div class="card group">
+            <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
+              {card.icon === 'money' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              )}
+              {card.icon === 'lightning' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              )}
+              {card.icon === 'team' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              )}
+              {card.icon === 'shield' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+              )}
+              {card.icon === 'book' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              )}
+              {card.icon === 'smile' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-bold text-white mb-3">{card.title}</h3>
+            <p class="text-racing-silver">{card.description}</p>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Economically accessible</h3>
-          <p class="text-racing-silver">
-            No need for big budgets. Affordable bikes, reduced maintenance costs, and
-            competition within everyone's reach.
-          </p>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Pure competition</h3>
-          <p class="text-racing-silver">
-            With equal machines, the one with the best strategy wins. Rider skill and
-            teamwork make the difference.
-          </p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Team spirit</h3>
-          <p class="text-racing-silver">
-            8 hours can't be raced alone. Coordination, relays, and teamwork
-            are the keys to success.
-          </p>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Safety first</h3>
-          <p class="text-racing-silver">
-            Controlled speeds that allow competing with greater safety margins
-            without losing any excitement.
-          </p>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Rider school</h3>
-          <p class="text-racing-silver">
-            The ideal format to learn the basics of competitive riding and
-            take the leap to higher categories.
-          </p>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Guaranteed fun</h3>
-          <p class="text-racing-silver">
-            Because in the end, that's what it's about: enjoying the competition,
-            camaraderie, and passion for two wheels.
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   </section>
@@ -215,17 +156,14 @@ import Layout from '../../layouts/Layout.astro';
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">Ready for the <span class="text-vanilla">challenge</span>?</h2>
-        <p class="section-subtitle mx-auto mb-8">
-          Join the community of riders who are writing the history of 125cc endurance in Spain.
-          Registration is open.
-        </p>
+        <h2 class="section-title mb-6">{content.cta.title} <span class="text-vanilla">{content.cta.titleAccent}</span>?</h2>
+        <p class="section-subtitle mx-auto mb-8">{content.cta.subtitle}</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/en/inscripciones#registro" class="btn-primary">
-            Register now
+          <a href={content.cta.buttonLink} class="btn-primary">
+            {content.cta.button}
           </a>
-          <a href="/en/motos" class="btn-secondary">
-            View technical regulations
+          <a href={content.cta.buttonSecondaryLink} class="btn-secondary">
+            {content.cta.buttonSecondary}
           </a>
         </div>
       </div>

@@ -1,21 +1,15 @@
 import type { HandlerEvent } from '@netlify/functions';
+import { getFirebaseAdminAuth } from './firebase-admin';
+import type { DecodedIdToken } from 'firebase-admin/auth';
 
-export interface JWTPayload {
-  sub: string; // User ID
+export interface TokenPayload {
+  uid: string;
   email: string;
-  exp: number;
-  aud: string;
-  app_metadata?: {
-    provider?: string;
-    roles?: string[];
-  };
-  user_metadata?: {
-    full_name?: string;
-  };
+  emailVerified: boolean;
 }
 
-// Validate Netlify Identity JWT token
-export function validateToken(event: HandlerEvent): JWTPayload | null {
+// Validate Firebase ID token
+export async function validateToken(event: HandlerEvent): Promise<TokenPayload | null> {
   const authHeader = event.headers.authorization || event.headers.Authorization;
 
   if (!authHeader?.startsWith('Bearer ')) {
@@ -25,23 +19,14 @@ export function validateToken(event: HandlerEvent): JWTPayload | null {
   const token = authHeader.substring(7);
 
   try {
-    // Decode JWT payload (middle part)
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      return null;
-    }
+    const auth = getFirebaseAdminAuth();
+    const decodedToken: DecodedIdToken = await auth.verifyIdToken(token);
 
-    const payload = JSON.parse(
-      Buffer.from(parts[1], 'base64').toString('utf-8')
-    ) as JWTPayload;
-
-    // Check expiration
-    if (payload.exp * 1000 < Date.now()) {
-      console.log('Token expired');
-      return null;
-    }
-
-    return payload;
+    return {
+      uid: decodedToken.uid,
+      email: decodedToken.email || '',
+      emailVerified: decodedToken.email_verified || false,
+    };
   } catch (error) {
     console.error('Token validation error:', error);
     return null;
@@ -49,20 +34,20 @@ export function validateToken(event: HandlerEvent): JWTPayload | null {
 }
 
 // Get user ID from request
-export function getUserId(event: HandlerEvent): string | null {
-  const payload = validateToken(event);
-  return payload?.sub || null;
+export async function getUserId(event: HandlerEvent): Promise<string | null> {
+  const payload = await validateToken(event);
+  return payload?.uid || null;
 }
 
 // Get user email from request
-export function getUserEmail(event: HandlerEvent): string | null {
-  const payload = validateToken(event);
+export async function getUserEmail(event: HandlerEvent): Promise<string | null> {
+  const payload = await validateToken(event);
   return payload?.email || null;
 }
 
 // Check if user is admin
-export function isAdmin(event: HandlerEvent): boolean {
-  const email = getUserEmail(event);
+export async function isAdmin(event: HandlerEvent): Promise<boolean> {
+  const email = await getUserEmail(event);
   if (!email) return false;
 
   const adminEmails = (process.env.ADMIN_EMAILS || '').split(',').map(e => e.trim().toLowerCase());

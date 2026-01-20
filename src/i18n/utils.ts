@@ -36,9 +36,11 @@ export async function getNavigation(lang: string) {
 // UI translations for common elements
 export const ui = {
   es: {
+    'nav.home': 'Home',
     'nav.historia': 'Historia',
-    'nav.motos': 'Motos',
+    'nav.eventos': 'Eventos',
     'nav.inscripciones': 'Inscripciones',
+    'nav.reglamento': 'Reglamento',
     'nav.tienda': 'Tienda',
     'nav.cta': 'Inscríbete',
     'nav.dashboard': 'Mi Equipo',
@@ -145,9 +147,11 @@ export const ui = {
     'form.invalidEmail': 'Email no válido',
   },
   en: {
+    'nav.home': 'Home',
     'nav.historia': 'Story',
-    'nav.motos': 'Bikes',
+    'nav.eventos': 'Events',
     'nav.inscripciones': 'Registration',
+    'nav.reglamento': 'Rules',
     'nav.tienda': 'Shop',
     'nav.cta': 'Register',
     'nav.dashboard': 'My Team',

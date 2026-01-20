@@ -173,32 +173,19 @@ const { title, currentSection = 'dashboard' } = Astro.props;
 
     <!-- Scripts -->
     <script>
-      import { identity } from '../lib/identity';
+      import { firebaseAuth, fetchWithAuth } from '../lib/firebase-auth';
 
       const showLoading = () => document.getElementById('loading-overlay')?.classList.remove('hidden');
       const hideLoading = () => document.getElementById('loading-overlay')?.classList.add('hidden');
 
-      // Helper for authenticated fetch
-      async function fetchWithAuth(url: string, options: RequestInit = {}) {
-        const token = identity.getToken();
-        return fetch(url, {
-          ...options,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            ...options.headers,
-          },
-        });
-      }
-
-      // Make it available globally
+      // Make helpers available globally
       (window as any).fetchWithAuth = fetchWithAuth;
       (window as any).showLoading = showLoading;
       (window as any).hideLoading = hideLoading;
 
-      // Initialize identity and wait for user state to be ready
-      await identity.init('es');
-      const user = await identity.waitForUser();
+      // Initialize Firebase Auth and wait for user state to be ready
+      await firebaseAuth.init();
+      const user = await firebaseAuth.waitForUser();
 
       if (!user) {
         window.location.href = '/auth/login';
@@ -219,7 +206,7 @@ const { title, currentSection = 'dashboard' } = Astro.props;
         // Update user name display
         const userName = document.getElementById('user-name');
         if (userName) {
-          userName.textContent = user.user_metadata?.full_name || user.email.split('@')[0];
+          userName.textContent = user.displayName || user.email.split('@')[0];
         }
       }
 
@@ -241,13 +228,13 @@ const { title, currentSection = 'dashboard' } = Astro.props;
 
       // Logout handler
       const logoutBtn = document.getElementById('logout-btn');
-      logoutBtn?.addEventListener('click', () => {
-        identity.logout();
+      logoutBtn?.addEventListener('click', async () => {
+        await firebaseAuth.logout();
         window.location.href = '/';
       });
 
       // Listen for auth changes
-      identity.onAuthChange((user) => {
+      firebaseAuth.onAuthChange((user) => {
         if (!user) {
           window.location.href = '/auth/login';
         }

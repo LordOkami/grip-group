@@ -22,25 +22,76 @@ const translatePath = useTranslatedPath(lang);
           <p class="text-racing-silver">{t('auth.signup.subtitle')}</p>
         </div>
 
-        <!-- Signup Button -->
-        <button
-          id="signup-btn"
-          class="w-full btn-primary py-4 text-lg flex items-center justify-center gap-2"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
-          </svg>
-          {t('auth.signup.button')}
-        </button>
+        <!-- Signup Form -->
+        <form id="signup-form" class="space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-racing-silver mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-racing-dark border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:outline-none focus:border-racing-green"
+              placeholder="tu@email.com"
+            />
+          </div>
 
-        <!-- Confirmation message -->
-        <div id="confirm-message" class="hidden mt-4 p-4 bg-racing-green/20 border border-racing-green/50 rounded-lg text-racing-green text-sm">
-          {t('auth.confirmEmail')}
+          <div>
+            <label for="password" class="block text-sm font-medium text-racing-silver mb-2">
+              {lang === 'en' ? 'Password' : 'Contraseña'}
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 bg-racing-dark border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:outline-none focus:border-racing-green"
+              placeholder="••••••••"
+            />
+            <p class="mt-1 text-xs text-racing-silver/70">
+              {lang === 'en' ? 'Minimum 6 characters' : 'Mínimo 6 caracteres'}
+            </p>
+          </div>
+
+          <div>
+            <label for="confirm-password" class="block text-sm font-medium text-racing-silver mb-2">
+              {lang === 'en' ? 'Confirm Password' : 'Confirmar Contraseña'}
+            </label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 bg-racing-dark border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:outline-none focus:border-racing-green"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="signup-btn"
+            class="w-full btn-primary py-4 text-lg flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+            </svg>
+            <span id="btn-text">{t('auth.signup.button')}</span>
+            <span id="btn-loading" class="hidden">{lang === 'en' ? 'Creating account...' : 'Creando cuenta...'}</span>
+          </button>
+        </form>
+
+        <!-- Success message -->
+        <div id="success-message" class="hidden mt-4 p-4 bg-racing-green/20 border border-racing-green/50 rounded-lg text-racing-green text-sm">
+          {lang === 'en' ? 'Account created! Redirecting...' : 'Cuenta creada! Redirigiendo...'}
         </div>
 
         <!-- Error message -->
         <div id="error-message" class="hidden mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm">
-          {t('auth.error')}
+          <span id="error-text">{t('auth.error')}</span>
         </div>
 
         <!-- Divider -->
@@ -62,43 +113,81 @@ const translatePath = useTranslatedPath(lang);
   </section>
 
   <script>
-    import { identity } from '../../lib/identity';
+    import { firebaseAuth } from '../../lib/firebase-auth';
 
     const lang = document.documentElement.lang || 'es';
-    await identity.init(lang);
+    await firebaseAuth.init();
 
-    // Wait for user state to be ready before checking
-    const currentUser = await identity.waitForUser();
+    // Check if user is already logged in
+    const currentUser = await firebaseAuth.waitForUser();
     if (currentUser) {
       const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
       window.location.href = dashboardPath;
     }
 
-    const signupBtn = document.getElementById('signup-btn');
+    const form = document.getElementById('signup-form') as HTMLFormElement;
     const errorMessage = document.getElementById('error-message');
-    const confirmMessage = document.getElementById('confirm-message');
+    const errorText = document.getElementById('error-text');
+    const successMessage = document.getElementById('success-message');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
+    const signupBtn = document.getElementById('signup-btn') as HTMLButtonElement;
 
-    signupBtn?.addEventListener('click', async () => {
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const password = (document.getElementById('password') as HTMLInputElement).value;
+      const confirmPassword = (document.getElementById('confirm-password') as HTMLInputElement).value;
+
+      // Validate passwords match
+      if (password !== confirmPassword) {
+        const message = lang === 'en' ? 'Passwords do not match' : 'Las contraseñas no coinciden';
+        if (errorText) errorText.textContent = message;
+        errorMessage?.classList.remove('hidden');
+        return;
+      }
+
       try {
         errorMessage?.classList.add('hidden');
-        confirmMessage?.classList.add('hidden');
-        await identity.signup();
-        // User registered and logged in
-        const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
-        window.location.href = dashboardPath;
-      } catch (error) {
+        successMessage?.classList.add('hidden');
+        btnText?.classList.add('hidden');
+        btnLoading?.classList.remove('hidden');
+        signupBtn.disabled = true;
+
+        await firebaseAuth.signup(email, password);
+
+        // Show success message
+        successMessage?.classList.remove('hidden');
+
+        // Redirect to dashboard
+        setTimeout(() => {
+          const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
+          window.location.href = dashboardPath;
+        }, 1000);
+      } catch (error: any) {
         console.error('Signup error:', error);
-        // Check if it's a confirmation email sent message
-        if ((error as Error).message?.includes('confirm')) {
-          confirmMessage?.classList.remove('hidden');
-        } else {
-          errorMessage?.classList.remove('hidden');
+        btnText?.classList.remove('hidden');
+        btnLoading?.classList.add('hidden');
+        signupBtn.disabled = false;
+
+        // Show user-friendly error message
+        let message = lang === 'en' ? 'Error creating account. Please try again.' : 'Error al crear la cuenta. Por favor, inténtalo de nuevo.';
+        if (error.code === 'auth/email-already-in-use') {
+          message = lang === 'en' ? 'An account with this email already exists' : 'Ya existe una cuenta con este email';
+        } else if (error.code === 'auth/weak-password') {
+          message = lang === 'en' ? 'Password is too weak. Use at least 6 characters.' : 'La contraseña es muy débil. Usa al menos 6 caracteres.';
+        } else if (error.code === 'auth/invalid-email') {
+          message = lang === 'en' ? 'Invalid email address' : 'Email inválido';
         }
+
+        if (errorText) errorText.textContent = message;
+        errorMessage?.classList.remove('hidden');
       }
     });
 
-    // Listen for login events from the widget
-    identity.onAuthChange((user) => {
+    // Listen for auth changes
+    firebaseAuth.onAuthChange((user) => {
       if (user) {
         const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
         window.location.href = dashboardPath;

@@ -1,0 +1,194 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Historia" currentPage="historia">
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-racing"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Grip Club</span>
+        <h1 class="section-title mb-6">
+          Nuestra <span class="text-vanilla">Historia</span>
+        </h1>
+        <p class="section-subtitle">
+          De la pasion por las dos ruedas nacio Grip Club. Conoce como empezo todo y hacia donde vamos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Origin Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Los Origenes</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" style="font-family: 'Bebas Neue', sans-serif;">
+            Una idea entre <span class="text-vanilla">amigos</span>
+          </h2>
+          <p class="text-racing-silver mb-4">
+            Grip Club nacio de la pasion compartida por el motorsport. Un grupo de entusiastas de las motos
+            que querian crear algo diferente: una competicion accesible, emocionante y que reuniera
+            a la comunidad motera en torno a un evento unico.
+          </p>
+          <p class="text-racing-silver mb-4">
+            Inspirados por formatos de resistencia internacionales como FreeTech Endurance UK,
+            decidimos adaptar el concepto a nuestro pais, manteniendo la esencia: motos 125cc de serie,
+            8 horas de carrera y mucho trabajo en equipo.
+          </p>
+          <p class="text-racing-silver">
+            Lo que empezo como una idea entre amigos se ha convertido en una realidad que crece
+            cada temporada, atrayendo a equipos de toda Espana.
+          </p>
+        </div>
+        <div class="relative">
+          <div class="aspect-video bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
+            <img
+              src="/images/teams-1.jpg"
+              alt="Origenes de Grip Club"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestros Valores</span>
+        <h2 class="section-title">Lo que nos <span class="text-vanilla">define</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Value 1 -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Comunidad</h3>
+          <p class="text-racing-silver">
+            Creemos en construir una comunidad unida donde todos los apasionados de las motos
+            tengan un lugar. El paddock es una gran familia.
+          </p>
+        </div>
+
+        <!-- Value 2 -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Accesibilidad</h3>
+          <p class="text-racing-silver">
+            El motorsport no tiene que ser exclusivo. Con motos 125cc de serie y costes controlados,
+            cualquiera puede participar y competir.
+          </p>
+        </div>
+
+        <!-- Value 3 -->
+        <div class="card text-center">
+          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Seguridad</h3>
+          <p class="text-racing-silver">
+            La seguridad es nuestra maxima prioridad. Velocidades controladas, equipamiento obligatorio
+            y estrictos controles tecnicos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Cronologia</span>
+        <h2 class="section-title">Nuestro <span class="text-vanilla">recorrido</span></h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <!-- Timeline Item 1 -->
+        <div class="flex gap-6 mb-12">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 bg-racing-green rounded-full flex items-center justify-center text-vanilla font-bold">
+              <span style="font-family: 'Bebas Neue', sans-serif;">2024</span>
+            </div>
+            <div class="w-0.5 h-full bg-racing-silver/20 mt-4"></div>
+          </div>
+          <div class="pb-12">
+            <h3 class="text-xl font-bold text-white mb-2">El Nacimiento</h3>
+            <p class="text-racing-silver">
+              Grip Club se funda con la mision de traer las carreras de resistencia 125cc a Espana.
+              Se establecen las bases del reglamento y se comienza a construir la comunidad.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="flex gap-6 mb-12">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 bg-racing-green rounded-full flex items-center justify-center text-vanilla font-bold">
+              <span style="font-family: 'Bebas Neue', sans-serif;">2025</span>
+            </div>
+            <div class="w-0.5 h-full bg-racing-silver/20 mt-4"></div>
+          </div>
+          <div class="pb-12">
+            <h3 class="text-xl font-bold text-white mb-2">Primera Edicion</h3>
+            <p class="text-racing-silver">
+              Se celebra la primera edicion oficial de las 8 Horas Grip Club. Equipos de toda Espana
+              se reunen para escribir las primeras paginas de esta nueva historia.
+            </p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 bg-vanilla/20 border-2 border-vanilla rounded-full flex items-center justify-center text-vanilla font-bold">
+              <span style="font-family: 'Bebas Neue', sans-serif;">...</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">El Futuro</h3>
+            <p class="text-racing-silver">
+              Y esto es solo el comienzo. Tenemos grandes planes para hacer crecer la comunidad,
+              mejorar el evento y llevar Grip Club a mas circuitos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title mb-6">Se parte de la <span class="text-vanilla">historia</span></h2>
+        <p class="section-subtitle mx-auto mb-8">
+          La historia de Grip Club se escribe con cada equipo que participa. Unete y forma parte de algo especial.
+        </p>
+        <a href="/inscripciones#registro" class="btn-primary">
+          Inscribete ahora
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

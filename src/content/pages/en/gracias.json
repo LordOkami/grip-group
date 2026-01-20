@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Thank you",
+    "description": "Your pre-registration has been received successfully."
+  },
+  "title": "Thank you!",
+  "message": "Your pre-registration has been received successfully.",
+  "submessage": "We've sent a confirmation email to your address. We'll contact you when official registration opens.",
+  "nextSteps": {
+    "title": "Next steps",
+    "steps": [
+      "Check your email (also spam folder)",
+      "Wait for our news about the track",
+      "Get your team and bike ready"
+    ]
+  },
+  "cta": {
+    "primary": "Back to home",
+    "primaryLink": "/en",
+    "secondary": "View technical regulations",
+    "secondaryLink": "/en/motos"
+  }
+}

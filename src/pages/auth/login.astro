@@ -22,20 +22,53 @@ const translatePath = useTranslatedPath(lang);
           <p class="text-racing-silver">{t('auth.login.subtitle')}</p>
         </div>
 
-        <!-- Login Button -->
-        <button
-          id="login-btn"
-          class="w-full btn-primary py-4 text-lg flex items-center justify-center gap-2"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
-          </svg>
-          {t('auth.login.button')}
-        </button>
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-racing-silver mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 bg-racing-dark border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:outline-none focus:border-racing-green"
+              placeholder="tu@email.com"
+            />
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-racing-silver mb-2">
+              {lang === 'en' ? 'Password' : 'Contraseña'}
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 bg-racing-dark border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:outline-none focus:border-racing-green"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="login-btn"
+            class="w-full btn-primary py-4 text-lg flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+            </svg>
+            <span id="btn-text">{t('auth.login.button')}</span>
+            <span id="btn-loading" class="hidden">{lang === 'en' ? 'Loading...' : 'Cargando...'}</span>
+          </button>
+        </form>
 
         <!-- Error message -->
         <div id="error-message" class="hidden mt-4 p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm">
-          {t('auth.error')}
+          <span id="error-text">{t('auth.error')}</span>
         </div>
 
         <!-- Divider -->
@@ -57,35 +90,63 @@ const translatePath = useTranslatedPath(lang);
   </section>
 
   <script>
-    import { identity } from '../../lib/identity';
+    import { firebaseAuth } from '../../lib/firebase-auth';
 
     const lang = document.documentElement.lang || 'es';
-    await identity.init(lang);
+    await firebaseAuth.init();
 
-    // Wait for user state to be ready before checking
-    const currentUser = await identity.waitForUser();
+    // Check if user is already logged in
+    const currentUser = await firebaseAuth.waitForUser();
     if (currentUser) {
       const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
       window.location.href = dashboardPath;
     }
 
-    const loginBtn = document.getElementById('login-btn');
+    const form = document.getElementById('login-form') as HTMLFormElement;
     const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const btnText = document.getElementById('btn-text');
+    const btnLoading = document.getElementById('btn-loading');
+    const loginBtn = document.getElementById('login-btn') as HTMLButtonElement;
 
-    loginBtn?.addEventListener('click', async () => {
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const password = (document.getElementById('password') as HTMLInputElement).value;
+
       try {
         errorMessage?.classList.add('hidden');
-        await identity.login();
+        btnText?.classList.add('hidden');
+        btnLoading?.classList.remove('hidden');
+        loginBtn.disabled = true;
+
+        await firebaseAuth.login(email, password);
         const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
         window.location.href = dashboardPath;
-      } catch (error) {
+      } catch (error: any) {
         console.error('Login error:', error);
+        btnText?.classList.remove('hidden');
+        btnLoading?.classList.add('hidden');
+        loginBtn.disabled = false;
+
+        // Show user-friendly error message
+        let message = lang === 'en' ? 'Invalid email or password' : 'Email o contraseña incorrectos';
+        if (error.code === 'auth/user-not-found') {
+          message = lang === 'en' ? 'No account found with this email' : 'No existe una cuenta con este email';
+        } else if (error.code === 'auth/wrong-password') {
+          message = lang === 'en' ? 'Incorrect password' : 'Contraseña incorrecta';
+        } else if (error.code === 'auth/too-many-requests') {
+          message = lang === 'en' ? 'Too many attempts. Please try again later.' : 'Demasiados intentos. Por favor, inténtalo más tarde.';
+        }
+
+        if (errorText) errorText.textContent = message;
         errorMessage?.classList.remove('hidden');
       }
     });
 
-    // Listen for login events from the widget
-    identity.onAuthChange((user) => {
+    // Listen for auth changes
+    firebaseAuth.onAuthChange((user) => {
       if (user) {
         const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
         window.location.href = dashboardPath;

@@ -57,13 +57,13 @@ const translatePath = useTranslatedPath(lang);
   </section>
 
   <script>
-    import { identity } from '../../../lib/identity';
+    import { firebaseAuth } from '../../../lib/firebase-auth';
 
     const lang = document.documentElement.lang || 'es';
-    await identity.init(lang);
+    await firebaseAuth.init(lang);
 
     // Wait for user state to be ready before checking
-    const currentUser = await identity.waitForUser();
+    const currentUser = await firebaseAuth.waitForUser();
     if (currentUser) {
       const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
       window.location.href = dashboardPath;
@@ -75,7 +75,7 @@ const translatePath = useTranslatedPath(lang);
     loginBtn?.addEventListener('click', async () => {
       try {
         errorMessage?.classList.add('hidden');
-        await identity.login();
+        await firebaseAuth.login();
         const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
         window.location.href = dashboardPath;
       } catch (error) {
@@ -85,7 +85,7 @@ const translatePath = useTranslatedPath(lang);
     });
 
     // Listen for login events from the widget
-    identity.onAuthChange((user) => {
+    firebaseAuth.onAuthChange((user) => {
       if (user) {
         const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
         window.location.href = dashboardPath;

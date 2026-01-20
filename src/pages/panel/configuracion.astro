@@ -100,14 +100,14 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 </AdminLayout>
 
 <script>
-  import { identity } from '../../lib/identity';
+  import { firebaseAuth } from '../../lib/firebase-auth';
 
   let originalSettings: any = {};
 
   async function loadSettings() {
     try {
-      await identity.waitForInit();
-      const token = identity.getToken();
+      await firebaseAuth.waitForInit();
+      const token = firebaseAuth.getToken();
       const response = await fetch('/api/admin-settings', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -151,8 +151,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     loading.classList.remove('hidden');
 
     try {
-      await identity.waitForInit();
-      const token = identity.getToken();
+      await firebaseAuth.waitForInit();
+      const token = firebaseAuth.getToken();
 
       const registration_deadline = (document.getElementById('registration_deadline') as HTMLInputElement).value;
       const pilot_modification_deadline = (document.getElementById('pilot_modification_deadline') as HTMLInputElement).value;

@@ -1,5 +1,6 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { supabase } from './utils/supabase';
+import { getFirestoreDb } from './utils/firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 import {
   getUserId,
   isAdmin,
@@ -17,101 +18,119 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
-  const userId = getUserId(event);
+  const userId = await getUserId(event);
   if (!userId) {
     return unauthorizedResponse();
   }
 
   // Check admin permission
-  if (!isAdmin(event)) {
+  if (!(await isAdmin(event))) {
     return forbiddenResponse();
   }
+
+  const db = getFirestoreDb();
 
   try {
     switch (event.httpMethod) {
       case 'GET': {
-        // Get all teams with pilots and staff counts
-        const { data, error } = await supabase
-          .from('teams')
-          .select(`
-            *,
-            pilots (id, name, surname, email, phone, dni, driving_level, is_representative, track_experience),
-            team_staff (id, name, role, dni, phone)
-          `)
-          .order('created_at', { ascending: false });
+        // Get all teams with pilots and staff
+        const teamsSnapshot = await db.collection('teams')
+          .orderBy('createdAt', 'desc')
+          .get();
 
-        if (error) throw error;
+        const teamsWithCounts = await Promise.all(
+          teamsSnapshot.docs.map(async (teamDoc) => {
+            const teamData = { id: teamDoc.id, ...teamDoc.data() };
 
-        // Add counts to each team
-        const teamsWithCounts = data?.map(team => ({
-          ...team,
-          pilots_count: team.pilots?.length || 0,
-          staff_count: team.team_staff?.length || 0
-        }));
+            // Get pilots subcollection
+            const pilotsSnapshot = await teamDoc.ref.collection('pilots').get();
+            const pilots = pilotsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+            // Get staff subcollection
+            const staffSnapshot = await teamDoc.ref.collection('staff').get();
+            const staff = staffSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+            return {
+              ...teamData,
+              pilots,
+              staff,
+              pilotsCount: pilots.length,
+              staffCount: staff.length
+            };
+          })
+        );
 
         // Get all pilots for detailed stats
-        const allPilots = teamsWithCounts?.flatMap(t => t.pilots || []) || [];
-        const allStaff = teamsWithCounts?.flatMap(t => t.team_staff || []) || [];
+        const allPilots = teamsWithCounts.flatMap(t => t.pilots || []);
+        const allStaff = teamsWithCounts.flatMap(t => t.staff || []);
 
         // Calculate stats by driving level
         const drivingLevelStats = {
-          amateur: allPilots.filter(p => p.driving_level === 'amateur').length,
-          intermediate: allPilots.filter(p => p.driving_level === 'intermediate').length,
-          advanced: allPilots.filter(p => p.driving_level === 'advanced').length,
-          expert: allPilots.filter(p => p.driving_level === 'expert').length
+          amateur: allPilots.filter((p: any) => p.drivingLevel === 'amateur').length,
+          intermediate: allPilots.filter((p: any) => p.drivingLevel === 'intermediate').length,
+          advanced: allPilots.filter((p: any) => p.drivingLevel === 'advanced').length,
+          expert: allPilots.filter((p: any) => p.drivingLevel === 'expert').length
         };
 
         // Calculate stats by engine size
         const engineStats = {
-          '125cc_4t': teamsWithCounts?.filter(t => t.motorcycle_engine === '125cc_4t').length || 0,
-          '50cc_2t': teamsWithCounts?.filter(t => t.motorcycle_engine === '50cc_2t').length || 0
+          '125cc_4t': teamsWithCounts.filter((t: any) => t.engineCapacity === '125cc_4t').length,
+          '50cc_2t': teamsWithCounts.filter((t: any) => t.engineCapacity === '50cc_2t').length
         };
 
         // Calculate stats by staff role
         const staffRoleStats = {
-          mechanic: allStaff.filter(s => s.role === 'mechanic').length,
-          coordinator: allStaff.filter(s => s.role === 'coordinator').length,
-          support: allStaff.filter(s => s.role === 'support').length
+          mechanic: allStaff.filter((s: any) => s.role === 'mechanic').length,
+          coordinator: allStaff.filter((s: any) => s.role === 'coordinator').length,
+          support: allStaff.filter((s: any) => s.role === 'support').length
         };
 
         // Get registration dates for timeline
-        const registrationsByDate = teamsWithCounts?.reduce((acc: Record<string, number>, team) => {
-          const date = team.created_at?.split('T')[0];
+        const registrationsByDate = teamsWithCounts.reduce((acc: Record<string, number>, team: any) => {
+          // Handle Firestore Timestamp
+          let date = '';
+          if (team.createdAt) {
+            if (team.createdAt.toDate) {
+              date = team.createdAt.toDate().toISOString().split('T')[0];
+            } else if (typeof team.createdAt === 'string') {
+              date = team.createdAt.split('T')[0];
+            }
+          }
           if (date) {
             acc[date] = (acc[date] || 0) + 1;
           }
           return acc;
-        }, {}) || {};
+        }, {});
 
         // Get teams without GDPR consent
-        const teamsWithoutGdpr = teamsWithCounts?.filter(t => !t.gdpr_consent).length || 0;
+        const teamsWithoutGdpr = teamsWithCounts.filter((t: any) => !t.gdprConsent).length;
 
         // Calculate conversion rate
-        const conversionRate = teamsWithCounts && teamsWithCounts.length > 0
-          ? Math.round((teamsWithCounts.filter(t => t.status === 'confirmed').length / teamsWithCounts.length) * 100)
+        const conversionRate = teamsWithCounts.length > 0
+          ? Math.round((teamsWithCounts.filter((t: any) => t.status === 'confirmed').length / teamsWithCounts.length) * 100)
           : 0;
 
         // Average pilots per team
-        const avgPilotsPerTeam = teamsWithCounts && teamsWithCounts.length > 0
+        const avgPilotsPerTeam = teamsWithCounts.length > 0
           ? (allPilots.length / teamsWithCounts.length).toFixed(1)
           : '0';
 
         // Calculate stats
         const stats = {
-          total: teamsWithCounts?.length || 0,
-          draft: teamsWithCounts?.filter(t => t.status === 'draft').length || 0,
-          pending: teamsWithCounts?.filter(t => t.status === 'pending').length || 0,
-          confirmed: teamsWithCounts?.filter(t => t.status === 'confirmed').length || 0,
-          cancelled: teamsWithCounts?.filter(t => t.status === 'cancelled').length || 0,
-          total_pilots: allPilots.length,
-          total_staff: allStaff.length,
-          driving_levels: drivingLevelStats,
-          engine_types: engineStats,
-          staff_roles: staffRoleStats,
-          registrations_by_date: registrationsByDate,
-          teams_without_gdpr: teamsWithoutGdpr,
-          conversion_rate: conversionRate,
-          avg_pilots_per_team: avgPilotsPerTeam
+          total: teamsWithCounts.length,
+          draft: teamsWithCounts.filter((t: any) => t.status === 'draft').length,
+          pending: teamsWithCounts.filter((t: any) => t.status === 'pending').length,
+          confirmed: teamsWithCounts.filter((t: any) => t.status === 'confirmed').length,
+          cancelled: teamsWithCounts.filter((t: any) => t.status === 'cancelled').length,
+          totalPilots: allPilots.length,
+          totalStaff: allStaff.length,
+          drivingLevels: drivingLevelStats,
+          engineTypes: engineStats,
+          staffRoles: staffRoleStats,
+          registrationsByDate: registrationsByDate,
+          teamsWithoutGdpr: teamsWithoutGdpr,
+          conversionRate: conversionRate,
+          avgPilotsPerTeam: avgPilotsPerTeam
         };
 
         return successResponse({ teams: teamsWithCounts, stats });
@@ -136,31 +155,37 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           return errorResponse('No valid fields to update');
         }
 
-        const { data, error } = await supabase
-          .from('teams')
-          .update(allowedUpdates)
-          .eq('id', teamId)
-          .select()
-          .single();
+        allowedUpdates.updatedAt = FieldValue.serverTimestamp();
 
-        if (error) throw error;
+        const teamRef = db.collection('teams').doc(teamId);
+        await teamRef.update(allowedUpdates);
 
-        return successResponse({ team: data });
+        const updatedDoc = await teamRef.get();
+
+        return successResponse({ team: { id: updatedDoc.id, ...updatedDoc.data() } });
       }
 
       case 'DELETE': {
-        // Delete team
+        // Delete team and its subcollections
         const teamId = event.queryStringParameters?.id;
         if (!teamId) {
           return errorResponse('Team ID is required');
         }
 
-        const { error } = await supabase
-          .from('teams')
-          .delete()
-          .eq('id', teamId);
+        const teamRef = db.collection('teams').doc(teamId);
 
-        if (error) throw error;
+        // Delete pilots subcollection
+        const pilotsSnapshot = await teamRef.collection('pilots').get();
+        const deletePilots = pilotsSnapshot.docs.map(doc => doc.ref.delete());
+        await Promise.all(deletePilots);
+
+        // Delete staff subcollection
+        const staffSnapshot = await teamRef.collection('staff').get();
+        const deleteStaff = staffSnapshot.docs.map(doc => doc.ref.delete());
+        await Promise.all(deleteStaff);
+
+        // Delete team document
+        await teamRef.delete();
 
         return successResponse({ message: 'Team deleted successfully' });
       }

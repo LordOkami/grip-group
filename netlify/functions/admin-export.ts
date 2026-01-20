@@ -1,5 +1,5 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { supabase } from './utils/supabase';
+import { getFirestoreDb } from './utils/firebase-admin';
 import {
   getUserId,
   isAdmin,
@@ -21,7 +21,14 @@ function arrayToCSV(data: any[], columns: { key: string; label: string }[]): str
     return columns.map(c => {
       let value = item[c.key];
       if (value === null || value === undefined) value = '';
-      if (typeof value === 'object') value = JSON.stringify(value);
+      if (typeof value === 'object') {
+        // Handle Firestore Timestamp
+        if (value.toDate) {
+          value = value.toDate().toISOString();
+        } else {
+          value = JSON.stringify(value);
+        }
+      }
       // Escape quotes and wrap in quotes
       return `"${String(value).replace(/"/g, '""')}"`;
     }).join(',');
@@ -42,15 +49,17 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
-  const userId = getUserId(event);
+  const userId = await getUserId(event);
   if (!userId) {
     return unauthorizedResponse();
   }
 
   // Check admin permission
-  if (!isAdmin(event)) {
+  if (!(await isAdmin(event))) {
     return forbiddenResponse();
   }
+
+  const db = getFirestoreDb();
 
   try {
     const exportType = event.queryStringParameters?.type || 'teams';
@@ -62,86 +71,93 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
     switch (exportType) {
       case 'teams': {
-        const { data: teams, error } = await supabase
-          .from('teams')
-          .select('*')
-          .order('created_at', { ascending: false });
+        const teamsSnapshot = await db.collection('teams')
+          .orderBy('createdAt', 'desc')
+          .get();
 
-        if (error) throw error;
-        data = teams || [];
+        data = teamsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         filename = 'equipos';
         columns = [
           { key: 'name', label: 'Nombre Equipo' },
           { key: 'status', label: 'Estado' },
-          { key: 'number_of_pilots', label: 'Num Pilotos' },
-          { key: 'representative_name', label: 'Representante Nombre' },
-          { key: 'representative_surname', label: 'Representante Apellidos' },
-          { key: 'representative_dni', label: 'DNI' },
-          { key: 'representative_email', label: 'Email' },
-          { key: 'representative_phone', label: 'Telefono' },
+          { key: 'numberOfPilots', label: 'Num Pilotos' },
+          { key: 'representativeName', label: 'Representante Nombre' },
+          { key: 'representativeSurname', label: 'Representante Apellidos' },
+          { key: 'representativeDni', label: 'DNI' },
+          { key: 'representativeEmail', label: 'Email' },
+          { key: 'representativePhone', label: 'Telefono' },
           { key: 'address', label: 'Direccion' },
           { key: 'municipality', label: 'Municipio' },
-          { key: 'postal_code', label: 'CP' },
+          { key: 'postalCode', label: 'CP' },
           { key: 'province', label: 'Provincia' },
-          { key: 'motorcycle_brand', label: 'Marca Moto' },
-          { key: 'motorcycle_model', label: 'Modelo Moto' },
-          { key: 'engine_capacity', label: 'Cilindrada' },
-          { key: 'created_at', label: 'Fecha Registro' }
+          { key: 'motorcycleBrand', label: 'Marca Moto' },
+          { key: 'motorcycleModel', label: 'Modelo Moto' },
+          { key: 'engineCapacity', label: 'Cilindrada' },
+          { key: 'createdAt', label: 'Fecha Registro' }
         ];
         break;
       }
 
       case 'pilots': {
-        const { data: pilots, error } = await supabase
-          .from('pilots')
-          .select(`
-            *,
-            teams (name)
-          `)
-          .order('created_at', { ascending: false });
+        const teamsSnapshot = await db.collection('teams').get();
 
-        if (error) throw error;
+        const allPilots: any[] = [];
+        for (const teamDoc of teamsSnapshot.docs) {
+          const teamData = teamDoc.data();
+          const pilotsSnapshot = await teamDoc.ref.collection('pilots')
+            .orderBy('createdAt', 'desc')
+            .get();
 
-        // Flatten team name
-        data = (pilots || []).map(p => ({
-          ...p,
-          team_name: p.teams?.name || ''
-        }));
+          pilotsSnapshot.docs.forEach(pilotDoc => {
+            allPilots.push({
+              id: pilotDoc.id,
+              teamName: teamData.name,
+              ...pilotDoc.data()
+            });
+          });
+        }
+
+        data = allPilots;
         filename = 'pilotos';
         columns = [
-          { key: 'team_name', label: 'Equipo' },
+          { key: 'teamName', label: 'Equipo' },
           { key: 'name', label: 'Nombre' },
           { key: 'surname', label: 'Apellidos' },
           { key: 'dni', label: 'DNI' },
           { key: 'email', label: 'Email' },
           { key: 'phone', label: 'Telefono' },
-          { key: 'driving_level', label: 'Nivel' },
-          { key: 'track_experience', label: 'Experiencia' },
-          { key: 'emergency_contact_name', label: 'Contacto Emergencia' },
-          { key: 'emergency_contact_phone', label: 'Tel Emergencia' },
-          { key: 'is_representative', label: 'Es Representante' }
+          { key: 'drivingLevel', label: 'Nivel' },
+          { key: 'trackExperience', label: 'Experiencia' },
+          { key: 'emergencyContactName', label: 'Contacto Emergencia' },
+          { key: 'emergencyContactPhone', label: 'Tel Emergencia' },
+          { key: 'isRepresentative', label: 'Es Representante' }
         ];
         break;
       }
 
       case 'staff': {
-        const { data: staff, error } = await supabase
-          .from('team_staff')
-          .select(`
-            *,
-            teams (name)
-          `)
-          .order('created_at', { ascending: false });
+        const teamsSnapshot = await db.collection('teams').get();
 
-        if (error) throw error;
+        const allStaff: any[] = [];
+        for (const teamDoc of teamsSnapshot.docs) {
+          const teamData = teamDoc.data();
+          const staffSnapshot = await teamDoc.ref.collection('staff')
+            .orderBy('createdAt', 'desc')
+            .get();
 
-        data = (staff || []).map(s => ({
-          ...s,
-          team_name: s.teams?.name || ''
-        }));
+          staffSnapshot.docs.forEach(staffDoc => {
+            allStaff.push({
+              id: staffDoc.id,
+              teamName: teamData.name,
+              ...staffDoc.data()
+            });
+          });
+        }
+
+        data = allStaff;
         filename = 'staff';
         columns = [
-          { key: 'team_name', label: 'Equipo' },
+          { key: 'teamName', label: 'Equipo' },
           { key: 'name', label: 'Nombre' },
           { key: 'dni', label: 'DNI' },
           { key: 'phone', label: 'Telefono' },
@@ -152,15 +168,38 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
       case 'all': {
         // Get all data for comprehensive export
-        const [teamsResult, pilotsResult, staffResult] = await Promise.all([
-          supabase.from('teams').select('*').order('name'),
-          supabase.from('pilots').select('*, teams(name)').order('team_id'),
-          supabase.from('team_staff').select('*, teams(name)').order('team_id')
-        ]);
+        const teamsSnapshot = await db.collection('teams')
+          .orderBy('name')
+          .get();
 
-        if (teamsResult.error) throw teamsResult.error;
-        if (pilotsResult.error) throw pilotsResult.error;
-        if (staffResult.error) throw staffResult.error;
+        const teams: any[] = [];
+        const pilots: any[] = [];
+        const staff: any[] = [];
+
+        for (const teamDoc of teamsSnapshot.docs) {
+          const teamData = { id: teamDoc.id, ...teamDoc.data() };
+          teams.push(teamData);
+
+          // Get pilots for this team
+          const pilotsSnapshot = await teamDoc.ref.collection('pilots').get();
+          pilotsSnapshot.docs.forEach(pilotDoc => {
+            pilots.push({
+              id: pilotDoc.id,
+              teamName: teamData.name,
+              ...pilotDoc.data()
+            });
+          });
+
+          // Get staff for this team
+          const staffSnapshot = await teamDoc.ref.collection('staff').get();
+          staffSnapshot.docs.forEach(staffDoc => {
+            staff.push({
+              id: staffDoc.id,
+              teamName: teamData.name,
+              ...staffDoc.data()
+            });
+          });
+        }
 
         // Return JSON for 'all' type
         return {
@@ -171,10 +210,10 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
             'Content-Disposition': `attachment; filename="grip-club-export-${new Date().toISOString().split('T')[0]}.json"`
           },
           body: JSON.stringify({
-            exported_at: new Date().toISOString(),
-            teams: teamsResult.data,
-            pilots: pilotsResult.data?.map(p => ({ ...p, team_name: p.teams?.name })),
-            staff: staffResult.data?.map(s => ({ ...s, team_name: s.teams?.name }))
+            exportedAt: new Date().toISOString(),
+            teams,
+            pilots,
+            staff
           }, null, 2)
         };
       }

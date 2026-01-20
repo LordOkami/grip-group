@@ -1,0 +1,172 @@
+{
+  "meta": {
+    "title": "Inscripciones",
+    "description": "Toda la informacion que necesitas para formar parte de las 8 Horas Endurance. Inscribete y vive la experiencia."
+  },
+  "hero": {
+    "tagline": "Unete a nosotros",
+    "title": "Inscripciones",
+    "subtitle": "Toda la informacion que necesitas para formar parte de las 8 Horas Endurance. Inscribete y vive la experiencia."
+  },
+  "infoCards": [
+    {
+      "icon": "calendar",
+      "title": "Fecha del evento",
+      "value": "POR CONFIRMAR",
+      "subtitle": "Pendiente de confirmacion de circuito"
+    },
+    {
+      "icon": "location",
+      "title": "Lugar",
+      "value": "ESPANA",
+      "subtitle": "Circuito por determinar"
+    },
+    {
+      "icon": "team",
+      "title": "Equipos",
+      "value": "4-8 PILOTOS",
+      "subtitle": "+ hasta 4 staff por equipo"
+    }
+  ],
+  "calendar": {
+    "tagline": "Planifica",
+    "title": "Calendario",
+    "titleAccent": "2025",
+    "items": [
+      {
+        "status": "active",
+        "label": "Ahora",
+        "title": "Pre-inscripciones abiertas",
+        "description": "Registrate para recibir toda la informacion y ser el primero en inscribirte cuando se abran las plazas oficiales."
+      },
+      {
+        "status": "pending",
+        "label": "Proximamente",
+        "title": "Confirmacion de circuito",
+        "description": "Anunciaremos el circuito oficial donde se celebrara la prueba."
+      },
+      {
+        "status": "pending",
+        "label": "Por definir",
+        "title": "Apertura inscripciones oficiales",
+        "description": "Plazas limitadas. Los pre-inscritos tendran prioridad."
+      },
+      {
+        "status": "pending",
+        "label": "Dia del evento",
+        "title": "8 Horas Endurance",
+        "description": "El gran dia! Verificaciones tecnicas por la manana y carrera durante 8 horas."
+      }
+    ]
+  },
+  "pricing": {
+    "tagline": "Tarifas",
+    "title": "Precio de",
+    "titleAccent": "inscripcion",
+    "badge": "PRE-INSCRIPCION",
+    "cardTitle": "Inscripcion por equipo",
+    "priceNote": "Precio por confirmar",
+    "priceValue": "PROXIMAMENTE",
+    "features": [
+      "Inscripcion para 4-8 pilotos + staff",
+      "Acceso a boxes/paddock",
+      "Transponder incluido",
+      "Cronometraje oficial",
+      "Briefing y verificaciones",
+      "Trofeos para el podio"
+    ],
+    "cta": "Pre-inscribete gratis"
+  },
+  "registration": {
+    "tagline": "Inscripcion",
+    "title": "Registra tu",
+    "titleAccent": "equipo",
+    "subtitle": "Crea una cuenta para registrar a tu equipo completo con todos los pilotos y datos necesarios.",
+    "teamRegistration": {
+      "title": "Inscripcion completa del equipo",
+      "description": "Registrate para inscribir a tu equipo con todos los datos: representante, pilotos (4-8), staff, y datos de la moto. Podras completar la inscripcion en varias sesiones.",
+      "createAccount": "Crear cuenta",
+      "hasAccount": "Ya tengo cuenta",
+      "signupLink": "/auth/signup",
+      "loginLink": "/auth/login"
+    },
+    "separator": "o dejanos tus datos",
+    "quickForm": {
+      "title": "Pre-inscripcion rapida",
+      "subtitle": "Si aun no estas listo para la inscripcion completa, dejanos tus datos y te contactaremos.",
+      "formName": "preinscripcion",
+      "successPage": "/gracias",
+      "fields": {
+        "nombre": { "label": "Nombre *", "placeholder": "Tu nombre" },
+        "apellidos": { "label": "Apellidos *", "placeholder": "Tus apellidos" },
+        "email": { "label": "Email *", "placeholder": "tu@email.com" },
+        "telefono": { "label": "Telefono *", "placeholder": "+34 600 000 000" },
+        "localidad": { "label": "Localidad *", "placeholder": "Tu ciudad" },
+        "codigoPostal": { "label": "Codigo Postal *", "placeholder": "28001" },
+        "provincia": { "label": "Provincia *", "placeholder": "Selecciona tu provincia" },
+        "moto": { "label": "Que moto tienes? (Opcional)", "placeholder": "Ej: Honda CBR125R 2019" },
+        "experiencia": {
+          "label": "Experiencia en competicion (Opcional)",
+          "placeholder": "Selecciona tu experiencia",
+          "options": [
+            { "value": "ninguna", "label": "Sin experiencia en competicion" },
+            { "value": "tandas", "label": "Solo tandas libres" },
+            { "value": "amateur", "label": "Competicion amateur" },
+            { "value": "semipro", "label": "Competicion semi-profesional" },
+            { "value": "profesional", "label": "Competicion profesional" }
+          ]
+        },
+        "mensaje": { "label": "Comentarios (Opcional)", "placeholder": "Tienes equipo formado? Alguna pregunta?" },
+        "rgpd": "He leido y acepto la politica de privacidad. Consiento el tratamiento de mis datos para gestionar mi pre-inscripcion y recibir informacion sobre el evento. *"
+      },
+      "submit": "Enviar pre-inscripcion"
+    },
+    "nextSteps": {
+      "title": "Que pasa despues?",
+      "description": "Al enviar tu pre-inscripcion, recibiras un email de confirmacion. Cuando confirmemos el circuito y las fechas, te enviaremos toda la informacion para formalizar tu inscripcion oficial. Los pre-inscritos tendran prioridad en las plazas."
+    }
+  },
+  "faq": {
+    "tagline": "FAQ",
+    "title": "Preguntas",
+    "titleAccent": "frecuentes",
+    "items": [
+      {
+        "question": "Cuantos pilotos puede tener un equipo?",
+        "answer": "Cada equipo puede estar formado por un minimo de 4 y un maximo de 8 pilotos. Ademas, puedes registrar hasta 4 miembros de staff (mecanicos, coordinadores, apoyo). Todos los pilotos deben estar inscritos antes del cierre de inscripciones."
+      },
+      {
+        "question": "Necesito licencia federativa?",
+        "answer": "No es necesaria licencia federativa. La organizacion proporcionara un seguro de responsabilidad civil para todos los participantes durante el evento."
+      },
+      {
+        "question": "Puedo participar sin equipo?",
+        "answer": "Si no tienes equipo, indicalo en los comentarios del formulario. Intentaremos ponerte en contacto con otros pilotos que busquen companeros."
+      },
+      {
+        "question": "Que incluye la inscripcion?",
+        "answer": "La inscripcion incluye acceso al circuito para todo el equipo, transponder, cronometraje oficial, acceso a boxes/paddock, briefing y verificaciones tecnicas, y trofeos para el podio."
+      },
+      {
+        "question": "Hay limite de vueltas por piloto?",
+        "answer": "Si, habra un maximo de stints continuos por piloto para garantizar la seguridad y el espiritu de equipo. Los detalles especificos se comunicaran en el reglamento deportivo."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Tienes mas",
+    "titleAccent": "preguntas",
+    "subtitle": "Estamos aqui para ayudarte. Contacta con nosotros y resolveremos todas tus dudas.",
+    "cta": "Contactar",
+    "email": "info@gripclub.es"
+  },
+  "provinces": [
+    "Alava", "Albacete", "Alicante", "Almeria", "Asturias", "Avila", "Badajoz", "Barcelona",
+    "Burgos", "Caceres", "Cadiz", "Cantabria", "Castellon", "Ciudad Real", "Cordoba", "Cuenca",
+    "Girona", "Granada", "Guadalajara", "Guipuzcoa", "Huelva", "Huesca", "Islas Baleares", "Jaen",
+    "La Coruna", "La Rioja", "Las Palmas", "Leon", "Lleida", "Lugo", "Madrid", "Malaga",
+    "Murcia", "Navarra", "Ourense", "Palencia", "Pontevedra", "Salamanca", "Santa Cruz de Tenerife",
+    "Segovia", "Sevilla", "Soria", "Tarragona", "Teruel", "Toledo", "Valencia", "Valladolid",
+    "Vizcaya", "Zamora", "Zaragoza"
+  ]
+}

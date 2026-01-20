@@ -156,7 +156,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 </AdminLayout>
 
 <script>
-  import { identity } from '../../lib/identity';
+  import { firebaseAuth } from '../../lib/firebase-auth';
 
   interface Pilot {
     id: string;
@@ -208,8 +208,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   async function loadPilots() {
     try {
-      await identity.waitForInit();
-      const token = identity.getToken();
+      await firebaseAuth.waitForInit();
+      const token = firebaseAuth.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: {
           'Authorization': `Bearer ${token}`

@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Gracias",
+    "description": "Tu pre-inscripcion ha sido recibida correctamente."
+  },
+  "title": "Gracias!",
+  "message": "Tu pre-inscripcion ha sido recibida correctamente.",
+  "submessage": "Hemos enviado un email de confirmacion a tu direccion de correo. Te contactaremos cuando las inscripciones oficiales esten abiertas.",
+  "nextSteps": {
+    "title": "Proximos pasos",
+    "steps": [
+      "Revisa tu email (tambien el spam)",
+      "Espera nuestras novedades sobre el circuito",
+      "Prepara tu equipo y tu moto"
+    ]
+  },
+  "cta": {
+    "primary": "Volver al inicio",
+    "primaryLink": "/",
+    "secondary": "Ver reglamento tecnico",
+    "secondaryLink": "/motos"
+  }
+}

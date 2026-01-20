@@ -1,0 +1,258 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Eventos" currentPage="eventos">
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-racing"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Calendario</span>
+        <h1 class="section-title mb-6">
+          <span class="text-vanilla">Eventos</span> 2025
+        </h1>
+        <p class="section-subtitle">
+          Todas las fechas y circuitos donde viviremos la emocion de las 8 Horas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Event -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Evento Principal</span>
+        <h2 class="section-title">8 Horas <span class="text-vanilla">Grip Club</span></h2>
+      </div>
+
+      <!-- Event Card -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
+          <!-- Event Image -->
+          <div class="aspect-video relative">
+            <img
+              src="/images/track-DR7-1.jpg"
+              alt="Circuito"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-racing-black to-transparent"></div>
+            <div class="absolute bottom-6 left-6">
+              <span class="inline-block bg-racing-green text-vanilla text-sm font-bold px-4 py-2 rounded-full uppercase tracking-wider">
+                Proximamente
+              </span>
+            </div>
+          </div>
+
+          <!-- Event Info -->
+          <div class="p-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <!-- Date -->
+              <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <span class="text-racing-silver text-sm uppercase tracking-wider">Fecha</span>
+                </div>
+                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                  Por confirmar
+                </p>
+              </div>
+
+              <!-- Location -->
+              <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </div>
+                  <span class="text-racing-silver text-sm uppercase tracking-wider">Circuito</span>
+                </div>
+                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                  Por confirmar
+                </p>
+              </div>
+
+              <!-- Duration -->
+              <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <span class="text-racing-silver text-sm uppercase tracking-wider">Duracion</span>
+                </div>
+                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                  8 Horas
+                </p>
+              </div>
+            </div>
+
+            <div class="border-t border-racing-silver/20 pt-6">
+              <p class="text-racing-silver mb-6">
+                La fecha y el circuito para la edicion 2025 se anunciaran proximamente.
+                Mantente atento a nuestras redes sociales para ser el primero en enterarte.
+              </p>
+              <a href="/inscripciones" class="btn-primary inline-flex items-center gap-2">
+                Pre-inscribete ahora
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule Overview -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Programa</span>
+        <h2 class="section-title">Programa <span class="text-vanilla">tipo</span></h2>
+        <p class="text-racing-silver max-w-2xl mx-auto mt-4">
+          Asi es un fin de semana de carrera en Grip Club.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Saturday -->
+        <div class="card">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-racing-green rounded-lg flex items-center justify-center">
+              <span class="text-vanilla font-bold" style="font-family: 'Bebas Neue', sans-serif;">SAB</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Sabado</h3>
+              <p class="text-racing-silver text-sm">Verificaciones y entrenamientos</p>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">08:00</span>
+              <div>
+                <p class="text-white font-medium">Apertura de paddock</p>
+                <p class="text-racing-silver text-sm">Llegada de equipos e instalacion</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">10:00</span>
+              <div>
+                <p class="text-white font-medium">Verificaciones tecnicas</p>
+                <p class="text-racing-silver text-sm">Revision de motos y documentacion</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">14:00</span>
+              <div>
+                <p class="text-white font-medium">Entrenamientos libres</p>
+                <p class="text-racing-silver text-sm">Sesiones para conocer el circuito</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">18:00</span>
+              <div>
+                <p class="text-white font-medium">Briefing oficial</p>
+                <p class="text-racing-silver text-sm">Reunion obligatoria de equipos</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sunday -->
+        <div class="card">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-vanilla rounded-lg flex items-center justify-center">
+              <span class="text-racing-black font-bold" style="font-family: 'Bebas Neue', sans-serif;">DOM</span>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-white">Domingo</h3>
+              <p class="text-racing-silver text-sm">Dia de carrera</p>
+            </div>
+          </div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">07:00</span>
+              <div>
+                <p class="text-white font-medium">Apertura de boxes</p>
+                <p class="text-racing-silver text-sm">Preparativos finales</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">08:00</span>
+              <div>
+                <p class="text-white font-medium">Warm-up</p>
+                <p class="text-racing-silver text-sm">Ultima sesion antes de carrera</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">10:00</span>
+              <div>
+                <p class="text-white font-medium">SALIDA 8 HORAS</p>
+                <p class="text-racing-silver text-sm">Inicio de la carrera</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-vanilla font-mono text-sm w-16 shrink-0">18:00</span>
+              <div>
+                <p class="text-white font-medium">Llegada y podio</p>
+                <p class="text-racing-silver text-sm">Final de carrera y ceremonia</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+          </svg>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" style="font-family: 'Bebas Neue', sans-serif;">
+          No te pierdas <span class="text-vanilla">nada</span>
+        </h2>
+        <p class="text-racing-silver mb-8">
+          Se el primero en conocer las fechas, circuitos y novedades de Grip Club.
+          Siguenos en redes sociales para estar al dia.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="#" class="w-12 h-12 bg-racing-black rounded-lg flex items-center justify-center text-racing-silver hover:text-vanilla hover:bg-racing-green/20 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-12 h-12 bg-racing-black rounded-lg flex items-center justify-center text-racing-silver hover:text-vanilla hover:bg-racing-green/20 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <a href="#" class="w-12 h-12 bg-racing-black rounded-lg flex items-center justify-center text-racing-silver hover:text-vanilla hover:bg-racing-green/20 transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,5 +1,6 @@
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { supabase } from './utils/supabase';
+import { getFirestoreDb } from './utils/firebase-admin';
+import { FieldValue } from 'firebase-admin/firestore';
 import {
   getUserId,
   corsHeaders,
@@ -17,21 +18,25 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
-  const userId = getUserId(event);
+  const userId = await getUserId(event);
   if (!userId) {
     return unauthorizedResponse();
   }
 
-  // Get user's team
-  const { data: team, error: teamError } = await supabase
-    .from('teams')
-    .select('id')
-    .eq('representative_user_id', userId)
-    .single();
+  const db = getFirestoreDb();
 
-  if (teamError || !team) {
+  // Get user's team
+  const teamQuery = await db.collection('teams')
+    .where('representativeUserId', '==', userId)
+    .limit(1)
+    .get();
+
+  if (teamQuery.empty) {
     return errorResponse('Primero debes crear un equipo / You must create a team first', 400);
   }
+
+  const teamDoc = teamQuery.docs[0];
+  const staffRef = teamDoc.ref.collection('staff');
 
   // Get staff ID from query string for PUT/DELETE
   const staffId = event.queryStringParameters?.id;
@@ -40,15 +45,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     switch (event.httpMethod) {
       case 'GET': {
         // Get all staff for the team
-        const { data, error } = await supabase
-          .from('team_staff')
-          .select('*')
-          .eq('team_id', team.id)
-          .order('created_at', { ascending: true });
+        const staffSnapshot = await staffRef.orderBy('createdAt').get();
+        const staff = staffSnapshot.docs.map(doc => ({
+          id: doc.id,
+          teamId: teamDoc.id,
+          ...doc.data()
+        }));
 
-        if (error) throw error;
-
-        return successResponse({ staff: data || [] });
+        return successResponse({ staff });
       }
 
       case 'POST': {
@@ -56,12 +60,10 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         const body = JSON.parse(event.body || '{}');
 
         // Check staff count
-        const { count } = await supabase
-          .from('team_staff')
-          .select('*', { count: 'exact', head: true })
-          .eq('team_id', team.id);
+        const staffCount = await staffRef.count().get();
+        const count = staffCount.data().count;
 
-        if (count !== null && count >= MAX_STAFF) {
+        if (count >= MAX_STAFF) {
           return errorResponse(
             `El equipo ya tiene el máximo de staff (${MAX_STAFF}) / Team already has maximum staff (${MAX_STAFF})`
           );
@@ -79,21 +81,22 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         }
 
         // Create staff member
-        const { data, error } = await supabase
-          .from('team_staff')
-          .insert({
-            team_id: team.id,
-            name: body.name,
-            dni: body.dni,
-            phone: body.phone,
-            role: body.role
-          })
-          .select()
-          .single();
+        const now = FieldValue.serverTimestamp();
+        const staffDocRef = staffRef.doc();
 
-        if (error) throw error;
+        const staffData = {
+          teamId: teamDoc.id,
+          name: body.name,
+          dni: body.dni || '',
+          phone: body.phone || '',
+          role: body.role,
+          createdAt: now,
+          updatedAt: now
+        };
 
-        return successResponse({ staff: data }, 201);
+        await staffDocRef.set(staffData);
+
+        return successResponse({ staff: { id: staffDocRef.id, ...staffData } }, 201);
       }
 
       case 'PUT': {
@@ -104,15 +107,9 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         const body = JSON.parse(event.body || '{}');
 
-        // Verify staff belongs to user's team
-        const { data: existingStaff } = await supabase
-          .from('team_staff')
-          .select('id')
-          .eq('id', staffId)
-          .eq('team_id', team.id)
-          .single();
-
-        if (!existingStaff) {
+        // Verify staff exists in team
+        const staffDoc = await staffRef.doc(staffId).get();
+        if (!staffDoc.exists) {
           return errorResponse('Staff no encontrado / Staff not found', 404);
         }
 
@@ -126,20 +123,17 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         // Remove fields that shouldn't be updated
         delete body.id;
-        delete body.team_id;
-        delete body.created_at;
+        delete body.teamId;
+        delete body.createdAt;
 
-        const { data, error } = await supabase
-          .from('team_staff')
-          .update(body)
-          .eq('id', staffId)
-          .eq('team_id', team.id)
-          .select()
-          .single();
+        // Add updated timestamp
+        body.updatedAt = FieldValue.serverTimestamp();
 
-        if (error) throw error;
+        await staffDoc.ref.update(body);
 
-        return successResponse({ staff: data });
+        const updatedDoc = await staffDoc.ref.get();
+
+        return successResponse({ staff: { id: updatedDoc.id, teamId: teamDoc.id, ...updatedDoc.data() } });
       }
 
       case 'DELETE': {
@@ -148,26 +142,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           return errorResponse('Staff ID required');
         }
 
-        // Verify staff belongs to user's team
-        const { data: staffToDelete } = await supabase
-          .from('team_staff')
-          .select('id')
-          .eq('id', staffId)
-          .eq('team_id', team.id)
-          .single();
-
-        if (!staffToDelete) {
+        // Verify staff exists in team
+        const staffDoc = await staffRef.doc(staffId).get();
+        if (!staffDoc.exists) {
           return errorResponse('Staff no encontrado / Staff not found', 404);
         }
 
         // Delete staff
-        const { error } = await supabase
-          .from('team_staff')
-          .delete()
-          .eq('id', staffId)
-          .eq('team_id', team.id);
-
-        if (error) throw error;
+        await staffDoc.ref.delete();
 
         return successResponse({ success: true });
       }

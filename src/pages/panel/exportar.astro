@@ -113,12 +113,12 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 </AdminLayout>
 
 <script>
-  import { identity } from '../../lib/identity';
+  import { firebaseAuth } from '../../lib/firebase-auth';
 
   (window as any).downloadExport = async function(type: string) {
     try {
-      await identity.waitForInit();
-      const token = identity.getToken();
+      await firebaseAuth.waitForInit();
+      const token = firebaseAuth.getToken();
       const response = await fetch(`/api/admin-export?type=${type}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });

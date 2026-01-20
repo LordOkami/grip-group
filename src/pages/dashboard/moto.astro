@@ -138,7 +138,7 @@ const translatePath = useTranslatedPath(lang);
   </div>
 
   <script>
-    import { fetchWithAuth } from '../../lib/identity';
+    import { fetchWithAuth } from '../../lib/firebase-auth';
 
     const lang = document.documentElement.lang || 'es';
     const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
