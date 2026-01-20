@@ -19,14 +19,14 @@ const content = await getContent('es', 'home');
     </div>
 
     <div class="relative z-10 container mx-auto px-4 md:px-8 text-center">
-      <div class="inline-block mb-6 px-4 py-2 bg-racing-green/30 border border-vanilla/30 rounded-full">
+      <div class="inline-block mt-8 mb-3 px-4 py-2 bg-racing-green/30 border border-vanilla/30 rounded-full">
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest">{content.hero.tagline}</span>
       </div>
 
       <img
         src="/desafios/desafio_bronce_icon.png"
         alt="Desafío Bronce 8 Horas 125cc 4T"
-        class="w-64 md:w-80 lg:w-96 mx-auto mb-6"
+        class="w-64 md:w-80 lg:w-96 mx-auto mb-4"
       />
 
       <p class="text-xl md:text-2xl text-racing-silver max-w-3xl mx-auto mb-8">
@@ -109,28 +109,6 @@ const content = await getContent('es', 'home');
             <p class="text-racing-silver">{card.description}</p>
           </div>
         ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Bikes Gallery Section -->
-  <section class="py-24 bg-racing-black">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-12">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">{content.bikes.tagline}</span>
-        <h2 class="section-title">{content.bikes.title} <span class="text-vanilla">{content.bikes.titleAccent}</span></h2>
-      </div>
-
-      <div class="gallery-grid">
-        {content.bikes.images.map((image: { src: string; alt: string }) => (
-          <div class="gallery-item">
-            <img src={image.src} alt={image.alt} loading="lazy" />
-          </div>
-        ))}
-      </div>
-
-      <div class="text-center mt-8">
-        <a href={content.bikes.ctaLink} class="btn-secondary">{content.bikes.ctaText}</a>
       </div>
     </div>
   </section>
