@@ -68,29 +68,12 @@ const altPath =
       <nav class="container mx-auto px-4 md:px-8">
         <div class="flex items-center justify-between h-20">
           <!-- Logo -->
-          <a href={translatePath("/")} class="flex items-center gap-3 group">
-            <div
-              class="w-12 h-12 bg-racing-green rounded-lg flex items-center justify-center group-hover:bg-racing-green-dark transition-colors"
-            >
-              <svg
-                class="w-8 h-8 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93V4.07z"
-                ></path>
-              </svg>
-            </div>
-            <div class="hidden sm:block">
-              <span
-                class="text-2xl font-bold tracking-wider"
-                style="font-family: 'Bebas Neue', sans-serif;">GRIP CLUB</span
-              >
-              <span class="block text-xs text-racing-silver tracking-widest"
-                >8H ENDURANCE</span
-              >
-            </div>
+          <a href={translatePath("/")} class="flex items-center group">
+            <img
+              src="/logo/logo_text_only_white.png"
+              alt="Grip Club"
+              class="h-10 w-auto group-hover:opacity-80 transition-opacity"
+            />
           </a>
 
           <!-- Desktop Navigation -->
@@ -250,24 +233,12 @@ const altPath =
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <!-- Brand -->
           <div>
-            <div class="flex items-center gap-3 mb-4">
-              <div
-                class="w-10 h-10 bg-racing-green rounded-lg flex items-center justify-center"
-              >
-                <svg
-                  class="w-6 h-6 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c3.94.49 7 3.85 7 7.93s-3.05 7.44-7 7.93V4.07z"
-                  ></path>
-                </svg>
-              </div>
-              <span
-                class="text-xl font-bold tracking-wider"
-                style="font-family: 'Bebas Neue', sans-serif;">GRIP CLUB</span
-              >
+            <div class="mb-4">
+              <img
+                src="/logo/logo_text_only_white.png"
+                alt="Grip Club"
+                class="h-8 w-auto"
+              />
             </div>
             <p class="text-racing-silver text-sm">
               {t("footer.description")}
