@@ -200,7 +200,7 @@ const { id } = Astro.params;
   async function loadTeam() {
     try {
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -218,7 +218,7 @@ const { id } = Astro.params;
 
       // Populate data
       document.getElementById('team-name')!.textContent = team.name || 'Sin nombre';
-      document.getElementById('team-email')!.textContent = team.representative_email || '-';
+      document.getElementById('team-email')!.textContent = team.representativeEmail || '-';
 
       const statusEl = document.getElementById('team-status')!;
       statusEl.textContent = statusLabels[team.status] || team.status;
@@ -227,22 +227,22 @@ const { id } = Astro.params;
       (document.getElementById('change-status') as HTMLSelectElement).value = team.status;
 
       // Representative
-      document.getElementById('rep-name')!.textContent = `${team.representative_name || ''} ${team.representative_surname || ''}`.trim() || '-';
-      document.getElementById('rep-dni')!.textContent = team.representative_dni || '-';
-      document.getElementById('rep-email')!.textContent = team.representative_email || '-';
-      document.getElementById('rep-phone')!.textContent = team.representative_phone || '-';
+      document.getElementById('rep-name')!.textContent = `${team.representativeName || ''} ${team.representativeSurname || ''}`.trim() || '-';
+      document.getElementById('rep-dni')!.textContent = team.representativeDni || '-';
+      document.getElementById('rep-email')!.textContent = team.representativeEmail || '-';
+      document.getElementById('rep-phone')!.textContent = team.representativePhone || '-';
       document.getElementById('rep-address')!.textContent = [
         team.address,
         team.municipality,
-        team.postal_code,
+        team.postalCode,
         team.province
       ].filter(Boolean).join(', ') || '-';
 
       // Motorcycle
-      document.getElementById('moto-brand')!.textContent = team.motorcycle_brand || '-';
-      document.getElementById('moto-model')!.textContent = team.motorcycle_model || '-';
-      document.getElementById('moto-capacity')!.textContent = team.engine_capacity === '125cc_4t' ? '125cc 4T' : team.engine_capacity === '50cc_2t' ? '50cc 2T' : team.engine_capacity || '-';
-      document.getElementById('moto-date')!.textContent = team.registration_date ? new Date(team.registration_date).toLocaleDateString('es-ES') : '-';
+      document.getElementById('moto-brand')!.textContent = team.motorcycleBrand || '-';
+      document.getElementById('moto-model')!.textContent = team.motorcycleModel || '-';
+      document.getElementById('moto-capacity')!.textContent = team.engineCapacity === '125cc_4t' ? '125cc 4T' : team.engineCapacity === '50cc_2t' ? '50cc 2T' : team.engineCapacity || '-';
+      document.getElementById('moto-date')!.textContent = team.registrationDate ? new Date(team.registrationDate).toLocaleDateString('es-ES') : '-';
       document.getElementById('moto-mods')!.textContent = team.modifications || 'Ninguna';
 
       // Pilots
@@ -263,13 +263,13 @@ const { id } = Astro.params;
               <div>
                 <div class="text-white font-medium">
                   ${p.name || ''} ${p.surname || ''}
-                  ${p.is_representative ? '<span class="text-xs bg-red-600 px-2 py-0.5 rounded ml-2">REP</span>' : ''}
+                  ${p.isRepresentative ? '<span class="text-xs bg-red-600 px-2 py-0.5 rounded ml-2">REP</span>' : ''}
                 </div>
                 <div class="text-racing-silver text-sm">${p.email || '-'} | ${p.phone || '-'}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-white text-sm">${levelLabels[p.driving_level] || p.driving_level || '-'}</div>
+              <div class="text-white text-sm">${levelLabels[p.drivingLevel] || p.drivingLevel || '-'}</div>
               <div class="text-racing-silver text-xs">DNI: ${p.dni || '-'}</div>
             </div>
           </div>
@@ -277,7 +277,7 @@ const { id } = Astro.params;
       }
 
       // Staff
-      const staff = team.team_staff || [];
+      const staff = team.staff || [];
       document.getElementById('staff-count')!.textContent = `(${staff.length})`;
 
       if (staff.length === 0) {
@@ -294,8 +294,13 @@ const { id } = Astro.params;
       }
 
       // Meta
-      document.getElementById('created-at')!.textContent = team.created_at ? new Date(team.created_at).toLocaleString('es-ES') : '-';
-      document.getElementById('gdpr-consent')!.textContent = team.gdpr_consent ? 'Si' : 'No';
+      let createdAtStr = '-';
+      if (team.createdAt) {
+        const dateVal = team.createdAt.toDate ? team.createdAt.toDate() : new Date(team.createdAt);
+        createdAtStr = dateVal.toLocaleString('es-ES');
+      }
+      document.getElementById('created-at')!.textContent = createdAtStr;
+      document.getElementById('gdpr-consent')!.textContent = team.gdprConsent ? 'Si' : 'No';
 
       // Show content
       document.getElementById('loading')!.classList.add('hidden');
@@ -314,7 +319,7 @@ const { id } = Astro.params;
 
     try {
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch(`/api/admin-teams?id=${teamId}`, {
         method: 'PUT',
         headers: {

@@ -103,7 +103,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   async function loadTeams() {
     try {
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -143,7 +143,11 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     }
 
     tbody.innerHTML = teams.map(team => {
-      const date = team.created_at ? new Date(team.created_at).toLocaleDateString('es-ES') : '-';
+      let dateStr = '-';
+      if (team.createdAt) {
+        const dateVal = team.createdAt.toDate ? team.createdAt.toDate() : new Date(team.createdAt);
+        dateStr = dateVal.toLocaleDateString('es-ES');
+      }
 
       return `
         <tr class="hover:bg-racing-silver/5 transition-colors">
@@ -154,23 +158,23 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
               </div>
               <div>
                 <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
-                <div class="text-racing-silver text-xs">${team.representative_email || ''}</div>
+                <div class="text-racing-silver text-xs">${team.representativeEmail || ''}</div>
               </div>
             </div>
           </td>
           <td class="px-6 py-4 text-racing-silver">
-            ${team.representative_name || ''} ${team.representative_surname || ''}
+            ${team.representativeName || ''} ${team.representativeSurname || ''}
           </td>
           <td class="px-6 py-4">
-            <span class="text-white">${team.pilots_count}</span>
-            <span class="text-racing-silver">/ ${team.number_of_pilots || 4}</span>
+            <span class="text-white">${team.pilotsCount}</span>
+            <span class="text-racing-silver">/ ${team.numberOfPilots || 4}</span>
           </td>
           <td class="px-6 py-4">
             <span class="px-2 py-1 rounded text-xs text-white ${statusColors[team.status] || 'bg-gray-500'}">
               ${statusLabels[team.status] || team.status}
             </span>
           </td>
-          <td class="px-6 py-4 text-racing-silver text-sm">${date}</td>
+          <td class="px-6 py-4 text-racing-silver text-sm">${dateStr}</td>
           <td class="px-6 py-4">
             <div class="flex items-center gap-2">
               <a href="/admin/equipos/${team.id}" class="p-2 text-racing-silver hover:text-white transition-colors" title="Ver detalle">
@@ -204,9 +208,9 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     if (search) {
       filtered = filtered.filter(t =>
         t.name?.toLowerCase().includes(search) ||
-        t.representative_name?.toLowerCase().includes(search) ||
-        t.representative_surname?.toLowerCase().includes(search) ||
-        t.representative_email?.toLowerCase().includes(search)
+        t.representativeName?.toLowerCase().includes(search) ||
+        t.representativeSurname?.toLowerCase().includes(search) ||
+        t.representativeEmail?.toLowerCase().includes(search)
       );
     }
 
@@ -228,7 +232,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
     try {
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch(`/api/admin-teams?id=${currentTeamId}`, {
         method: 'PUT',
         headers: {

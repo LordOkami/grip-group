@@ -267,7 +267,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     try {
       // Wait for identity to be ready
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch('/api/admin-teams', {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -284,36 +284,36 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       document.getElementById('stat-total')!.textContent = stats.total.toString();
       document.getElementById('stat-pending')!.textContent = stats.pending.toString();
       document.getElementById('stat-confirmed')!.textContent = stats.confirmed.toString();
-      document.getElementById('stat-pilots')!.textContent = stats.total_pilots.toString();
+      document.getElementById('stat-pilots')!.textContent = stats.totalPilots.toString();
 
       // Update secondary stats
-      document.getElementById('stat-staff')!.textContent = stats.total_staff.toString();
-      document.getElementById('stat-conversion')!.textContent = `${stats.conversion_rate}%`;
-      document.getElementById('stat-avg-pilots')!.textContent = stats.avg_pilots_per_team;
+      document.getElementById('stat-staff')!.textContent = stats.totalStaff.toString();
+      document.getElementById('stat-conversion')!.textContent = `${stats.conversionRate}%`;
+      document.getElementById('stat-avg-pilots')!.textContent = stats.avgPilotsPerTeam;
       document.getElementById('stat-draft')!.textContent = stats.draft.toString();
 
       // Update engine stats
-      const totalEngines = stats.engine_types['125cc_4t'] + stats.engine_types['50cc_2t'];
-      document.getElementById('engine-125')!.textContent = stats.engine_types['125cc_4t'].toString();
-      document.getElementById('engine-50')!.textContent = stats.engine_types['50cc_2t'].toString();
+      const totalEngines = stats.engineTypes['125cc_4t'] + stats.engineTypes['50cc_2t'];
+      document.getElementById('engine-125')!.textContent = stats.engineTypes['125cc_4t'].toString();
+      document.getElementById('engine-50')!.textContent = stats.engineTypes['50cc_2t'].toString();
 
       if (totalEngines > 0) {
-        (document.getElementById('engine-125-bar') as HTMLElement).style.width = `${(stats.engine_types['125cc_4t'] / totalEngines) * 100}%`;
-        (document.getElementById('engine-50-bar') as HTMLElement).style.width = `${(stats.engine_types['50cc_2t'] / totalEngines) * 100}%`;
+        (document.getElementById('engine-125-bar') as HTMLElement).style.width = `${(stats.engineTypes['125cc_4t'] / totalEngines) * 100}%`;
+        (document.getElementById('engine-50-bar') as HTMLElement).style.width = `${(stats.engineTypes['50cc_2t'] / totalEngines) * 100}%`;
       }
 
       // Update staff stats
-      document.getElementById('staff-mechanic')!.textContent = stats.staff_roles.mechanic.toString();
-      document.getElementById('staff-coordinator')!.textContent = stats.staff_roles.coordinator.toString();
-      document.getElementById('staff-support')!.textContent = stats.staff_roles.support.toString();
+      document.getElementById('staff-mechanic')!.textContent = stats.staffRoles.mechanic.toString();
+      document.getElementById('staff-coordinator')!.textContent = stats.staffRoles.coordinator.toString();
+      document.getElementById('staff-support')!.textContent = stats.staffRoles.support.toString();
 
       // Show alerts
       showAlerts(stats, teams);
 
       // Create charts
       createStatusChart(stats);
-      createLevelChart(stats.driving_levels);
-      createTimelineChart(stats.registrations_by_date);
+      createLevelChart(stats.drivingLevels);
+      createTimelineChart(stats.registrationsByDate);
 
       // Update recent teams
       updateRecentTeams(teams);
@@ -346,25 +346,25 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     }
 
     // Alert for teams without GDPR
-    if (stats.teams_without_gdpr > 0) {
+    if (stats.teamsWithoutGdpr > 0) {
       alerts.push(`
         <div class="bg-red-900/30 border border-red-600/50 rounded-lg p-4 flex items-center gap-3">
           <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
-          <span class="text-red-200"><strong>${stats.teams_without_gdpr}</strong> equipo(s) sin consentimiento GDPR</span>
+          <span class="text-red-200"><strong>${stats.teamsWithoutGdpr}</strong> equipo(s) sin consentimiento GDPR</span>
         </div>
       `);
     }
 
     // Alert for low conversion rate
-    if (stats.total > 5 && stats.conversion_rate < 30) {
+    if (stats.total > 5 && stats.conversionRate < 30) {
       alerts.push(`
         <div class="bg-orange-900/30 border border-orange-600/50 rounded-lg p-4 flex items-center gap-3">
           <svg class="w-5 h-5 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          <span class="text-orange-200">Tasa de confirmacion baja: <strong>${stats.conversion_rate}%</strong></span>
+          <span class="text-orange-200">Tasa de confirmacion baja: <strong>${stats.conversionRate}%</strong></span>
         </div>
       `);
     }
@@ -526,7 +526,11 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     };
 
     recentTeamsEl.innerHTML = recentTeams.map((team: any) => {
-      const date = new Date(team.created_at).toLocaleDateString('es-ES');
+      let dateStr = '-';
+      if (team.createdAt) {
+        const dateVal = team.createdAt.toDate ? team.createdAt.toDate() : new Date(team.createdAt);
+        dateStr = dateVal.toLocaleDateString('es-ES');
+      }
       return `
         <a href="/admin/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
           <div class="flex items-center gap-4">
@@ -536,8 +540,8 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             <div>
               <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
               <div class="text-racing-silver text-sm">
-                ${team.representative_name || ''} ${team.representative_surname || ''}
-                - ${team.pilots_count} pilotos - ${date}
+                ${team.representativeName || ''} ${team.representativeSurname || ''}
+                - ${team.pilotsCount} pilotos - ${dateStr}
               </div>
             </div>
           </div>

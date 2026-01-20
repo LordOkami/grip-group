@@ -118,7 +118,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   (window as any).downloadExport = async function(type: string) {
     try {
       await firebaseAuth.waitForInit();
-      const token = firebaseAuth.getToken();
+      const token = await firebaseAuth.getToken();
       const response = await fetch(`/api/admin-export?type=${type}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
