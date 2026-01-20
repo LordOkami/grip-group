@@ -211,9 +211,102 @@ const content = await getContent('en', 'home');
       });
     }
 
+    // Motorcycle pass-by sound effect using Web Audio API
+    function playMotoSound() {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+
+      // Create oscillator for engine sound
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const panNode = audioContext.createStereoPanner();
+
+      // Create noise for exhaust
+      const bufferSize = audioContext.sampleRate * 0.8;
+      const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1;
+      }
+
+      const noiseSource = audioContext.createBufferSource();
+      noiseSource.buffer = noiseBuffer;
+      const noiseGain = audioContext.createGain();
+      const noiseFilter = audioContext.createBiquadFilter();
+      noiseFilter.type = 'lowpass';
+      noiseFilter.frequency.value = 800;
+
+      // Connect nodes
+      oscillator.connect(gainNode);
+      gainNode.connect(panNode);
+      panNode.connect(audioContext.destination);
+
+      noiseSource.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(panNode);
+
+      // Set initial values
+      oscillator.type = 'sawtooth';
+      oscillator.frequency.value = 80;
+      gainNode.gain.value = 0;
+      noiseGain.gain.value = 0;
+
+      const now = audioContext.currentTime;
+      const duration = 0.8;
+
+      // Doppler effect - frequency rises then falls
+      oscillator.frequency.setValueAtTime(60, now);
+      oscillator.frequency.linearRampToValueAtTime(120, now + duration * 0.4);
+      oscillator.frequency.linearRampToValueAtTime(50, now + duration);
+
+      // Pan from left to right
+      panNode.pan.setValueAtTime(-1, now);
+      panNode.pan.linearRampToValueAtTime(1, now + duration);
+
+      // Volume envelope - louder in middle
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.15, now + duration * 0.3);
+      gainNode.gain.linearRampToValueAtTime(0.2, now + duration * 0.5);
+      gainNode.gain.linearRampToValueAtTime(0, now + duration);
+
+      noiseGain.gain.setValueAtTime(0, now);
+      noiseGain.gain.linearRampToValueAtTime(0.08, now + duration * 0.3);
+      noiseGain.gain.linearRampToValueAtTime(0.1, now + duration * 0.5);
+      noiseGain.gain.linearRampToValueAtTime(0, now + duration);
+
+      // Start and stop
+      oscillator.start(now);
+      noiseSource.start(now);
+      oscillator.stop(now + duration);
+      noiseSource.stop(now + duration);
+    }
+
+    // Toggle badge icon on click
+    function initBadgeToggle() {
+      const badge = document.getElementById('hero-badge') as HTMLImageElement;
+      const shine = document.querySelector('.hero-badge-shine') as HTMLElement;
+      if (!badge) return;
+
+      const icons = [
+        '/desafios/desafio_bronce_icon.png',
+        '/desafios/desafio_bronce_icon_2.png'
+      ];
+      let currentIndex = 1; // Start with icon_2
+
+      badge.addEventListener('click', () => {
+        playMotoSound();
+        currentIndex = currentIndex === 0 ? 1 : 0;
+        badge.src = icons[currentIndex];
+        if (shine) {
+          shine.style.maskImage = `url('${icons[currentIndex]}')`;
+          shine.style.webkitMaskImage = `url('${icons[currentIndex]}')`;
+        }
+      });
+    }
+
     // Initialize
     createDustParticles();
     initBadgeInteraction();
+    initBadgeToggle();
   </script>
 
   <!-- Historia Section -->

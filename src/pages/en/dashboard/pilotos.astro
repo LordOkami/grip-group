@@ -61,10 +61,10 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Pilot Modal -->
     <div id="pilot-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
-      <div class="min-h-screen px-4 flex items-center justify-center">
+      <div class="min-h-screen px-4 py-8 flex items-start justify-center">
         <div class="fixed inset-0 bg-black/70" id="modal-backdrop"></div>
 
-        <div class="relative bg-racing-gray rounded-xl max-w-lg w-full p-6 border border-racing-silver/10">
+        <div class="relative bg-racing-gray rounded-xl max-w-2xl w-full p-6 border border-racing-silver/10 my-8">
           <div class="flex items-center justify-between mb-6">
             <h2 id="modal-title" class="text-xl font-bold text-white">{t('dashboard.addPilot')}</h2>
             <button id="close-modal-btn" class="text-racing-silver hover:text-white">
@@ -74,9 +74,17 @@ const translatePath = useTranslatedPath(lang);
             </button>
           </div>
 
-          <form id="pilot-form" class="space-y-4">
+          <form id="pilot-form" class="space-y-5">
             <input type="hidden" id="pilot-id">
 
+            <!-- Captain checkbox -->
+            <div class="flex items-center gap-3 p-4 bg-racing-black/50 rounded-lg border border-racing-silver/10">
+              <input type="checkbox" id="isCaptain" name="isCaptain"
+                class="w-5 h-5 bg-racing-black border-racing-silver/20 rounded text-racing-green focus:ring-racing-green">
+              <label for="isCaptain" class="text-white font-medium">{t('form.isCaptain')}</label>
+            </div>
+
+            <!-- Personal info -->
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label for="name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotName')} *</label>
@@ -92,51 +100,133 @@ const translatePath = useTranslatedPath(lang);
 
             <div>
               <label for="dni" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotDni')} *</label>
-              <input type="text" id="dni" name="dni" required
+              <input type="text" id="dni" name="dni" required placeholder="12345678A"
                 class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
             </div>
 
             <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotPhone')} *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+34 600 000 000"
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
               <div>
                 <label for="email" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotEmail')} *</label>
                 <input type="email" id="email" name="email" required
                   class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
               </div>
-              <div>
-                <label for="phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotPhone')} *</label>
-                <input type="tel" id="phone" name="phone" required
-                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+            </div>
+
+            <div>
+              <label for="birthDate" class="block text-sm font-medium text-racing-silver mb-2">{t('form.birthDate')} *</label>
+              <input type="date" id="birthDate" name="birthDate" required
+                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+            </div>
+
+            <!-- Shipping address section -->
+            <div class="border-t border-racing-silver/10 pt-5 mt-5">
+              <h3 class="text-sm font-semibold text-vanilla uppercase tracking-wider mb-4">{t('form.shippingAddress')}</h3>
+
+              <div class="space-y-4">
+                <div>
+                  <label for="address" class="block text-sm font-medium text-racing-silver mb-2">{t('form.address')} *</label>
+                  <input type="text" id="address" name="address" required
+                    class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="city" class="block text-sm font-medium text-racing-silver mb-2">{t('form.city')} *</label>
+                    <input type="text" id="city" name="city" required
+                      class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                  </div>
+                  <div>
+                    <label for="stateProvince" class="block text-sm font-medium text-racing-silver mb-2">{t('form.stateProvince')} *</label>
+                    <input type="text" id="stateProvince" name="stateProvince" required
+                      class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label for="postalCode" class="block text-sm font-medium text-racing-silver mb-2">{t('form.postalCode')} *</label>
+                    <input type="text" id="postalCode" name="postalCode" required
+                      class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                  </div>
+                  <div>
+                    <label for="country" class="block text-sm font-medium text-racing-silver mb-2">{t('form.country')} *</label>
+                    <select id="country" name="country" required
+                      class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                      <option value="España">Spain</option>
+                      <option value="Portugal">Portugal</option>
+                      <option value="Francia">France</option>
+                      <option value="Andorra">Andorra</option>
+                      <option value="Otro">Other</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
 
+            <!-- Motorcycle experience -->
+            <div class="border-t border-racing-silver/10 pt-5 mt-5">
+              <h3 class="text-sm font-semibold text-vanilla uppercase tracking-wider mb-4">{t('form.motorcycleExperience')} *</h3>
+
+              <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="principiante" required
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.principiante')}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="rutero"
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.rutero')}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="tandero_iniciado"
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.tandero_iniciado')}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="tandero_medio"
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.tandero_medio')}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="tandero_rapido"
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.tandero_rapido')}</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 bg-racing-black/50 rounded-lg border border-racing-silver/10 cursor-pointer hover:border-racing-green/50 transition-colors">
+                  <input type="radio" name="motorcycleExperience" value="semi_pro"
+                    class="w-4 h-4 text-racing-green focus:ring-racing-green bg-racing-black border-racing-silver/20">
+                  <span class="text-white text-sm">{t('form.motorcycleExperience.semi_pro')}</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- T-Shirt size and allergies -->
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label for="emergency_contact_name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.emergencyContactName')} *</label>
-                <input type="text" id="emergency_contact_name" name="emergency_contact_name" required
+                <label for="tShirtSize" class="block text-sm font-medium text-racing-silver mb-2">{t('form.tShirtSize')} *</label>
+                <select id="tShirtSize" name="tShirtSize" required
                   class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                  <option value="">--</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                  <option value="XXXL">XXXL</option>
+                </select>
               </div>
               <div>
-                <label for="emergency_contact_phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.emergencyContactPhone')} *</label>
-                <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone" required
+                <label for="allergies" class="block text-sm font-medium text-racing-silver mb-2">{t('form.allergies')} *</label>
+                <input type="text" id="allergies" name="allergies" required placeholder={t('form.allergiesPlaceholder')}
                   class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
               </div>
-            </div>
-
-            <div>
-              <label for="driving_level" class="block text-sm font-medium text-racing-silver mb-2">{t('form.drivingLevel')}</label>
-              <select id="driving_level" name="driving_level"
-                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
-                <option value="amateur">{t('form.drivingLevel.amateur')}</option>
-                <option value="intermediate">{t('form.drivingLevel.intermediate')}</option>
-                <option value="advanced">{t('form.drivingLevel.advanced')}</option>
-                <option value="expert">{t('form.drivingLevel.expert')}</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="track_experience" class="block text-sm font-medium text-racing-silver mb-2">{t('form.trackExperience')}</label>
-              <textarea id="track_experience" name="track_experience" rows="2"
-                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors resize-none"></textarea>
             </div>
 
             <!-- Error message -->
@@ -182,11 +272,13 @@ const translatePath = useTranslatedPath(lang);
     let maxPilots = 8;
     let currentPilots: any[] = [];
 
-    const drivingLevels: Record<string, string> = {
-      amateur: lang === 'en' ? 'Amateur' : 'Amateur',
-      intermediate: lang === 'en' ? 'Intermediate' : 'Intermedio',
-      advanced: lang === 'en' ? 'Advanced' : 'Avanzado',
-      expert: lang === 'en' ? 'Expert' : 'Experto',
+    const experienceLevels: Record<string, string> = {
+      principiante: lang === 'en' ? 'Beginner (L)' : 'Principiante (L)',
+      rutero: lang === 'en' ? 'Road rider' : 'Rutero',
+      tandero_iniciado: lang === 'en' ? 'Track - Beginner' : 'Tandero - Iniciado',
+      tandero_medio: lang === 'en' ? 'Track - Intermediate' : 'Tandero - Medio',
+      tandero_rapido: lang === 'en' ? 'Track - Fast' : 'Tandero - Rápido',
+      semi_pro: lang === 'en' ? 'Semi-Pro' : 'Semi-Pro',
     };
 
     function openModal(pilot?: any) {
@@ -198,14 +290,26 @@ const translatePath = useTranslatedPath(lang);
         if (modalTitle) modalTitle.textContent = lang === 'en' ? 'Edit Pilot' : 'Editar Piloto';
         if (pilotIdInput) pilotIdInput.value = pilot.id;
 
-        // Fill form
-        const fields = ['name', 'surname', 'dni', 'email', 'phone', 'emergency_contact_name', 'emergency_contact_phone', 'driving_level', 'track_experience'];
-        fields.forEach(field => {
-          const input = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        // Fill text/select fields
+        const textFields = ['name', 'surname', 'dni', 'email', 'phone', 'birthDate', 'address', 'city', 'stateProvince', 'postalCode', 'country', 'tShirtSize', 'allergies'];
+        textFields.forEach(field => {
+          const input = document.getElementById(field) as HTMLInputElement | HTMLSelectElement;
           if (input && pilot[field]) {
             input.value = pilot[field];
           }
         });
+
+        // Fill captain checkbox
+        const captainCheckbox = document.getElementById('isCaptain') as HTMLInputElement;
+        if (captainCheckbox) {
+          captainCheckbox.checked = pilot.isCaptain || false;
+        }
+
+        // Fill motorcycle experience radio
+        if (pilot.motorcycleExperience) {
+          const radio = document.querySelector(`input[name="motorcycleExperience"][value="${pilot.motorcycleExperience}"]`) as HTMLInputElement;
+          if (radio) radio.checked = true;
+        }
       } else {
         // Add mode
         if (modalTitle) modalTitle.textContent = lang === 'en' ? 'Add Pilot' : 'Añadir Piloto';
@@ -235,11 +339,14 @@ const translatePath = useTranslatedPath(lang);
         <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 flex items-center justify-between">
           <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-racing-green/20 rounded-full flex items-center justify-center text-racing-green font-bold">
-              ${pilot.pilot_number || index + 1}
+              ${index + 1}
             </div>
             <div>
-              <h3 class="text-white font-medium">${pilot.name} ${pilot.surname}</h3>
-              <p class="text-sm text-racing-silver">${pilot.email} · ${drivingLevels[pilot.driving_level] || pilot.driving_level}</p>
+              <div class="flex items-center gap-2">
+                <h3 class="text-white font-medium">${pilot.name} ${pilot.surname}</h3>
+                ${pilot.isCaptain ? `<span class="px-2 py-0.5 bg-vanilla/20 text-vanilla text-xs font-semibold rounded uppercase">${lang === 'en' ? 'Captain' : 'Capitán'}</span>` : ''}
+              </div>
+              <p class="text-sm text-racing-silver">${pilot.email} · ${experienceLevels[pilot.motorcycleExperience] || pilot.motorcycleExperience || '-'}</p>
             </div>
           </div>
           <div class="flex items-center gap-2">
@@ -248,13 +355,11 @@ const translatePath = useTranslatedPath(lang);
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
               </svg>
             </button>
-            ${!pilot.is_representative ? `
             <button class="delete-pilot-btn p-2 text-racing-silver hover:text-red-400 transition-colors" data-id="${pilot.id}">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
               </svg>
             </button>
-            ` : ''}
           </div>
         </div>
       `).join('');
@@ -372,6 +477,10 @@ const translatePath = useTranslatedPath(lang);
       formData.forEach((value, key) => {
         data[key] = value;
       });
+
+      // Handle checkbox separately (unchecked checkboxes don't appear in FormData)
+      const captainCheckbox = document.getElementById('isCaptain') as HTMLInputElement;
+      data.isCaptain = captainCheckbox?.checked || false;
 
       try {
         const result = await savePilot(data);
