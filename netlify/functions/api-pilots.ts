@@ -69,11 +69,27 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         }
 
         // Validate required fields
-        const requiredFields = ['name', 'surname', 'dni', 'email', 'phone', 'emergencyContactName', 'emergencyContactPhone'];
+        const requiredFields = [
+          'name', 'surname', 'dni', 'email', 'phone', 'birthDate',
+          'address', 'city', 'stateProvince', 'postalCode', 'country',
+          'motorcycleExperience', 'tShirtSize', 'allergies'
+        ];
         for (const field of requiredFields) {
           if (!body[field]) {
             return errorResponse(`Campo obligatorio: ${field} / Required field: ${field}`);
           }
+        }
+
+        // Validate motorcycleExperience value
+        const validExperiences = ['principiante', 'rutero', 'tandero_iniciado', 'tandero_medio', 'tandero_rapido', 'semi_pro'];
+        if (!validExperiences.includes(body.motorcycleExperience)) {
+          return errorResponse('Nivel de experiencia no válido / Invalid experience level');
+        }
+
+        // Validate tShirtSize value
+        const validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
+        if (!validSizes.includes(body.tShirtSize)) {
+          return errorResponse('Talla de camiseta no válida / Invalid t-shirt size');
         }
 
         // Check DNI uniqueness within team
@@ -88,16 +104,21 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         const pilotData = {
           teamId: teamDoc.id,
+          isCaptain: body.isCaptain === true || body.isCaptain === 'true' || body.isCaptain === 'on',
           name: body.name,
           surname: body.surname,
           dni: body.dni,
-          email: body.email,
           phone: body.phone,
-          emergencyContactName: body.emergencyContactName,
-          emergencyContactPhone: body.emergencyContactPhone,
-          drivingLevel: body.drivingLevel || 'amateur',
-          trackExperience: body.trackExperience || '',
-          isRepresentative: body.isRepresentative || false,
+          email: body.email,
+          birthDate: body.birthDate,
+          address: body.address,
+          city: body.city,
+          stateProvince: body.stateProvince,
+          postalCode: body.postalCode,
+          country: body.country,
+          motorcycleExperience: body.motorcycleExperience,
+          tShirtSize: body.tShirtSize,
+          allergies: body.allergies,
           createdAt: now,
           updatedAt: now
         };
