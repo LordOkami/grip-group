@@ -66,7 +66,7 @@ const translatePath = useTranslatedPath(lang);
 
     <!-- Team Form -->
     <form id="team-form" class="hidden space-y-6">
-      <!-- Team Name -->
+      <!-- Team Data -->
       <div
         class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4"
       >
@@ -91,13 +91,13 @@ const translatePath = useTranslatedPath(lang);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label
-              for="number_of_pilots"
+              for="numberOfPilots"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.numberOfPilots")} *</label
             >
             <select
-              id="number_of_pilots"
-              name="number_of_pilots"
+              id="numberOfPilots"
+              name="numberOfPilots"
               required
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
             >
@@ -111,7 +111,7 @@ const translatePath = useTranslatedPath(lang);
 
           <div>
             <label
-              for="preferred_number"
+              for="preferredNumber"
               class="block text-sm font-medium text-racing-silver mb-2 flex items-center gap-2"
             >
               {t("form.preferredNumber")}
@@ -126,8 +126,8 @@ const translatePath = useTranslatedPath(lang);
             </label>
             <input
               type="number"
-              id="preferred_number"
-              name="preferred_number"
+              id="preferredNumber"
+              name="preferredNumber"
               min="1"
               max="99"
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
@@ -148,14 +148,14 @@ const translatePath = useTranslatedPath(lang);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label
-              for="representative_name"
+              for="representativeName"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.representativeName")} *</label
             >
             <input
               type="text"
-              id="representative_name"
-              name="representative_name"
+              id="representativeName"
+              name="representativeName"
               required
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
             />
@@ -163,14 +163,14 @@ const translatePath = useTranslatedPath(lang);
 
           <div>
             <label
-              for="representative_surname"
+              for="representativeSurname"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.representativeSurname")} *</label
             >
             <input
               type="text"
-              id="representative_surname"
-              name="representative_surname"
+              id="representativeSurname"
+              name="representativeSurname"
               required
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
             />
@@ -180,14 +180,14 @@ const translatePath = useTranslatedPath(lang);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label
-              for="representative_dni"
+              for="representativeDni"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.representativeDni")} *</label
             >
             <input
               type="text"
-              id="representative_dni"
-              name="representative_dni"
+              id="representativeDni"
+              name="representativeDni"
               required
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
               placeholder="12345678A"
@@ -196,14 +196,14 @@ const translatePath = useTranslatedPath(lang);
 
           <div>
             <label
-              for="representative_phone"
+              for="representativePhone"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.representativePhone")} *</label
             >
             <input
               type="tel"
-              id="representative_phone"
-              name="representative_phone"
+              id="representativePhone"
+              name="representativePhone"
               required
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
               placeholder="+34 600 000 000"
@@ -213,14 +213,14 @@ const translatePath = useTranslatedPath(lang);
 
         <div>
           <label
-            for="representative_email"
+            for="representativeEmail"
             class="block text-sm font-medium text-racing-silver mb-2"
             >{t("form.representativeEmail")} *</label
           >
           <input
             type="email"
-            id="representative_email"
-            name="representative_email"
+            id="representativeEmail"
+            name="representativeEmail"
             required
             class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
             placeholder="email@ejemplo.com"
@@ -265,14 +265,14 @@ const translatePath = useTranslatedPath(lang);
 
           <div>
             <label
-              for="postal_code"
+              for="postalCode"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.postalCode")}</label
             >
             <input
               type="text"
-              id="postal_code"
-              name="postal_code"
+              id="postalCode"
+              name="postalCode"
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
             />
           </div>
@@ -302,14 +302,14 @@ const translatePath = useTranslatedPath(lang);
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label
-              for="motorcycle_brand"
+              for="motorcycleBrand"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.motorcycleBrand")}</label
             >
             <input
               type="text"
-              id="motorcycle_brand"
-              name="motorcycle_brand"
+              id="motorcycleBrand"
+              name="motorcycleBrand"
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
               placeholder="Ej: Honda, Yamaha, Aprilia..."
             />
@@ -317,14 +317,14 @@ const translatePath = useTranslatedPath(lang);
 
           <div>
             <label
-              for="motorcycle_model"
+              for="motorcycleModel"
               class="block text-sm font-medium text-racing-silver mb-2"
               >{t("form.motorcycleModel")}</label
             >
             <input
               type="text"
-              id="motorcycle_model"
-              name="motorcycle_model"
+              id="motorcycleModel"
+              name="motorcycleModel"
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
               placeholder="Ej: CBR125R, YZF-R125..."
             />
@@ -333,13 +333,13 @@ const translatePath = useTranslatedPath(lang);
 
         <div>
           <label
-            for="engine_capacity"
+            for="engineCapacity"
             class="block text-sm font-medium text-racing-silver mb-2"
             >{t("form.engineCapacity")} *</label
           >
           <select
-            id="engine_capacity"
-            name="engine_capacity"
+            id="engineCapacity"
+            name="engineCapacity"
             required
             class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
           >
@@ -352,7 +352,7 @@ const translatePath = useTranslatedPath(lang);
         <div>
           <label class="block text-sm font-medium text-racing-silver mb-2">
             {t("form.motorcyclePhoto")}
-            <span class="text-racing-silver/60 font-normal ml-2">({lang === 'es' ? 'opcional' : 'optional'})</span>
+            <span class="text-racing-silver/60 font-normal ml-2">(opcional)</span>
           </label>
           <p class="text-xs text-racing-silver/60 mb-3">{t("form.motorcyclePhotoHint")}</p>
 
@@ -384,8 +384,8 @@ const translatePath = useTranslatedPath(lang);
               <span class="text-sm text-racing-silver">{t("form.uploadPhoto")}</span>
               <input
                 type="file"
-                id="motorcycle_photo"
-                name="motorcycle_photo"
+                id="motorcyclePhoto"
+                name="motorcyclePhoto"
                 accept="image/*"
                 class="hidden"
               />
@@ -399,8 +399,8 @@ const translatePath = useTranslatedPath(lang);
         <label class="flex items-start gap-3 cursor-pointer">
           <input
             type="checkbox"
-            id="gdpr_consent"
-            name="gdpr_consent"
+            id="gdprConsent"
+            name="gdprConsent"
             required
             class="mt-1 w-5 h-5 rounded border-racing-silver/20 bg-racing-black text-racing-green focus:ring-racing-green focus:ring-offset-0"
           />
@@ -470,28 +470,28 @@ const translatePath = useTranslatedPath(lang);
 
     let existingTeam: any = null;
 
-    // Form field names
+    // Form field names (camelCase to match API)
     const fields = [
       "name",
-      "preferred_number",
-      "number_of_pilots",
-      "representative_name",
-      "representative_surname",
-      "representative_dni",
-      "representative_phone",
-      "representative_email",
+      "preferredNumber",
+      "numberOfPilots",
+      "representativeName",
+      "representativeSurname",
+      "representativeDni",
+      "representativePhone",
+      "representativeEmail",
       "address",
       "municipality",
-      "postal_code",
+      "postalCode",
       "province",
-      "motorcycle_brand",
-      "motorcycle_model",
-      "engine_capacity",
-      "gdpr_consent",
+      "motorcycleBrand",
+      "motorcycleModel",
+      "engineCapacity",
+      "gdprConsent",
     ];
 
     // Photo upload elements
-    const photoInput = document.getElementById("motorcycle_photo") as HTMLInputElement;
+    const photoInput = document.getElementById("motorcyclePhoto") as HTMLInputElement;
     const photoPreview = document.getElementById("photo-preview");
     const photoPreviewImg = document.getElementById("photo-preview-img") as HTMLImageElement;
     const uploadPhotoLabel = document.getElementById("upload-photo-label");
@@ -502,9 +502,9 @@ const translatePath = useTranslatedPath(lang);
 
     // Photo status colors
     const statusColors: Record<string, { bg: string; text: string; label: string }> = {
-      pending: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: lang === 'en' ? 'Pending' : 'Pendiente' },
-      approved: { bg: 'bg-green-500/20', text: 'text-green-400', label: lang === 'en' ? 'Approved' : 'Aprobada' },
-      rejected: { bg: 'bg-red-500/20', text: 'text-red-400', label: lang === 'en' ? 'Rejected' : 'Rechazada' },
+      pending: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'Pendiente' },
+      approved: { bg: 'bg-green-500/20', text: 'text-green-400', label: 'Aprobada' },
+      rejected: { bg: 'bg-red-500/20', text: 'text-red-400', label: 'Rechazada' },
     };
 
     function showPhotoStatus(status: string | undefined) {
@@ -586,9 +586,7 @@ const translatePath = useTranslatedPath(lang);
           // Pre-fill email from logged user
           const user = firebaseAuth.getUser();
           if (user) {
-            const emailInput = document.getElementById(
-              "representative_email",
-            ) as HTMLInputElement;
+            const emailInput = document.getElementById("representativeEmail") as HTMLInputElement;
             if (emailInput) emailInput.value = user.email;
           }
         }
@@ -610,7 +608,6 @@ const translatePath = useTranslatedPath(lang);
         submitBtn.textContent = "Guardando...";
       }
 
-      const formData = new FormData(teamForm);
       const body: Record<string, any> = {};
 
       fields.forEach((field) => {
@@ -620,7 +617,7 @@ const translatePath = useTranslatedPath(lang);
         if (input) {
           if (input.type === "checkbox") {
             body[field] = (input as HTMLInputElement).checked;
-          } else if (input.type === "number" || field === "number_of_pilots" || field === "preferred_number") {
+          } else if (input.type === "number" || field === "numberOfPilots" || field === "preferredNumber") {
             const val = input.value;
             body[field] = val ? parseInt(val, 10) : null;
           } else {
@@ -636,7 +633,7 @@ const translatePath = useTranslatedPath(lang);
           reader.onload = (e) => resolve(e.target?.result as string);
           reader.readAsDataURL(pendingPhotoFile!);
         });
-        body.motorcycle_photo = photoData;
+        body.motorcyclePhoto = photoData;
       }
 
       try {
@@ -673,7 +670,7 @@ const translatePath = useTranslatedPath(lang);
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
-            ${lang === "en" ? "Save" : "Guardar"}
+            Guardar
           `;
         }
       }
@@ -681,16 +678,13 @@ const translatePath = useTranslatedPath(lang);
 
     // Initialize and load data
     async function initAndLoad() {
-      // Wait for identity to be initialized (done by DashboardLayout)
       await firebaseAuth.waitForInit();
 
-      // Load data if authenticated
       const user = firebaseAuth.getUser();
       if (user) {
         loadTeamData();
       }
 
-      // Listen for auth changes to load data when user logs in
       firebaseAuth.onAuthChange((u) => {
         if (u) {
           loadTeamData();
