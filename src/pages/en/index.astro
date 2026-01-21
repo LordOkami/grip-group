@@ -58,8 +58,8 @@ const content = await getContent('en', 'home');
       <div class="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl mx-auto">
         {content.hero.stats.map((stat: { value: string; label: string }) => (
           <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
             <div class="text-racing-silver text-sm uppercase tracking-wider">{stat.label}</div>
+            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
           </div>
         ))}
       </div>

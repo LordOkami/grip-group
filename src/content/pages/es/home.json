@@ -9,22 +9,22 @@
     "title": "8 HORAS",
     "subtitle": "Los desafíos de resistencia en circuito más emocionantes y divertidos de España.",
     "subtitleBold": "",
-    "nextEvent": "Próximo evento: Desafío Bronce 8 Horas. 10 Octubre 2026. Circuito DR7 (Tarancón).",
+    "nextEvent": "Evento: Desafio Bronce 8 Horas. Cuando: 10 Octubre 2026. Lugar: Circuito DR7 (Tarancon).",
     "cta": "Quiero participar",
     "ctaSecondary": "Descubre mas",
     "ctaLink": "/inscripciones#registro",
     "ctaSecondaryLink": "#concepto",
     "backgroundImage": "/images/header-2024.jpg",
     "stats": [
-      { "value": "125cc 4T", "label": "Motos de serie" },
-      { "value": "Resistencia", "label": "Por equipos" },
-      { "value": "Amateur", "label": "Pilotos" }
+      { "label": "Por equipos", "value": "Resistencia" },
+      { "label": "Motos de serie", "value": "125cc" },
+      { "label": "Pilotos", "value": "Amateur" }
     ]
   },
   "concepto": {
     "tagline": "",
-    "title": "",
-    "titleAccent": "",
+    "title": "Por que motos de",
+    "titleAccent": "125cc",
     "cards": [
       {
         "title": "Accesible para todos",
@@ -72,7 +72,7 @@
     ]
   },
   "teams": {
-    "tagline": "Los Equipos",
+    "tagline": "",
     "title": "ESPÍRITU DE",
     "titleAccent": "EQUIPO",
     "subtitle": "Los equipos son la piedra angular de estos desafíos.",
