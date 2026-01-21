@@ -188,19 +188,19 @@ const translatePath = useTranslatedPath(lang);
 
         const team = data.team;
         const pilots = team.pilots || [];
-        const staff = team.team_staff || [];
+        const staff = team.staff || [];
 
         // Update dashboard
         if (teamNameEl) teamNameEl.textContent = team.name;
         if (pilotsCountEl) pilotsCountEl.textContent = pilots.length.toString();
-        if (maxPilotsEl) maxPilotsEl.textContent = team.number_of_pilots.toString();
+        if (maxPilotsEl) maxPilotsEl.textContent = (team.numberOfPilots || 4).toString();
         if (pilotsSummaryEl) pilotsSummaryEl.textContent = pilots.length.toString();
         if (staffSummaryEl) staffSummaryEl.textContent = staff.length.toString();
 
         // Moto summary
         if (motoSummaryEl) {
-          if (team.motorcycle_brand && team.motorcycle_model) {
-            motoSummaryEl.textContent = `${team.motorcycle_brand} ${team.motorcycle_model}`;
+          if (team.motorcycleBrand && team.motorcycleModel) {
+            motoSummaryEl.textContent = `${team.motorcycleBrand} ${team.motorcycleModel}`;
           } else {
             motoSummaryEl.textContent = 'Not configured';
           }

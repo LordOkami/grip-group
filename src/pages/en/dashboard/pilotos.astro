@@ -404,7 +404,7 @@ const translatePath = useTranslatedPath(lang);
           return;
         }
 
-        maxPilots = teamData.team.number_of_pilots;
+        maxPilots = teamData.team.numberOfPilots || 4;
 
         const response = await fetchWithAuth('/api/pilots');
         const data = await response.json();

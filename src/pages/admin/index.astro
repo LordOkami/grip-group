@@ -312,7 +312,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
       // Create charts
       createStatusChart(stats);
-      createLevelChart(stats.drivingLevels);
+      createLevelChart(stats.experienceLevels);
       createTimelineChart(stats.registrationsByDate);
 
       // Update recent teams
@@ -413,13 +413,21 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
     if (levelChart) levelChart.destroy();
 
+    // Handle both old and new format
+    const data = levels ? [
+      levels.principiante || 0,
+      levels.rutero || 0,
+      (levels.tandero_iniciado || 0) + (levels.tandero_medio || 0),
+      (levels.tandero_rapido || 0) + (levels.semi_pro || 0)
+    ] : [0, 0, 0, 0];
+
     levelChart = new (window as any).Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Amateur', 'Intermedio', 'Avanzado', 'Experto'],
+        labels: ['Principiante', 'Rutero', 'Tandero', 'Avanzado'],
         datasets: [{
           label: 'Pilotos',
-          data: [levels.amateur, levels.intermediate, levels.advanced, levels.expert],
+          data: data,
           backgroundColor: ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444'],
           borderRadius: 8
         }]
