@@ -520,13 +520,14 @@ const content = await getContent('es', 'home');
 
       const icons = [
         '/desafios/desafio_bronce_icon.png',
-        '/desafios/desafio_bronce_icon_2.png'
+        '/desafios/desafio_bronce_icon_2.png',
+        '/desafios/desafio_bronce_icon_3.png'
       ];
       let currentIndex = 1; // Start with icon_2
 
       badge.addEventListener('click', () => {
         playMotoSound();
-        currentIndex = currentIndex === 0 ? 1 : 0;
+        currentIndex = (currentIndex + 1) % icons.length;
         badge.src = icons[currentIndex];
         if (shine) {
           shine.style.maskImage = `url('${icons[currentIndex]}')`;
