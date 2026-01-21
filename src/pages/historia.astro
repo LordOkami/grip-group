@@ -11,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
           <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Grip Club</span>
           <h1 class="section-title mb-8">
@@ -19,80 +19,52 @@ import Layout from '../layouts/Layout.astro';
           </h1>
         </div>
 
-        <div class="prose prose-invert prose-lg max-w-none mb-12">
-          <p class="text-racing-silver text-lg leading-relaxed mb-6">
-            Grip Club nació de una pasión compartida por el motorsport.
-            Un grupo de amigos, entusiastas de las motos, que querían crear algo diferente: una competición accesible, emocionante y capaz de reunir a la comunidad motera en torno a un evento único.
-          </p>
-          <p class="text-racing-silver text-lg leading-relaxed mb-6">
-            Inspirados por los grandes formatos internacionales de resistencia, decidimos adaptar el concepto a nuestro país manteniendo su esencia más pura: motos 125cc de serie, pilotos amateur y carreras donde importa tanto el equipo como el piloto.
-          </p>
-          <p class="text-racing-silver text-lg leading-relaxed mb-6">
-            Detrás de esta idea hay algo más que ilusión. Hay años de experiencia creando eventos en circuitos, viviendo las carreras desde dentro, organizando formatos de resistencia, trackdays y encuentros que han unido a miles de apasionados del motor. Esa trayectoria, forjada en proyectos como las 24H Experience, 8000vueltas y eventos de cultura del motor como Autopía, es la base sobre la que nace Grip Club.
-          </p>
-          <p class="text-racing-silver text-lg leading-relaxed">
-            Lo que empezó como una idea entre amigos se ha convertido hoy en una realidad pensada para equipos y pilotos de toda España, con un objetivo claro: trasladar todo ese conocimiento, exigencia y cuidado por el detalle a una competición accesible, auténtica y memorable para quienes la viven desde el box, la pista y el paddock.
-          </p>
-        </div>
+        <!-- Two Column Layout: Text Left, Images Right -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Column: Text -->
+          <div class="prose prose-invert prose-lg max-w-none">
+            <p class="text-racing-silver text-lg leading-relaxed mb-6">
+              Grip Club nació de una pasión compartida por el motorsport.
+              Un grupo de amigos, entusiastas de las motos, que querían crear algo diferente: una competición accesible, emocionante y capaz de reunir a la comunidad motera en torno a un evento único.
+            </p>
+            <p class="text-racing-silver text-lg leading-relaxed mb-6">
+              Inspirados por los grandes formatos internacionales de resistencia, decidimos adaptar el concepto a nuestro país manteniendo su esencia más pura: motos 125cc de serie, pilotos amateur y carreras donde importa tanto el equipo como el piloto.
+            </p>
+            <p class="text-racing-silver text-lg leading-relaxed mb-6">
+              Detrás de esta idea hay algo más que ilusión. Hay años de experiencia creando eventos en circuitos, viviendo las carreras desde dentro, organizando formatos de resistencia, trackdays y encuentros que han unido a miles de apasionados del motor.
+            </p>
+            <p class="text-racing-silver text-lg leading-relaxed">
+              Lo que empezó como una idea entre amigos se ha convertido hoy en una realidad pensada para equipos y pilotos de toda España, con un objetivo claro: trasladar todo ese conocimiento a una competición accesible, auténtica y memorable.
+            </p>
+          </div>
 
-        <!-- Auto-rotating Image Carousel -->
-        <div class="relative max-w-4xl mx-auto">
-          <div class="historia-carousel-container relative overflow-hidden rounded-2xl">
-            <div class="historia-carousel-track">
-              <!-- Slide 1 -->
-              <div class="historia-slide">
-                <div class="aspect-video bg-racing-black overflow-hidden">
-                  <img
-                    src="https://github.com/user-attachments/assets/8f266e31-907d-46d1-9cf5-725b92309450"
-                    alt="Autopía Events"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="slide-caption">
-                  <a href="https://autopia.events/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
-                    Autopía Events - Cultura del motor
-                  </a>
-                </div>
-              </div>
-
-              <!-- Slide 2 -->
-              <div class="historia-slide">
-                <div class="aspect-video bg-racing-black overflow-hidden">
-                  <img
-                    src="https://github.com/user-attachments/assets/5730ed2d-27af-4095-b984-9fa17471e947"
-                    alt="8000vueltas"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="slide-caption">
-                  <a href="https://8000vueltas.com/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
-                    8000vueltas - Trackdays y eventos
-                  </a>
-                </div>
-              </div>
-
-              <!-- Slide 3 -->
-              <div class="historia-slide">
-                <div class="aspect-video bg-racing-black overflow-hidden">
-                  <img
-                    src="https://github.com/user-attachments/assets/2620ab2a-8469-45db-a648-72877bc38506"
-                    alt="Robert Borowik Media"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="slide-caption">
-                  <a href="https://robertborowikmedia.com/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
-                    Robert Borowik Media - Fotografía de motorsport
-                  </a>
-                </div>
-              </div>
+          <!-- Right Column: Images -->
+          <div class="space-y-4">
+            <div class="rounded-2xl overflow-hidden border border-racing-silver/20">
+              <img
+                src="https://placehold.co/800x500/1a1a1a/00ff88?text=Motorsport+Passion"
+                alt="Historia Grip Club"
+                class="w-full h-auto object-cover"
+                loading="lazy"
+              />
             </div>
-
-            <!-- Navigation Dots -->
-            <div class="carousel-dots">
-              <button class="dot active" data-slide="0" aria-label="Ver imagen 1"></button>
-              <button class="dot" data-slide="1" aria-label="Ver imagen 2"></button>
-              <button class="dot" data-slide="2" aria-label="Ver imagen 3"></button>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-xl overflow-hidden border border-racing-silver/20">
+                <img
+                  src="https://placehold.co/400x300/1a1a1a/00ff88?text=Racing+Spirit"
+                  alt="Racing Spirit"
+                  class="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div class="rounded-xl overflow-hidden border border-racing-silver/20">
+                <img
+                  src="https://placehold.co/400x300/1a1a1a/00ff88?text=Team+Work"
+                  alt="Team Work"
+                  class="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -100,195 +72,178 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- BLOQUE 2: Nuestros Valores -->
-  <section class="py-20 bg-racing-black">
+  <!-- BLOQUE 2: Vision, Mision, Valores - Compact Design -->
+  <section class="py-16 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestros Valores</span>
-        <h2 class="section-title">Lo que nos <span class="text-vanilla">define</span></h2>
-      </div>
+      <div class="max-w-7xl mx-auto">
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <!-- Value 1: Comunidad -->
-        <div class="card text-center">
-          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
+        <!-- Vision -->
+        <div class="mb-12">
+          <div class="text-center mb-8">
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Visión</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">¿Por qué motos de <span class="text-vanilla">125cc</span>?</h2>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Comunidad</h3>
-          <p class="text-racing-silver">
-            Creemos en una comunidad unida por una misma pasión: el motociclismo en su esencia, sin filtros.
-          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Accesible</h3>
+                  <p class="text-racing-silver text-sm">Motos asequibles y baratas de mantener.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Igualdad mecánica</h3>
+                  <p class="text-racing-silver text-sm">La estrategia y habilidad marcan la diferencia.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Seguridad</h3>
+                  <p class="text-racing-silver text-sm">Velocidades controladas sin perder emoción.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Disponibilidad</h3>
+                  <p class="text-racing-silver text-sm">Gran oferta de motos 125cc en el mercado.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Escuela de pilotos</h3>
+                  <p class="text-racing-silver text-sm">Ideales para aprender técnica de pilotaje.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-compact group">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white mb-1">Diversión pura</h3>
+                  <p class="text-racing-silver text-sm">La velocidad no sale en la foto.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Value 2: Accesibilidad -->
-        <div class="card text-center">
-          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+        <div class="border-t border-racing-silver/20 my-12"></div>
+
+        <!-- Mision -->
+        <div class="mb-12">
+          <div class="text-center mb-8">
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Misión</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Espíritu de <span class="text-vanilla">Equipo</span></h2>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Accesibilidad</h3>
-          <p class="text-racing-silver">
-            El motorsport no tiene que ser exclusivo de unos pocos. Con motos 125cc de serie y costes controlados, cualquiera puede participar y competir.
-          </p>
+          <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              <div class="space-y-4">
+                <p class="text-racing-silver leading-relaxed">
+                  Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Gestionar nervios, tráfico, repostajes y decisiones bajo presión.
+                </p>
+                <p class="text-racing-silver leading-relaxed">
+                  Lo importante es vivir la resistencia con vuestros amigos: compartir nervios, risas, sustos y remontadas hasta la bandera a cuadros.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-xl overflow-hidden border border-racing-silver/20">
+                  <img src="https://placehold.co/300x200/1a1a1a/00ff88?text=Team+Spirit" alt="Team Spirit" class="w-full h-auto object-cover" loading="lazy" />
+                </div>
+                <div class="rounded-xl overflow-hidden border border-racing-silver/20">
+                  <img src="https://placehold.co/300x200/1a1a1a/00ff88?text=Paddock" alt="Paddock" class="w-full h-auto object-cover" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Value 3: Seguridad -->
-        <div class="card text-center">
-          <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-            </svg>
+        <div class="border-t border-racing-silver/20 my-12"></div>
+
+        <!-- Valores -->
+        <div>
+          <div class="text-center mb-8">
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Valores</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Lo que nos <span class="text-vanilla">define</span></h2>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Seguridad</h3>
-          <p class="text-racing-silver">
-            La seguridad es nuestra máxima prioridad. Velocidades bajas, riesgos controlados, equipamiento obligatorio y estrictos controles técnicos.
-          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="card-compact text-center">
+              <div class="w-14 h-14 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Comunidad</h3>
+              <p class="text-racing-silver text-sm">Unidos por la pasión: motociclismo en su esencia, sin filtros.</p>
+            </div>
+            <div class="card-compact text-center">
+              <div class="w-14 h-14 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Accesibilidad</h3>
+              <p class="text-racing-silver text-sm">El motorsport no tiene que ser exclusivo. Todos pueden participar.</p>
+            </div>
+            <div class="card-compact text-center">
+              <div class="w-14 h-14 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Seguridad</h3>
+              <p class="text-racing-silver text-sm">Máxima prioridad: equipamiento obligatorio y controles técnicos.</p>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- BLOQUE 3: Nuestra Visión - ¿Por qué motos de 125cc? -->
-  <section class="py-24 bg-racing-gray">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestra visión</span>
-        <h2 class="section-title">¿Por qué motos de <span class="text-vanilla">125cc</span>?</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Accesible para todos</h3>
-          <p class="text-racing-silver">Motos asequibles, fiables y baratas de mantener. Para que podáis disfrutar la experiencia sin arruinaros.</p>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Máxima igualdad mecánica</h3>
-          <p class="text-racing-silver">Con motos igualadas, todo lo decide la estrategia, la habilidad de los pilotos y el trabajo en equipo.</p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Disponibilidad inmediata</h3>
-          <p class="text-racing-silver">Hay una gran oferta de motos de 125cc 4 tiempos disponibles. Ya sean nuevas, de segunda mano, de diferentes estilos y precios.</p>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Escuela de pilotos</h3>
-          <p class="text-racing-silver">Motos divertidas, ligeras y fáciles de pilotar. Ideales para aprender y mejorar la técnica de pilotaje en circuito.</p>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">Seguridad primero</h3>
-          <p class="text-racing-silver">Velocidades controladas que permiten pilotar con márgenes de seguridad mayores sin perder ni un gramo de emoción.</p>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="card group">
-          <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 transition-colors">
-            <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-white mb-3">LA VELOCIDAD NO SALE EN LA FOTO</h3>
-          <p class="text-racing-silver">La filosofía es disfrutar con amigos de la resistencia la pasión por el motociclismo puro.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOQUE 4: Nuestra Misión - Espíritu de Equipo -->
-  <section class="py-24 bg-racing-black">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-12">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestra misión</span>
-        <h2 class="section-title">ESPÍRITU DE <span class="text-vanilla">EQUIPO</span></h2>
-        <p class="section-subtitle mx-auto mt-4">Los equipos son la piedra angular de estos desafíos.</p>
-      </div>
-
-      <div class="max-w-4xl mx-auto mb-12 space-y-6">
-        <p class="text-racing-silver text-base md:text-lg leading-relaxed">
-          Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Durante horas tendréis que gestionar mucho más que el gas: los nervios antes de salir, el tráfico en pista, los pequeños errores, los repostajes, los cambios de piloto, el cansancio y las decisiones bajo presión. Aquí cada vuelta cuenta y cada parada importa.
-        </p>
-        <p class="text-racing-silver text-base md:text-lg leading-relaxed">
-          Y sí, en pista habrá duelos, adelantamientos y momentos de máxima tensión… pero eso es solo una parte. Lo realmente importante es vivir la resistencia con vuestros amigos: compartir los nervios, las risas, los sustos y las remontadas hasta que cae la bandera a cuadros y os recorre la euforia de haber logrado juntos algo épico e inolvidable.
-        </p>
-      </div>
-
-      <!-- Team Images Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
-          <div class="aspect-[3/2] bg-racing-gray">
-            <img
-              src="https://github.com/user-attachments/assets/810d3958-6cd9-4d7d-88b3-e1adcc34d140"
-              alt="Equipos en el paddock"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
-          <div class="aspect-[3/2] bg-racing-gray">
-            <img
-              src="https://github.com/user-attachments/assets/64aa2b8a-5f61-4047-907d-f4917a43e8ef"
-              alt="Pilotos en acción"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
-          <div class="aspect-[3/2] bg-racing-gray">
-            <img
-              src="https://github.com/user-attachments/assets/fdbb9769-24fd-4494-9ef2-b416742fe368"
-              alt="Trabajo en equipo"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOQUE 5: CTA - Se parte de nuestra historia -->
+  <!-- BLOQUE 3: CTA - Se parte de nuestra historia -->
   <section class="py-20 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">Se parte de la <span class="text-vanilla">historia</span></h2>
+        <h2 class="section-title mb-6">Se parte de nuestra <span class="text-vanilla">historia</span></h2>
         <p class="section-subtitle mx-auto mb-8">
           La historia de Grip Club se escribe con cada equipo que participa. Únete y forma parte de algo especial.
         </p>
@@ -301,144 +256,26 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
-  /* Historia Carousel Styles */
-  .historia-carousel-container {
-    position: relative;
-    background: var(--racing-black);
+  /* Compact Card Styles */
+  .card-compact {
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .historia-carousel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .historia-slide {
-    min-width: 100%;
-    flex-shrink: 0;
-  }
-
-  .slide-caption {
-    padding: 1.5rem;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .slide-caption a {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  /* Carousel Dots */
-  .carousel-dots {
-    position: absolute;
-    bottom: 5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 0.75rem;
-    z-index: 10;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    cursor: pointer;
+    border-radius: 1rem;
+    padding: 1.25rem;
     transition: all 0.3s ease;
-    padding: 0;
   }
 
-  .dot:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
-  }
-
-  .dot.active {
-    background: var(--vanilla);
-    border-color: var(--vanilla);
-    transform: scale(1.3);
+  .card-compact:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--racing-green);
+    transform: translateY(-2px);
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .carousel-dots {
-      bottom: 4.5rem;
-      gap: 0.5rem;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
+    .card-compact {
+      padding: 1rem;
     }
   }
 </style>
 
-<script>
-  // Auto-rotating carousel functionality
-  function initHistoriaCarousel() {
-    const track = document.querySelector('.historia-carousel-track') as HTMLElement;
-    const slides = document.querySelectorAll('.historia-slide');
-    const dots = document.querySelectorAll('.carousel-dots .dot');
-
-    if (!track || !slides.length || !dots.length) return;
-
-    let currentSlide = 0;
-    const totalSlides = slides.length;
-    const autoPlayInterval = 5000; // 5 seconds
-    let autoPlayTimer: number;
-
-    function goToSlide(index: number) {
-      currentSlide = index;
-      const offset = -currentSlide * 100;
-      track.style.transform = `translateX(${offset}%)`;
-
-      // Update dots
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
-
-    function nextSlide() {
-      const next = (currentSlide + 1) % totalSlides;
-      goToSlide(next);
-    }
-
-    function startAutoPlay() {
-      stopAutoPlay();
-      autoPlayTimer = window.setInterval(nextSlide, autoPlayInterval);
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayTimer) {
-        clearInterval(autoPlayTimer);
-      }
-    }
-
-    // Add click handlers to dots
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-        stopAutoPlay();
-        startAutoPlay(); // Restart auto-play after manual interaction
-      });
-    });
-
-    // Pause auto-play on hover
-    track.addEventListener('mouseenter', stopAutoPlay);
-    track.addEventListener('mouseleave', startAutoPlay);
-
-    // Start auto-play
-    startAutoPlay();
-  }
-
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', initHistoriaCarousel);
-
-  // Re-initialize on Astro page transitions (if using View Transitions)
-  document.addEventListener('astro:page-load', initHistoriaCarousel);
-</script>
