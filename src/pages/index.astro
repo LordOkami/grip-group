@@ -71,9 +71,30 @@ const content = await getContent('es', 'home');
       </div>
 
       <p class="text-lg md:text-xl text-racing-silver max-w-3xl mx-auto mb-6">
-        {content.hero.subtitle}<br>
-        <span class="text-white font-semibold">{content.hero.subtitleBold}</span>
+        {content.hero.subtitle}
+        {content.hero.subtitleBold && (
+          <>
+            <br>
+            <span class="text-white font-semibold">{content.hero.subtitleBold}</span>
+          </>
+        )}
       </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 md:gap-8 mt-8 max-w-2xl mx-auto">
+        {content.hero.stats.map((stat: { value: string; label: string }) => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
+            <div class="text-racing-silver text-sm uppercase tracking-wider">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {content.hero.nextEvent && (
+        <p class="text-base md:text-lg text-white font-semibold max-w-3xl mx-auto mt-10 mb-6">
+          {content.hero.nextEvent}
+        </p>
+      )}
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a href={content.hero.ctaLink} class="btn-primary">
@@ -82,16 +103,6 @@ const content = await getContent('es', 'home');
         <a href={content.hero.ctaSecondaryLink} class="btn-secondary">
           {content.hero.ctaSecondary}
         </a>
-      </div>
-
-      <!-- Stats -->
-      <div class="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl mx-auto">
-        {content.hero.stats.map((stat: { value: string; label: string }) => (
-          <div class="text-center">
-            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
-            <div class="text-racing-silver text-sm uppercase tracking-wider">{stat.label}</div>
-          </div>
-        ))}
       </div>
     </div>
 
@@ -461,10 +472,16 @@ const content = await getContent('es', 'home');
   <!-- Concepto Section -->
   <section id="concepto" class="py-24 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">{content.concepto.tagline}</span>
-        <h2 class="section-title">¿{content.concepto.title} <span class="text-vanilla">{content.concepto.titleAccent}</span>?</h2>
-      </div>
+      {(content.concepto.tagline || content.concepto.title) && (
+        <div class="text-center mb-16">
+          {content.concepto.tagline && (
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">{content.concepto.tagline}</span>
+          )}
+          {content.concepto.title && (
+            <h2 class="section-title">¿{content.concepto.title} <span class="text-vanilla">{content.concepto.titleAccent}</span>?</h2>
+          )}
+        </div>
+      )}
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {content.concepto.cards.map((card: { title: string; description: string; icon: string }) => (
@@ -478,6 +495,12 @@ const content = await getContent('es', 'home');
               {card.icon === 'lightning' && (
                 <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              )}
+              {card.icon === 'gear' && (
+                <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
               )}
               {card.icon === 'team' && (
@@ -527,6 +550,14 @@ const content = await getContent('es', 'home');
         <h2 class="section-title">{content.teams.title} <span class="text-vanilla">{content.teams.titleAccent}</span></h2>
         <p class="section-subtitle mx-auto mt-4">{content.teams.subtitle}</p>
       </div>
+
+      {content.teams.content && content.teams.content.length > 0 && (
+        <div class="max-w-4xl mx-auto mb-12 space-y-6">
+          {content.teams.content.map((paragraph: string) => (
+            <p class="text-racing-silver text-base md:text-lg leading-relaxed">{paragraph}</p>
+          ))}
+        </div>
+      )}
 
       <div class="gallery-grid">
         {content.teams.images.map((image: { src: string; alt: string }) => (

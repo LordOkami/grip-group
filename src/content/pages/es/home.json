@@ -7,23 +7,24 @@
     "tagline": "Grip Club presenta",
     "preTitle": "DESAFIO BRONCE",
     "title": "8 HORAS",
-    "subtitle": "La prueba de resistencia mas emocionante de Espana.",
-    "subtitleBold": "Motos 125cc de serie. 8 horas de pura adrenalina.",
+    "subtitle": "Los desafíos de resistencia en circuito más emocionantes y divertidos de España.",
+    "subtitleBold": "",
+    "nextEvent": "Próximo evento: Desafío Bronce 8 Horas. 10 Octubre 2026. Circuito DR7 (Tarancón).",
     "cta": "Quiero participar",
     "ctaSecondary": "Descubre mas",
     "ctaLink": "/inscripciones#registro",
     "ctaSecondaryLink": "#concepto",
     "backgroundImage": "/images/header-2024.jpg",
     "stats": [
-      { "value": "8H", "label": "Duracion" },
-      { "value": "125cc", "label": "Cilindrada" },
-      { "value": "100%", "label": "Pasion" }
+      { "value": "125cc 4T", "label": "Motos de serie" },
+      { "value": "Resistencia", "label": "Por equipos" },
+      { "value": "Amateur", "label": "Pilotos" }
     ]
   },
   "concepto": {
-    "tagline": "El Concepto",
-    "title": "Por que motos de",
-    "titleAccent": "125cc de serie",
+    "tagline": "",
+    "title": "",
+    "titleAccent": "",
     "cards": [
       {
         "title": "Accesible para todos",
@@ -32,23 +33,13 @@
       },
       {
         "title": "Maxima igualdad mecanica",
-        "description": "Con maquinas igualadas, todo lo decide la estrategia, la habilidad de los pilotos y el trabajo en equipo.",
-        "icon": "lightning"
+        "description": "Con motos igualadas, todo lo decide la estrategia, la habilidad de los pilotos y el trabajo en equipo.",
+        "icon": "gear"
       },
       {
         "title": "Disponibilidad inmediata",
-        "description": "Hay una oferta enorme de 125cc 4 tiempos de serie nuevas o de segunda mano: distintos modelos, estilos y precios.",
+        "description": "Hay una gran oferta de motos de 125cc 4 tiempos disponibles. Ya sean nuevas, de segunda mano, de diferentes estilos y precios.",
         "icon": "calendar"
-      },
-      {
-        "title": "Competicion pura",
-        "description": "Con maquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y el trabajo en equipo marcan la diferencia.",
-        "icon": "trophy"
-      },
-      {
-        "title": "Espiritu de equipo",
-        "description": "8 horas no las corre nadie solo. La coordinacion, los relevos y el trabajo conjunto son la clave del exito.",
-        "icon": "team"
       },
       {
         "title": "Escuela de pilotos",
@@ -57,12 +48,12 @@
       },
       {
         "title": "Seguridad primero",
-        "description": "Velocidades controladas que permiten competir con margenes de seguridad mayores sin perder ni un gramo de emocion.",
+        "description": "Velocidades controladas que permiten pilotar con margenes de seguridad mayores sin perder ni un gramo de emocion.",
         "icon": "shield"
       },
       {
-        "title": "Diversion garantizada",
-        "description": "Aqui se trata de disfrutar de la resistencia con amigos y de la pasion por el motociclismo puro.",
+        "title": "LA VELOCIDAD NO SALE EN LA FOTO",
+        "description": "Lo que se busca es disfrutar de la resistencia con amigos y de la pasión por el motociclismo puro.",
         "icon": "smile"
       }
     ]
@@ -82,13 +73,12 @@
   },
   "teams": {
     "tagline": "Los Equipos",
-    "title": "Trabajo en",
-    "titleAccent": "equipo",
-    "subtitle": "De 4 a 8 pilotos por equipo, mas hasta 4 miembros de staff. La coordinacion es clave.",
+    "title": "ESPÍRITU DE",
+    "titleAccent": "EQUIPO",
+    "subtitle": "Los equipos son la piedra angular de estos desafíos.",
     "content": [
-      "Los equipos son la piedra angular de estos desafíos.",
-      "Desde 04 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: dar el máximo durante 8 horas. Aquí habrá momentos de tensión, estrategia, cambios rápidos, desgaste de equipo, cansancio de pilotos, el cansancio y las decisiones bajo presión. Aquí gana quien mejor se adapte y trabaje unido.",
-      "Y es, sin esta hacia cuatro, aisladamente y mostremos de máxima fuerza... pero no es solo hasta 8. Un miembro importante, un conjunto de técnicos dedicados, que se entrega al equipo como uno más. La ayuda y las conexiones hacia una que cida la escucha y armonizan. Y eso es para nuestra carrera a poder pista, puede siempre hay que no está en carreras de resistencia."
+      "Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Durante horas tendréis que gestionar mucho más que el gas: los nervios antes de salir, el tráfico en pista, los pequeños errores, los repostajes, los cambios de piloto, el cansancio y las decisiones bajo presión. Aquí cada vuelta cuenta y cada parada importa.",
+      "Y sí, en pista habrá duelos, adelantamientos y momentos de máxima tensión… pero eso es solo una parte. Lo realmente importante es vivir la resistencia con vuestros amigos: compartir los nervios, las risas, los sustos y las remontadas hasta que cae la bandera a cuadros y os recorre la euforia de haber logrado juntos algo épico e inolvidable."
     ],
     "images": [
       { "src": "/images/teams-1.jpg", "alt": "Equipo de pilotos" },
@@ -101,10 +91,10 @@
     "title": "Listo para el",
     "titleAccent": "desafio",
     "subtitle": "Unete a la comunidad de equipos y pilotos que ya estan disfrutando de las resistencias mas epicas de la mano de GRIP Club.",
-    "button": "Ver proximos eventos",
-    "buttonLink": "/eventos",
-    "buttonSecondary": "Ver reglamento tecnico",
-    "buttonSecondaryLink": "/motos",
+    "button": "Inscríbete",
+    "buttonLink": "/inscripciones",
+    "buttonSecondary": "Ver próximos eventos",
+    "buttonSecondaryLink": "/eventos",
     "backgroundImage": "/images/track-DR7-1.jpg"
   }
 }
