@@ -12,107 +12,228 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
       <div class="max-w-3xl">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Calendario</span>
-        <h1 class="section-title mb-6">
-          <span class="text-vanilla">Eventos</span> 2025
-        </h1>
+        <div class="mb-6">
+          <h1 class="text-4xl md:text-6xl font-bold mb-4" style="font-family: 'Bebas Neue', sans-serif;">
+            <span class="text-white">Eventos</span>
+          </h1>
+          <div class="inline-block">
+            <img src="/images/logo-header.png" alt="Grip Club" class="h-16 md:h-20 brightness-0 invert" />
+          </div>
+        </div>
         <p class="section-subtitle">
-          Todas las fechas y circuitos donde viviremos la emocion de las 8 Horas.
+          Todas las fechas y circuitos donde viviremos la emocion de la resistencia en moto.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Main Event -->
+  <!-- Events Carousel -->
   <section class="py-20 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Evento Principal</span>
-        <h2 class="section-title">8 Horas <span class="text-vanilla">Grip Club</span></h2>
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Evento Activo</span>
+        <h2 class="section-title">Desafio Bronce <span class="text-vanilla">8 Horas</span></h2>
       </div>
 
-      <!-- Event Card -->
-      <div class="max-w-4xl mx-auto">
-        <div class="bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
-          <!-- Event Image -->
-          <div class="aspect-video relative">
-            <img
-              src="/images/track-DR7-1.jpg"
-              alt="Circuito"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-racing-black to-transparent"></div>
-            <div class="absolute bottom-6 left-6">
-              <span class="inline-block bg-racing-green text-vanilla text-sm font-bold px-4 py-2 rounded-full uppercase tracking-wider">
-                Proximamente
-              </span>
+      <!-- Carousel Container -->
+      <div class="relative max-w-7xl mx-auto">
+        <div class="flex items-center justify-center gap-4 md:gap-8">
+
+          <!-- Left Event (Desafio Plata - Primavera 2027) -->
+          <div class="hidden md:block w-1/4 opacity-50 hover:opacity-75 transition-opacity cursor-pointer">
+            <div class="bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
+              <div class="aspect-video relative">
+                <img
+                  src="/images/track-DR7-1.jpg"
+                  alt="Circuito"
+                  class="w-full h-full object-cover grayscale"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-32 h-32">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                      <rect x="10" y="10" width="180" height="180" rx="20" fill="#f5f1e8" stroke="#d4af37" stroke-width="4"/>
+                      <g transform="translate(100, 50)">
+                        <rect x="-40" y="0" width="80" height="15" fill="#2d5016" rx="3"/>
+                        <text x="0" y="11" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">DESAFÍO</text>
+                      </g>
+                      <text x="100" y="100" font-family="Arial" font-size="32" font-weight="bold" fill="#c0c0c0" text-anchor="middle">PLATA</text>
+                      <g transform="translate(100, 130)">
+                        <rect x="-35" y="0" width="70" height="12" fill="#2d5016" rx="2"/>
+                        <text x="0" y="9" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">12 HORAS</text>
+                      </g>
+                      <text x="100" y="165" font-family="Arial" font-size="10" fill="#000000" text-anchor="middle">GRIPClub</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="text-center mb-3">
+                  <span class="inline-block bg-racing-silver/30 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Proximamente
+                  </span>
+                  <h3 class="text-sm font-bold text-white mt-2" style="font-family: 'Bebas Neue', sans-serif;">
+                    Desafio Plata 12 Horas
+                  </h3>
+                </div>
+                <div class="text-center text-xs">
+                  <p class="text-racing-silver">
+                    <span class="font-bold">Circuito:</span> Por definir
+                  </p>
+                  <p class="text-racing-silver">
+                    <span class="font-bold">Fecha:</span> Primavera 2027
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Event Info -->
-          <div class="p-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <!-- Date -->
-              <div class="text-center md:text-left">
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          <!-- Center Event (Desafio Bronce - Active) -->
+          <div class="w-full md:w-1/2">
+            <div class="bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20 shadow-2xl">
+              <div class="aspect-video relative">
+                <img
+                  src="/images/track-DR7-1.jpg"
+                  alt="Circuito DR7"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-48 h-48">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-2xl">
+                      <rect x="10" y="10" width="180" height="180" rx="20" fill="#f5f1e8" stroke="#d4af37" stroke-width="4"/>
+                      <g transform="translate(100, 40)">
+                        <path d="M -15,0 L -10,5 L 0,5 L 0,0 Z M 0,0 L 0,5 L 10,5 L 15,0 Z" fill="black"/>
+                        <path d="M -13,2 L -8,7 L 2,7 L 2,2 Z M 2,2 L 2,7 L 12,7 L 17,2 Z" fill="white"/>
+                      </g>
+                      <g transform="translate(100, 50)">
+                        <rect x="-40" y="0" width="80" height="15" fill="#2d5016" rx="3"/>
+                        <text x="0" y="11" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">DESAFÍO</text>
+                      </g>
+                      <g transform="translate(100, 70)">
+                        <ellipse cx="0" cy="15" rx="25" ry="12" fill="#d4af37"/>
+                        <ellipse cx="0" cy="12" rx="25" ry="12" fill="#c5a028"/>
+                        <rect x="-25" y="0" width="50" height="12" fill="#d4af37"/>
+                        <circle cx="0" cy="6" r="4" fill="#8b7220"/>
+                      </g>
+                      <text x="100" y="120" font-family="Arial" font-size="36" font-weight="bold" fill="#d4af37" text-anchor="middle">BRONCE</text>
+                      <g transform="translate(100, 145)">
+                        <rect x="-35" y="0" width="70" height="12" fill="#2d5016" rx="2"/>
+                        <text x="0" y="9" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">8 HORAS</text>
+                      </g>
+                      <text x="100" y="175" font-family="Arial" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">GRIP</text>
+                      <text x="130" y="175" font-family="Arial" font-size="12" font-weight="bold" fill="#000000" text-anchor="start" font-style="italic">Club</text>
                     </svg>
                   </div>
-                  <span class="text-racing-silver text-sm uppercase tracking-wider">Fecha</span>
                 </div>
-                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
-                  Por confirmar
-                </p>
               </div>
-
-              <!-- Location -->
-              <div class="text-center md:text-left">
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
+              <div class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                      <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                      </div>
+                      <span class="text-racing-silver text-sm uppercase tracking-wider">Fecha</span>
+                    </div>
+                    <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                      Por confirmar
+                    </p>
                   </div>
-                  <span class="text-racing-silver text-sm uppercase tracking-wider">Circuito</span>
-                </div>
-                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
-                  Por confirmar
-                </p>
-              </div>
-
-              <!-- Duration -->
-              <div class="text-center md:text-left">
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
-                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
+                  <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                      <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                      </div>
+                      <span class="text-racing-silver text-sm uppercase tracking-wider">Circuito</span>
+                    </div>
+                    <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                      Por confirmar
+                    </p>
                   </div>
-                  <span class="text-racing-silver text-sm uppercase tracking-wider">Duracion</span>
+                  <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                      <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      </div>
+                      <span class="text-racing-silver text-sm uppercase tracking-wider">Duracion</span>
+                    </div>
+                    <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
+                      8 Horas
+                    </p>
+                  </div>
                 </div>
-                <p class="text-white text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">
-                  8 Horas
-                </p>
+                <div class="border-t border-racing-silver/20 pt-6">
+                  <p class="text-racing-silver mb-6">
+                    El Desafio Bronce es nuestra carrera de resistencia de 8 horas. La fecha y el circuito se anunciaran proximamente.
+                  </p>
+                  <a href="/inscripciones" class="btn-primary inline-flex items-center gap-2">
+                    Pre-inscribete ahora
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
-            </div>
-
-            <div class="border-t border-racing-silver/20 pt-6">
-              <p class="text-racing-silver mb-6">
-                La fecha y el circuito para la edicion 2025 se anunciaran proximamente.
-                Mantente atento a nuestras redes sociales para ser el primero en enterarte.
-              </p>
-              <a href="/inscripciones" class="btn-primary inline-flex items-center gap-2">
-                Pre-inscribete ahora
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
             </div>
           </div>
+
+          <!-- Right Event (Desafio Oro - Otoño 2027) -->
+          <div class="hidden md:block w-1/4 opacity-50 hover:opacity-75 transition-opacity cursor-pointer">
+            <div class="bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
+              <div class="aspect-video relative">
+                <img
+                  src="/images/track-DR7-1.jpg"
+                  alt="Circuito"
+                  class="w-full h-full object-cover grayscale"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-32 h-32">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                      <rect x="10" y="10" width="180" height="180" rx="20" fill="#f5f1e8" stroke="#d4af37" stroke-width="4"/>
+                      <g transform="translate(100, 50)">
+                        <rect x="-40" y="0" width="80" height="15" fill="#2d5016" rx="3"/>
+                        <text x="0" y="11" font-family="Arial" font-size="10" font-weight="bold" fill="white" text-anchor="middle">DESAFÍO</text>
+                      </g>
+                      <text x="100" y="100" font-family="Arial" font-size="32" font-weight="bold" fill="#ffd700" text-anchor="middle">ORO</text>
+                      <g transform="translate(100, 130)">
+                        <rect x="-35" y="0" width="70" height="12" fill="#2d5016" rx="2"/>
+                        <text x="0" y="9" font-family="Arial" font-size="8" font-weight="bold" fill="white" text-anchor="middle">12 HORAS</text>
+                      </g>
+                      <text x="100" y="165" font-family="Arial" font-size="10" fill="#000000" text-anchor="middle">GRIPClub</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4">
+                <div class="text-center mb-3">
+                  <span class="inline-block bg-racing-silver/30 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Proximamente
+                  </span>
+                  <h3 class="text-sm font-bold text-white mt-2" style="font-family: 'Bebas Neue', sans-serif;">
+                    Desafio Oro 12 Horas
+                  </h3>
+                </div>
+                <div class="text-center text-xs">
+                  <p class="text-racing-silver">
+                    <span class="font-bold">Circuito:</span> Por definir
+                  </p>
+                  <p class="text-racing-silver">
+                    <span class="font-bold">Fecha:</span> Otoño 2027
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
