@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import historiaData from '../content/pages/es/historia.json';
 ---
 
 <Layout title="Historia" currentPage="historia">
@@ -73,109 +74,73 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- BLOQUE 2: Vision, Mision, Valores - Compact Design -->
-  <section class="py-16 bg-racing-black">
+  <section class="py-12 md:py-16 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-7xl mx-auto">
 
         <!-- Vision -->
-        <div class="mb-12">
-          <div class="text-center mb-8">
-            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Visión</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white">¿Por qué motos de <span class="text-vanilla">125cc</span>?</h2>
+        <div class="mb-10">
+          <div class="text-center mb-6">
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">{historiaData.conceptoTagline}</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">{historiaData.conceptoTitle} <span class="text-vanilla">{historiaData.conceptoTitleAccent}</span></h2>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Accesible</h3>
-                  <p class="text-racing-silver text-sm">Motos asequibles y baratas de mantener.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Igualdad mecánica</h3>
-                  <p class="text-racing-silver text-sm">La estrategia y habilidad marcan la diferencia.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Seguridad</h3>
-                  <p class="text-racing-silver text-sm">Velocidades controladas sin perder emoción.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Disponibilidad</h3>
-                  <p class="text-racing-silver text-sm">Gran oferta de motos 125cc en el mercado.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {historiaData.conceptCards.map((card) => (
+              <div class="card-compact group">
+                <div class="flex items-start gap-3">
+                  <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
+                    {card.icon === 'money' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    )}
+                    {card.icon === 'lightning' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      </svg>
+                    )}
+                    {card.icon === 'team' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                      </svg>
+                    )}
+                    {card.icon === 'shield' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                      </svg>
+                    )}
+                    {card.icon === 'book' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                      </svg>
+                    )}
+                    {card.icon === 'smile' && (
+                      <svg class="w-5 h-5 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                    )}
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-base font-bold text-white mb-1.5">{card.title}</h3>
+                    <p class="text-racing-silver text-sm leading-snug">{card.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Escuela de pilotos</h3>
-                  <p class="text-racing-silver text-sm">Ideales para aprender técnica de pilotaje.</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-compact group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-racing-green/30 transition-colors">
-                  <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-lg font-bold text-white mb-1">Diversión pura</h3>
-                  <p class="text-racing-silver text-sm">La velocidad no sale en la foto.</p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
-        <div class="border-t border-racing-silver/20 my-12"></div>
+        <div class="border-t border-racing-silver/20 my-10"></div>
 
         <!-- Mision -->
-        <div class="mb-12">
-          <div class="text-center mb-8">
+        <div class="mb-10">
+          <div class="text-center mb-6">
             <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Misión</span>
             <h2 class="text-3xl md:text-4xl font-bold text-white">Espíritu de <span class="text-vanilla">Equipo</span></h2>
           </div>
           <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div class="space-y-4">
                 <p class="text-racing-silver leading-relaxed">
                   Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Gestionar nervios, tráfico, repostajes y decisiones bajo presión.
@@ -196,15 +161,15 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
-        <div class="border-t border-racing-silver/20 my-12"></div>
+        <div class="border-t border-racing-silver/20 my-10"></div>
 
         <!-- Valores -->
         <div>
-          <div class="text-center mb-8">
+          <div class="text-center mb-6">
             <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Valores</span>
             <h2 class="text-3xl md:text-4xl font-bold text-white">Lo que nos <span class="text-vanilla">define</span></h2>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
             <div class="card-compact text-center">
               <div class="w-14 h-14 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg class="w-7 h-7 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,12 +208,12 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-20 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">Se parte de nuestra <span class="text-vanilla">historia</span></h2>
+        <h2 class="section-title mb-6">{historiaData.ctaTitle} <span class="text-vanilla">{historiaData.ctaTitleAccent}</span></h2>
         <p class="section-subtitle mx-auto mb-8">
-          La historia de Grip Club se escribe con cada equipo que participa. Únete y forma parte de algo especial.
+          {historiaData.ctaSubtitle}
         </p>
         <a href="/inscripciones#registro" class="btn-primary">
-          Inscríbete ahora
+          {historiaData.ctaButton}
         </a>
       </div>
     </div>
@@ -260,8 +225,8 @@ import Layout from '../layouts/Layout.astro';
   .card-compact {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.25rem;
+    border-radius: 0.75rem;
+    padding: 1rem;
     transition: all 0.3s ease;
   }
 
@@ -274,7 +239,7 @@ import Layout from '../layouts/Layout.astro';
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .card-compact {
-      padding: 1rem;
+      padding: 0.875rem;
     }
   }
 </style>
